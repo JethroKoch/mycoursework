@@ -105,6 +105,30 @@ public class mainScene extends Application {
         editCustomerInfo.setOnAction((ActionEvent ae) -> error(ae));
         customerPane.add(editCustomerInfo,1,0);
         bottomPane.getChildren().add(customerPane);
+        
+        Label customerID = new Label("Customer ID");
+        customerID.setPrefWidth(Integer.MAX_VALUE);
+        customerPane.add(customerID,0,1);
+        
+        Label customerID1 = new Label("");
+        customerID1.setPrefWidth(Integer.MAX_VALUE);
+        customerPane.add(customerID1,1,1);
+        
+        Label name = new Label("Name");
+        name.setPrefWidth(Integer.MAX_VALUE);
+        customerPane.add(name,0,2);
+        
+        Label name1 = new Label("");
+        customerInformation.setPrefWidth(Integer.MAX_VALUE);
+        customerPane.add(name1,1,2);
+        
+        Label age = new Label("Age");
+        age.setPrefWidth(Integer.MAX_VALUE);
+        customerPane.add(age,0,3);
+        
+        Label age1 = new Label("");
+        age1.setPrefWidth(Integer.MAX_VALUE);
+        customerPane.add(age1,1,3);
 
         Scene scene = new Scene(root, 1024, 768);
         scene.getStylesheets().add("Stylesheet.css");
