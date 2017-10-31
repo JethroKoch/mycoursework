@@ -110,15 +110,15 @@ public class mainScene extends Application {
         customerID.setPrefWidth(Integer.MAX_VALUE);
         customerPane.add(customerID,0,1);
         
-        Label customerID1 = new Label("");
+        Label customerID1 = new Label("CustomerIDInput");
         customerID1.setPrefWidth(Integer.MAX_VALUE);
         customerPane.add(customerID1,1,1);
         
-        Label name = new Label("Name");
+        Label name = new Label("customerName");
         name.setPrefWidth(Integer.MAX_VALUE);
         customerPane.add(name,0,2);
         
-        Label name1 = new Label("");
+        Label name1 = new Label("customerNameInput");
         customerInformation.setPrefWidth(Integer.MAX_VALUE);
         customerPane.add(name1,1,2);
         
@@ -126,9 +126,20 @@ public class mainScene extends Application {
         age.setPrefWidth(Integer.MAX_VALUE);
         customerPane.add(age,0,3);
         
-        Label age1 = new Label("");
+        Label age1 = new Label("customerAgeInput");
         age1.setPrefWidth(Integer.MAX_VALUE);
         customerPane.add(age1,1,3);
+        
+        Button processbutton = new Button("PROCESS");
+        processButton.setPrefSize(Integer.MAX_VALUE, MAX_VALUE);
+        editCustomerInfo.setOnAction((ActionEvent ae) -> error(ae));
+        bottomPane.getChildren().add(processButton);
+        
+        GridPane costPane = new GridPane();
+        costPane.setHgap(10);
+        costPane.setVgap(10);
+        costPane.setPadding(new Insets(10));
+        costPane.setStyle();
 
         Scene scene = new Scene(root, 1024, 768);
         scene.getStylesheets().add("Stylesheet.css");
