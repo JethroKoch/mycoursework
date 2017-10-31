@@ -94,6 +94,7 @@ public class mainScene extends Application {
         customerPane.setVgap(10);
         customerPane.setPadding(new Insets(10));
         customerPane.setStyle("-fx-background-color: forestgreen");
+        bottomPane.getChildren().add(customerPane);
 
         Label customerInformation = new Label("Customer Information");
         customerInformation.setPrefWidth(Integer.MAX_VALUE);
@@ -103,7 +104,7 @@ public class mainScene extends Application {
         editCustomerInfo.getStyleClass().add("normalButton");
         editCustomerInfo.setPrefSize(Integer.MAX_VALUE, 20);
         editCustomerInfo.setOnAction((ActionEvent ae) -> error(ae));
-        customerPane.add(editCustomerInfo,1,0);
+        customerPane.add(editCustomerInfo,0,1);
         bottomPane.getChildren().add(customerPane);
         
         Label customerID = new Label("Customer ID");
@@ -140,6 +141,31 @@ public class mainScene extends Application {
         costPane.setVgap(10);
         costPane.setPadding(new Insets(10));
         costPane.setStyle();
+        bottomPane.getChildren().add(costPane);
+        
+        Label totalCost = new Label("Total Cost");
+        totalCost.setPrefWidth(Integer.MAX_VALUE);
+        costPane.add(totalCost,0,0);
+        
+        Label totalCost1 = new Label("£" + "input");
+        totalCost1.setPrefWidth(Integer.MAX_VALUE);
+        costPane.add(totalCost1,1,0);
+        
+        Label amountGiven = new Label("Amount Given");
+        amountgiven.setPrefWidth(Integer.MAX_VALUE);
+        costPane.add(amountGiven,0,1);
+        
+        Label amountGiven1 = new Label("£" + "input");
+        amountGiven1.setPrefWidth(Integer.MAX_VALUE);
+        costPane.add(amountGiven,1,1);
+        
+        Label change = new Label("change");
+        change.setPrefWidth(Integer.MAX_VALUE);
+        costPane.add(change,0,2);
+        
+        Label change1 = new Label("£" + "input");
+        change1.setPrefWidth(Integer.MAX_VALUE);
+        costPane.add(change1,1,2);
 
         Scene scene = new Scene(root, 1024, 768);
         scene.getStylesheets().add("Stylesheet.css");
