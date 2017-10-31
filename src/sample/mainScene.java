@@ -12,6 +12,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
+import javax.swing.text.Position;
+
 public class mainScene extends Application {
     @Override
     public void start(Stage stage) throws Exception {
@@ -57,6 +59,7 @@ public class mainScene extends Application {
         centerPane.setAlignment(Pos.CENTER);
         BorderPane.setAlignment(centerPane, Pos.CENTER);
 
+
         TableView table = new TableView<>();
         table.setPrefSize(400,400);
         table.setItems(purchaseTable);
@@ -86,7 +89,7 @@ public class mainScene extends Application {
         bottomPane.setStyle("-fx-background-color: navy;");
         bottomPane.setPadding(new Insets(20));
         root.setBottom(bottomPane);
-        bottomPane.setAlignment(Pos.CENTER);
+        bottomPane.setAlignment(Pos.BASELINE_CENTER);
         BorderPane.setAlignment(bottomPane, Pos.BOTTOM_CENTER);
 
         GridPane customerPane = new GridPane();
@@ -95,6 +98,7 @@ public class mainScene extends Application {
         customerPane.setPadding(new Insets(10));
         customerPane.setStyle("-fx-background-color: forestgreen");
         bottomPane.getChildren().add(customerPane);
+        customerPane.setAlignment(Pos.BOTTOM_LEFT);
 
         Label customerInformation = new Label("Customer Information");
         customerInformation.setPrefWidth(Integer.MAX_VALUE);
@@ -104,66 +108,68 @@ public class mainScene extends Application {
         editCustomerInfo.getStyleClass().add("normalButton");
         editCustomerInfo.setPrefSize(Integer.MAX_VALUE, 20);
         editCustomerInfo.setOnAction((ActionEvent ae) -> error(ae));
-        customerPane.add(editCustomerInfo,0,1);
-        bottomPane.getChildren().add(customerPane);
-        
+        customerPane.add(editCustomerInfo,1,0);
+
         Label customerID = new Label("Customer ID");
         customerID.setPrefWidth(Integer.MAX_VALUE);
         customerPane.add(customerID,0,1);
-        
+
         Label customerID1 = new Label("CustomerIDInput");
         customerID1.setPrefWidth(Integer.MAX_VALUE);
         customerPane.add(customerID1,1,1);
-        
+
         Label name = new Label("customerName");
         name.setPrefWidth(Integer.MAX_VALUE);
         customerPane.add(name,0,2);
-        
+
         Label name1 = new Label("customerNameInput");
         customerInformation.setPrefWidth(Integer.MAX_VALUE);
         customerPane.add(name1,1,2);
-        
+
         Label age = new Label("Age");
         age.setPrefWidth(Integer.MAX_VALUE);
         customerPane.add(age,0,3);
-        
+
         Label age1 = new Label("customerAgeInput");
         age1.setPrefWidth(Integer.MAX_VALUE);
         customerPane.add(age1,1,3);
-        
-        Button processbutton = new Button("PROCESS");
-        processButton.setPrefSize(Integer.MAX_VALUE, MAX_VALUE);
-        editCustomerInfo.setOnAction((ActionEvent ae) -> error(ae));
+
+
+        Button processButton = new Button("PROCESS");
+        processButton.setMinSize(300, 100);
+        processButton.setOnAction((ActionEvent ae) -> error(ae));
         bottomPane.getChildren().add(processButton);
-        
+        bottomPane.setAlignment(Pos.CENTER);
+
         GridPane costPane = new GridPane();
         costPane.setHgap(10);
         costPane.setVgap(10);
         costPane.setPadding(new Insets(10));
-        costPane.setStyle();
+        costPane.setStyle("-fx-background-color: forestgreen");
         bottomPane.getChildren().add(costPane);
-        
+        costPane.setAlignment(Pos.CENTER_RIGHT);
+
         Label totalCost = new Label("Total Cost");
         totalCost.setPrefWidth(Integer.MAX_VALUE);
         costPane.add(totalCost,0,0);
-        
-        Label totalCost1 = new Label("£" + "input");
+
+        Label totalCost1 = new Label("£ input");
         totalCost1.setPrefWidth(Integer.MAX_VALUE);
         costPane.add(totalCost1,1,0);
-        
+
         Label amountGiven = new Label("Amount Given");
-        amountgiven.setPrefWidth(Integer.MAX_VALUE);
+        amountGiven.setPrefWidth(Integer.MAX_VALUE);
         costPane.add(amountGiven,0,1);
-        
-        Label amountGiven1 = new Label("£" + "input");
+
+        Label amountGiven1 = new Label("£input");
         amountGiven1.setPrefWidth(Integer.MAX_VALUE);
-        costPane.add(amountGiven,1,1);
-        
+        costPane.add(amountGiven1,1,1);
+
         Label change = new Label("change");
         change.setPrefWidth(Integer.MAX_VALUE);
         costPane.add(change,0,2);
-        
-        Label change1 = new Label("£" + "input");
+
+        Label change1 = new Label("£input");
         change1.setPrefWidth(Integer.MAX_VALUE);
         costPane.add(change1,1,2);
 
