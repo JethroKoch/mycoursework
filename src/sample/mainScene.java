@@ -1,5 +1,6 @@
 package sample;
 
+import Models.Product;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,17 +13,15 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
-import javax.swing.text.Position;
-
 public class mainScene extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         BorderPane root = new BorderPane();
-        ObservableList<purchaseTable> purchaseTable = FXCollections.observableArrayList();
+        ObservableList<Product> purchaseTable = FXCollections.observableArrayList();
 
         HBox topPane = new HBox(60);
         topPane.setStyle("-fx-background-color: navy;");
-        topPane.setPadding(new Insets(20,60,0,60));
+        topPane.setPadding(new Insets(20, 60, 0, 60));
         HBox.setHgrow(topPane, Priority.ALWAYS);
         topPane.setAlignment(Pos.CENTER);
         BorderPane.setAlignment(topPane, Pos.TOP_CENTER);
@@ -34,7 +33,7 @@ public class mainScene extends Application {
         historyButton.setOnAction((ActionEvent ae) -> error(ae));
         topPane.getChildren().add(historyButton);
 
-        Button adjustStockButton= new Button("Adjust Stock");
+        Button adjustStockButton = new Button("Adjust Stock");
         adjustStockButton.getStyleClass().add("normalButton");
         adjustStockButton.setPrefSize(Integer.MAX_VALUE, 20);
         adjustStockButton.setOnAction((ActionEvent ae) -> error(ae));
@@ -54,14 +53,14 @@ public class mainScene extends Application {
 
         VBox centerPane = new VBox(20);
         centerPane.setStyle("-fx-background-color: navy;");
-        centerPane.setPadding(new Insets(0,60,0,60));
+        centerPane.setPadding(new Insets(0, 60, 0, 60));
         root.setCenter(centerPane);
         centerPane.setAlignment(Pos.CENTER);
         BorderPane.setAlignment(centerPane, Pos.CENTER);
 
 
         TableView table = new TableView<>();
-        table.setPrefSize(400,400);
+        table.setPrefSize(400, 400);
         table.setItems(purchaseTable);
         TableColumn productIDColumn = new TableColumn<>("ProductID");
         productIDColumn.setCellValueFactory(new PropertyValueFactory<>("productID"));
@@ -102,37 +101,37 @@ public class mainScene extends Application {
 
         Label customerInformation = new Label("Customer Information");
         customerInformation.setPrefWidth(Integer.MAX_VALUE);
-        customerPane.add(customerInformation,0,0);
+        customerPane.add(customerInformation, 0, 0);
 
         Button editCustomerInfo = new Button("Edit/New");
         editCustomerInfo.getStyleClass().add("normalButton");
         editCustomerInfo.setPrefSize(Integer.MAX_VALUE, 20);
         editCustomerInfo.setOnAction((ActionEvent ae) -> error(ae));
-        customerPane.add(editCustomerInfo,1,0);
+        customerPane.add(editCustomerInfo, 1, 0);
 
         Label customerID = new Label("Customer ID");
         customerID.setPrefWidth(Integer.MAX_VALUE);
-        customerPane.add(customerID,0,1);
+        customerPane.add(customerID, 0, 1);
 
         Label customerID1 = new Label("CustomerIDInput");
         customerID1.setPrefWidth(Integer.MAX_VALUE);
-        customerPane.add(customerID1,1,1);
+        customerPane.add(customerID1, 1, 1);
 
         Label name = new Label("customerName");
         name.setPrefWidth(Integer.MAX_VALUE);
-        customerPane.add(name,0,2);
+        customerPane.add(name, 0, 2);
 
         Label name1 = new Label("customerNameInput");
         customerInformation.setPrefWidth(Integer.MAX_VALUE);
-        customerPane.add(name1,1,2);
+        customerPane.add(name1, 1, 2);
 
         Label age = new Label("Age");
         age.setPrefWidth(Integer.MAX_VALUE);
-        customerPane.add(age,0,3);
+        customerPane.add(age, 0, 3);
 
         Label age1 = new Label("customerAgeInput");
         age1.setPrefWidth(Integer.MAX_VALUE);
-        customerPane.add(age1,1,3);
+        customerPane.add(age1, 1, 3);
 
 
         Button processButton = new Button("PROCESS");
@@ -151,27 +150,27 @@ public class mainScene extends Application {
 
         Label totalCost = new Label("Total Cost");
         totalCost.setPrefWidth(Integer.MAX_VALUE);
-        costPane.add(totalCost,0,0);
+        costPane.add(totalCost, 0, 0);
 
         Label totalCost1 = new Label("£ input");
         totalCost1.setPrefWidth(Integer.MAX_VALUE);
-        costPane.add(totalCost1,1,0);
+        costPane.add(totalCost1, 1, 0);
 
         Label amountGiven = new Label("Amount Given");
         amountGiven.setPrefWidth(Integer.MAX_VALUE);
-        costPane.add(amountGiven,0,1);
+        costPane.add(amountGiven, 0, 1);
 
         Label amountGiven1 = new Label("£input");
         amountGiven1.setPrefWidth(Integer.MAX_VALUE);
-        costPane.add(amountGiven1,1,1);
+        costPane.add(amountGiven1, 1, 1);
 
         Label change = new Label("change");
         change.setPrefWidth(Integer.MAX_VALUE);
-        costPane.add(change,0,2);
+        costPane.add(change, 0, 2);
 
         Label change1 = new Label("£input");
         change1.setPrefWidth(Integer.MAX_VALUE);
-        costPane.add(change1,1,2);
+        costPane.add(change1, 1, 2);
 
         Scene scene = new Scene(root, 1024, 768);
         scene.getStylesheets().add("Stylesheet.css");
@@ -192,5 +191,4 @@ public class mainScene extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
 }

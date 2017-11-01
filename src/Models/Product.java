@@ -1,17 +1,17 @@
-package sample;
+package Models;
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-public class purchaseTable {
+public class Product {
     private final SimpleIntegerProperty productID;
     private final SimpleStringProperty productDescription;
     private final SimpleIntegerProperty inStock;
     private final SimpleIntegerProperty quantity;
     private final SimpleDoubleProperty price;
 
-    public purchaseTable(Integer productID, String productDescription, Integer inStock, Integer quantity, Double price) {
+    public Product(Integer productID, String productDescription, Integer inStock, Integer quantity, Double price) {
         this.productID = new SimpleIntegerProperty(productID);
         this.productDescription = new SimpleStringProperty(productDescription);
         this.inStock = new SimpleIntegerProperty(inStock);
@@ -22,15 +22,12 @@ public class purchaseTable {
     public Integer getProductID() {
         return productID.get();
     }
-
     public void setProductID(Integer productID) {
         this.productID.set(productID);
     }
-
     public String getProductDescription() {
         return productDescription.get();
     }
-
     public void setProductDescription(String productDescription) {
         this.productDescription.set(productDescription);
     }
