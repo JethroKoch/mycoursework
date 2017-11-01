@@ -13,7 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
-public class mainScene extends Application {
+public class MainStage extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         BorderPane root = new BorderPane();
@@ -58,6 +58,21 @@ public class mainScene extends Application {
         centerPane.setAlignment(Pos.CENTER);
         BorderPane.setAlignment(centerPane, Pos.CENTER);
 
+        HBox searchPane = new HBox(10);
+        searchPane.setStyle("-fx-background-color: navy");
+        centerPane.getChildren().add(searchPane);
+
+        TextField searchBar = new TextField();
+        searchBar.setPromptText("Search Product ID");
+        searchBar.setPrefSize(Integer.MAX_VALUE, 20);
+        searchPane.getChildren().add(searchBar);
+
+        Button searchButton = new Button("Add Product");
+        searchButton.setPrefHeight(20);
+        searchButton.setMinWidth(100);
+        searchButton.getStyleClass().add("normalButton");
+        searchButton.setOnAction((ActionEvent ae) -> error(ae));
+        searchPane.getChildren().add(searchButton);
 
         TableView table = new TableView<>();
         table.setPrefSize(400, 400);
@@ -86,7 +101,7 @@ public class mainScene extends Application {
 
         HBox bottomPane = new HBox(20);
         bottomPane.setStyle("-fx-background-color: navy;");
-        bottomPane.setPadding(new Insets(20));
+        bottomPane.setPadding(new Insets(0));
         root.setBottom(bottomPane);
         bottomPane.setAlignment(Pos.BASELINE_CENTER);
         BorderPane.setAlignment(bottomPane, Pos.BOTTOM_CENTER);
