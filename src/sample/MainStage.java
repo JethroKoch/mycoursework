@@ -30,25 +30,19 @@ public class MainStage extends Application {
         Button historyButton = new Button("History");
         historyButton.getStyleClass().add("normalButton");
         historyButton.setPrefSize(Integer.MAX_VALUE, 20);
-        historyButton.setOnAction((ActionEvent ae) -> error(ae));
+        historyButton.setOnAction((ActionEvent ae) -> openHistoryStage(root));
         topPane.getChildren().add(historyButton);
 
         Button adjustStockButton = new Button("Adjust Stock");
         adjustStockButton.getStyleClass().add("normalButton");
         adjustStockButton.setPrefSize(Integer.MAX_VALUE, 20);
-        adjustStockButton.setOnAction((ActionEvent ae) -> error(ae));
+        adjustStockButton.setOnAction((ActionEvent ae) -> openStockAdjustmentStage(root));
         topPane.getChildren().add(adjustStockButton);
-
-        Button newStockButton = new Button("Add New Item");
-        newStockButton.getStyleClass().add("normalButton");
-        newStockButton.setPrefSize(Integer.MAX_VALUE, 20);
-        newStockButton.setOnAction((ActionEvent ae) -> error(ae));
-        topPane.getChildren().add(newStockButton);
 
         Button refundButton = new Button("Refund");
         refundButton.getStyleClass().add("normalButton");
         refundButton.setPrefSize(Integer.MAX_VALUE, 20);
-        refundButton.setOnAction((ActionEvent ae) -> error(ae));
+        refundButton.setOnAction((ActionEvent ae) -> openRefundStage(root));
         topPane.getChildren().add(refundButton);
 
         VBox centerPane = new VBox(20);
@@ -121,14 +115,14 @@ public class MainStage extends Application {
         Button editCustomerInfo = new Button("Edit/New");
         editCustomerInfo.getStyleClass().add("normalButton");
         editCustomerInfo.setPrefSize(Integer.MAX_VALUE, 20);
-        editCustomerInfo.setOnAction((ActionEvent ae) -> error(ae));
+        editCustomerInfo.setOnAction((ActionEvent ae) -> openCustomerStage(root));
         customerPane.add(editCustomerInfo, 1, 0);
 
         Label customerID = new Label("Customer ID");
         customerID.setPrefWidth(Integer.MAX_VALUE);
         customerPane.add(customerID, 0, 1);
 
-        Label customerID1 = new Label("CustomerIDInput");
+        Label customerID1 = new Label("");
         customerID1.setPrefWidth(Integer.MAX_VALUE);
         customerPane.add(customerID1, 1, 1);
 
@@ -136,7 +130,7 @@ public class MainStage extends Application {
         name.setPrefWidth(Integer.MAX_VALUE);
         customerPane.add(name, 0, 2);
 
-        Label name1 = new Label("customerNameInput");
+        Label name1 = new Label("");
         customerInformation.setPrefWidth(Integer.MAX_VALUE);
         customerPane.add(name1, 1, 2);
 
@@ -144,7 +138,7 @@ public class MainStage extends Application {
         age.setPrefWidth(Integer.MAX_VALUE);
         customerPane.add(age, 0, 3);
 
-        Label age1 = new Label("customerAgeInput");
+        Label age1 = new Label("");
         age1.setPrefWidth(Integer.MAX_VALUE);
         customerPane.add(age1, 1, 3);
 
@@ -167,7 +161,7 @@ public class MainStage extends Application {
         totalCost.setPrefWidth(Integer.MAX_VALUE);
         costPane.add(totalCost, 0, 0);
 
-        Label totalCost1 = new Label("£ input");
+        Label totalCost1 = new Label("");
         totalCost1.setPrefWidth(Integer.MAX_VALUE);
         costPane.add(totalCost1, 1, 0);
 
@@ -175,7 +169,8 @@ public class MainStage extends Application {
         amountGiven.setPrefWidth(Integer.MAX_VALUE);
         costPane.add(amountGiven, 0, 1);
 
-        Label amountGiven1 = new Label("£input");
+        TextField amountGiven1 = new TextField();
+        amountGiven1.setPromptText("Enter amount");
         amountGiven1.setPrefWidth(Integer.MAX_VALUE);
         costPane.add(amountGiven1, 1, 1);
 
@@ -183,7 +178,7 @@ public class MainStage extends Application {
         change.setPrefWidth(Integer.MAX_VALUE);
         costPane.add(change, 0, 2);
 
-        Label change1 = new Label("£input");
+        Label change1 = new Label("");
         change1.setPrefWidth(Integer.MAX_VALUE);
         costPane.add(change1, 1, 2);
 
@@ -202,7 +197,18 @@ public class MainStage extends Application {
         alert.setContentText("This feature has not been implicated yet");
         alert.showAndWait();
     }
-
+    public static void openCustomerStage(Pane parent) {
+        CustomerStage newStage = new CustomerStage(parent);
+    }
+    public static void openHistoryStage(Pane parent) {
+        HistoryStage newStage = new HistoryStage(parent);
+    }
+    public static void openRefundStage(Pane parent) {
+        RefundStage newStage = new RefundStage(parent);
+    }
+    public static void openStockAdjustmentStage(Pane parent) {
+        StockAdjustmentStage newStage = new StockAdjustmentStage(parent);
+    }
     public static void main(String[] args) {
         launch(args);
     }

@@ -1,16 +1,14 @@
 package sample;
 
-import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-public class CustomerStage {
-
+public class HistoryStage {
     static Pane parent;
 
-    public CustomerStage(Pane theParent) {
+    public HistoryStage(Pane theParent) {
 
         Stage stage = new Stage();
         parent = theParent;
@@ -23,7 +21,7 @@ public class CustomerStage {
 
         Pane root = new Pane();
         Scene scene = new Scene(root, 1024, 768);
-        stage.setTitle("Customer Information");
+        stage.setTitle("Transaction History");
         stage.setScene(scene);
         stage.setOnCloseRequest((WindowEvent we) -> closeStage(stage));
         stage.show();
@@ -38,3 +36,4 @@ public class CustomerStage {
     }
 
 }
+
