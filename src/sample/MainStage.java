@@ -17,6 +17,11 @@ public class MainStage extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         BorderPane root = new BorderPane();
+        Scene scene = new Scene(root, 1024, 768);
+        scene.getStylesheets().add("Stylesheet.css");
+        stage.setTitle("mainScene Window");
+        stage.setScene(scene);
+        stage.show();
         ObservableList<Product> purchaseTable = FXCollections.observableArrayList();
 
         HBox topPane = new HBox(60);
@@ -182,11 +187,7 @@ public class MainStage extends Application {
         change1.setPrefWidth(Integer.MAX_VALUE);
         costPane.add(change1, 1, 2);
 
-        Scene scene = new Scene(root, 1024, 768);
-        scene.getStylesheets().add("Stylesheet.css");
-        stage.setTitle("mainScene Window");
-        stage.setScene(scene);
-        stage.show();
+
 
     }
 
