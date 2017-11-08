@@ -14,6 +14,19 @@ public class Customer {
     private String coounty;
     private String postcode;
 
+    public Customer(int customerId, String firstName, String lastName, Date dateOfBirth, String contactNumber, String house, String street, String city, String coounty, String postcode) {
+        this.customerId = customerId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.contactNumber = contactNumber;
+        this.house = house;
+        this.street = street;
+        this.city = city;
+        this.coounty = coounty;
+        this.postcode = postcode;
+    }
+
     public int getCustomerId() {
         return customerId;
     }

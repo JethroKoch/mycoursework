@@ -10,6 +10,15 @@ public class Transaction {
     private double change;
     private Date date;
 
+    public Transaction(int transactionid, int customerid, double totalCost, double amountPaid, double change, Date date) {
+        this.transactionid = transactionid;
+        this.customerid = customerid;
+        this.totalCost = totalCost;
+        this.amountPaid = amountPaid;
+        this.change = change;
+        this.date = date;
+    }
+
     public int getTransactionid() {
         return transactionid;
     }

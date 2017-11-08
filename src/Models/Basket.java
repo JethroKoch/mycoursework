@@ -4,6 +4,11 @@ public class Basket {
     private int transactionid;
     private int productid;
 
+    public Basket(int transactionid, int productid) {
+        this.transactionid = transactionid;
+        this.productid = productid;
+    }
+
     public int getTransactionid() {
         return transactionid;
     }
