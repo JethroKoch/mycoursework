@@ -1,20 +1,18 @@
 package sample;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-import javax.print.DocFlavor;
-import javax.xml.soap.Text;
-
 public class CustomerStage {
-
+    Scene searchCustomer, editCustomer, newCustomer;
     static Pane parent;
 
     public CustomerStage(Pane theParent) {
@@ -28,10 +26,10 @@ public class CustomerStage {
 
     public void start(Stage stage) {
 
-        BorderPane root = new BorderPane();
-        Scene scene = new Scene(root, 1024, 768);
         stage.setTitle("Customer Information");
-        stage.setScene(scene);
+        BorderPane search = new BorderPane();
+        searchCustomer = new Scene(search, 1024, 768);
+        stage.setScene(searchCustomer);
         stage.setOnCloseRequest((WindowEvent we) -> closeStage(stage));
         stage.show();
 
@@ -41,21 +39,20 @@ public class CustomerStage {
         topPane.setAlignment(Pos.CENTER);
         BorderPane.setAlignment(topPane, Pos.TOP_CENTER);
         HBox.setHgrow(topPane, Priority.ALWAYS);
-        root.setTop(topPane);
+        search.setTop(topPane);
 
         Button searchCustomerButton = new Button("Search Customer");
         searchCustomerButton.setPrefSize(Integer.MAX_VALUE, 40);
-        searchCustomerButton.setOnAction((ActionEvent ae) -> error(ae));
         topPane.getChildren().add(searchCustomerButton);
 
         Button editCustomerButton = new Button("Edit Customer");
         editCustomerButton.setPrefSize(Integer.MAX_VALUE, 40);
-        editCustomerButton.setOnAction((ActionEvent ae) -> error(ae));
+        editCustomerButton.setOnAction(e->stage.setScene(editCustomer));
         topPane.getChildren().add(editCustomerButton);
 
         Button newCustomerButton = new Button("New Customer");
         newCustomerButton.setPrefSize(Integer.MAX_VALUE, 40);
-        newCustomerButton.setOnAction((ActionEvent ae) -> error(ae));
+        newCustomerButton.setOnAction(e->stage.setScene(newCustomer));
         topPane.getChildren().add(newCustomerButton);
 
         VBox leftPane = new VBox(40);
@@ -63,7 +60,7 @@ public class CustomerStage {
         leftPane.setPadding(new Insets(60,20,60,20));
         leftPane.setAlignment(Pos.CENTER);
         BorderPane.setAlignment(leftPane, Pos.CENTER_LEFT);
-        root.setLeft(leftPane);
+        search.setLeft(leftPane);
 
 
         Label firstName = new Label("First Name");
@@ -98,7 +95,16 @@ public class CustomerStage {
         searchCustomerNowButton.setMinSize(100,20);
         searchCustomerNowButton.setOnAction((ActionEvent ae) ->error(ae));
         leftPane.getChildren().add(searchCustomerNowButton);
+
+        ListView<String> results = new ListView<String>();
+        ObservableList<String>customers = FXCollections.observableArrayList();
+        results.setItems(customers);
+        results.setPrefSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
+        search.setCenter(results);
+
+
     }
+
     public static void error(ActionEvent ae) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Error");
