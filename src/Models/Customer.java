@@ -14,7 +14,7 @@ public class Customer {
     private String coounty;
     private String postcode;
 
-    public Customer(int customerId, String firstName, String lastName, Date dateOfBirth, String contactNumber, String house, String street, String city, String coounty, String postcode) {
+    public Customer(int customerId, String firstName, String lastName, Date dateOfBirth, String contactNumber, String house, String street, String city, String county, String postcode) {
         this.customerId = customerId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -23,7 +23,7 @@ public class Customer {
         this.house = house;
         this.street = street;
         this.city = city;
-        this.coounty = coounty;
+        this.coounty = county;
         this.postcode = postcode;
     }
 
@@ -91,11 +91,11 @@ public class Customer {
         this.city = city;
     }
 
-    public String getCoounty() {
+    public String getCounty() {
         return coounty;
     }
 
-    public void setCoounty(String coounty) {
+    public void setCounty(String coounty) {
         this.coounty = coounty;
     }
 

@@ -3,36 +3,36 @@ package Models;
 import java.util.Date;
 
 public class Transaction {
-    private int transactionid;
-    private int customerid;
+    private int transactionId;
+    private int customerId;
     private double totalCost;
     private double amountPaid;
     private double change;
     private Date date;
 
-    public Transaction(int transactionid, int customerid, double totalCost, double amountPaid, double change, Date date) {
-        this.transactionid = transactionid;
-        this.customerid = customerid;
+    public Transaction(int transactiond, int customerid, double totalCost, double amountPaid, double change, Date date) {
+        this.transactionId = transactionId;
+        this.customerId = customerid;
         this.totalCost = totalCost;
         this.amountPaid = amountPaid;
         this.change = change;
         this.date = date;
     }
 
-    public int getTransactionid() {
-        return transactionid;
+    public int getTransactionId() {
+        return transactionId;
     }
 
-    public void setTransactionid(int transactionid) {
-        this.transactionid = transactionid;
+    public void setTransactionId(int transactionId) {
+        this.transactionId = transactionId;
     }
 
-    public int getCustomerid() {
-        return customerid;
+    public int getCustomerId() {
+        return customerId;
     }
 
-    public void setCustomerid(int customerid) {
-        this.customerid = customerid;
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 
     public double getTotalCost() {
@@ -70,8 +70,8 @@ public class Transaction {
     @Override
     public String toString() {
         return "Transaction{" +
-                "transactionid=" + transactionid +
-                ", customerid=" + customerid +
+                "transactionId=" + transactionId +
+                ", customerId=" + customerId +
                 ", totalCost=" + totalCost +
                 ", amountPaid=" + amountPaid +
                 ", change=" + change +

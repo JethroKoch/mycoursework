@@ -44,7 +44,7 @@ public class DatabaseConnection {
     }
 
 
-    public ResultSet runQuery(PreparedStatement statement)
+    public ResultSet excecuteQuery(PreparedStatement statement)
     {
         try {
             return statement.executeQuery();
