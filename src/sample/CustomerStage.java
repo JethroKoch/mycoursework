@@ -158,13 +158,68 @@ public class CustomerStage {
 
         TextField firstNameInput = new TextField();
         firstNameInput.setPrefSize(Integer.MAX_VALUE, 20);
+        firstNameInput.setPromptText("First Name");
 
         TextField secondNameInput = new TextField();
         secondNameInput.setPrefSize(Integer.MAX_VALUE, 20);
+        secondNameInput.setPromptText("Second Name");
 
         TextField datOfBirthInput = new TextField();
         datOfBirthInput.setPrefSize(Integer.MAX_VALUE, 20);
+        datOfBirthInput.setPromptText("Date of Birth");
         textFields.getChildren().addAll(firstNameInput, secondNameInput, datOfBirthInput);
+
+        VBox leftPane = new VBox(40);
+        leftPane.setStyle("-fx-background-color: #c2c2c2");
+        leftPane.setPadding(new Insets(0,20,0,20));
+        leftPane.setAlignment(Pos.CENTER_LEFT);
+        BorderPane.setAlignment(leftPane, Pos.CENTER_LEFT);
+        VBox.setVgrow(leftPane, Priority.ALWAYS);
+        search.setLeft(leftPane);
+
+        Label address = new Label("Address");
+        address.setMinWidth(500);
+
+        TextField house = new TextField();
+        house.setMinWidth(500);
+        house.setPromptText("House Name/Number");
+
+        TextField street = new TextField();
+        street.setMinWidth(500);
+        street.setPromptText("Street Name");
+
+        TextField city = new TextField();
+        city.setMinWidth(500);
+        city.setPromptText("City/Town");
+
+        TextField county = new TextField();
+        county.setMinWidth(500);
+        county.setPromptText("County");
+
+        TextField postcode = new TextField();
+        postcode.setMinWidth(500);
+        postcode.setPromptText("Postcode");
+        leftPane.getChildren().addAll(address,house,street,city,county,postcode);
+
+        VBox rightPane = new VBox(200);
+        rightPane.setStyle("-fx-background-color: #c2c2c2");
+        rightPane.setPadding(new Insets(0,20,0,20));
+        rightPane.setAlignment(Pos.CENTER_RIGHT);
+        BorderPane.setAlignment(rightPane, Pos.CENTER_RIGHT);
+        VBox.setVgrow(rightPane, Priority.ALWAYS);
+        search.setRight(rightPane);
+
+        TextField contactNumber = new TextField();
+        contactNumber.setMinWidth(500);
+        contactNumber.setPromptText("Contact Number");
+
+        Button saveButton = new Button("Save");
+        saveButton.setStyle("-fx-background-color: #f7cecc");
+        saveButton.setMinSize(500,20);
+        saveButton.setOnAction((ActionEvent ae) ->error(ae));
+        rightPane.getChildren().addAll(contactNumber, saveButton);
+
+
 
 
     }
