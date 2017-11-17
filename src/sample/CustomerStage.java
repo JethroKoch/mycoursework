@@ -102,10 +102,18 @@ public class CustomerStage {
         selectButton.setOnAction((ActionEvent ae)->error(ae));
         leftPane.getChildren().add(selectButton);
 
+        HBox centrePane = new HBox(40);
+        centrePane.setStyle("-fx-background-color: #c2c2c2");
+        centrePane.setPadding(new Insets(60,20,60,20));
+        centrePane.setAlignment(Pos.CENTER);
+        search.setAlignment(centrePane, Pos.CENTER);
+
+        search.setCenter(centrePane);
         ListView<String> results = new ListView<String>();
         results.setPrefSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
         ObservableList<String>customers = FXCollections.observableArrayList("No items Searched");
         results.setItems(customers);
+        centrePane.getChildren().add(results);
         /*playList.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
                                        @Override
