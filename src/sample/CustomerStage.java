@@ -26,14 +26,14 @@ public class CustomerStage {
     public void start(Stage stage) {
 
         stage.setTitle("Customer Information");
+        stage.setOnCloseRequest((WindowEvent we) -> closeStage(stage));
+        stage.show();
         searchPane(stage);
     }
     private void searchPane(Stage stage){
         BorderPane search = new BorderPane();
         searchCustomer = new Scene(search, 1024, 768);
         stage.setScene(searchCustomer);
-        stage.setOnCloseRequest((WindowEvent we) -> closeStage(stage));
-        stage.show();
 
         HBox topPane = new HBox(20);
         topPane.setStyle("-fx-background-color: #c2c2c2");
@@ -387,7 +387,6 @@ public class CustomerStage {
     private void openCustomerNew(ActionEvent ae, Stage stage) {
         newPane(stage);
     }
-
     private void openCustomeredit(ActionEvent ae, Stage stage) {
         editPane(stage);
     }
