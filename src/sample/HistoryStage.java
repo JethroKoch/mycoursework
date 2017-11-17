@@ -6,7 +6,6 @@ import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -74,8 +73,8 @@ public class HistoryStage {
         root.getChildren().add(rightPane);
         ListView<String> results = new ListView<String>();
         results.setPrefSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
-        ObservableList<String> customers = FXCollections.observableArrayList("No items Searched");
-        results.setItems(customers);
+        ObservableList<String> transactions = FXCollections.observableArrayList("No items Searched");
+        results.setItems(transactions);
         rightPane.getChildren().add(results);
 
 
