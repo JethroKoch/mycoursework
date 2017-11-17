@@ -103,10 +103,23 @@ public class CustomerStage {
         leftPane.getChildren().add(selectButton);
 
         ListView<String> results = new ListView<String>();
+        results.setPrefSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
         ObservableList<String>customers = FXCollections.observableArrayList("No items Searched");
         results.setItems(customers);
-        results.setPrefSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
-        search.setCenter(results);
+        /*playList.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+                                       @Override
+                                       public void handle(MouseEvent click) {
+
+                                           if (click.getClickCount() == 2) {
+                                               //Use ListView's getSelected Item
+                                               currentItemSelected = playList.getSelectionModel()
+                                                       .getSelectedItem();
+                                               //use this to do whatever you want to. Open Link etc.
+                                           }
+                                       }
+                                   }
+        search.setCenter(results);*/
     }
 
     private void newPane(Stage stage){
