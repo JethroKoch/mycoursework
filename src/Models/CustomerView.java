@@ -2,7 +2,7 @@ package Models;
 
 import java.util.Date;
 
-public class Customer {
+public class CustomerView {
     private int customerId;
     private String firstName;
     private String lastName;
@@ -14,7 +14,7 @@ public class Customer {
     private String coounty;
     private String postcode;
 
-    public Customer(int customerId, String firstName, String lastName, Date dateOfBirth, String contactNumber, String house, String street, String city, String county, String postcode) {
+    public CustomerView(int customerId, String firstName, String lastName, Date dateOfBirth, String contactNumber, String house, String street, String city, String county, String postcode) {
         this.customerId = customerId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -109,7 +109,7 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{" +
+        return "CustomerView{" +
                 "customerId=" + customerId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +

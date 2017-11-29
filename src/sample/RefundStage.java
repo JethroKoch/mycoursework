@@ -1,6 +1,6 @@
 package sample;
 
-import Models.Refund;
+import Models.TransactionView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -33,7 +33,7 @@ public class RefundStage {
 
         VBox root = new VBox();
         Scene scene = new Scene(root, 1024, 768);
-        stage.setTitle("Refund A Transaction");
+        stage.setTitle("TransactionView A TransactionView");
         stage.setScene(scene);
         stage.setOnCloseRequest((WindowEvent we) -> closeStage(stage));
         stage.show();
@@ -65,7 +65,7 @@ public class RefundStage {
         root.getChildren().add(centrePane);
 
         TableView table = new TableView<>();
-        ObservableList<Refund>basket= FXCollections.observableArrayList();
+        ObservableList<TransactionView>basket= FXCollections.observableArrayList();
         table.setPrefSize(400, Integer.MAX_VALUE);
         table.setItems(basket);
         TableColumn customerIDColumn = new TableColumn<>("CustomerID");
@@ -76,7 +76,7 @@ public class RefundStage {
         productIDColumn.setCellValueFactory(new PropertyValueFactory<>("productID"));
         productIDColumn.setPrefWidth(180.8);
         table.getColumns().add(productIDColumn);
-        TableColumn productDescriptionColumn = new TableColumn<>("Product Description");
+        TableColumn productDescriptionColumn = new TableColumn<>("ProductView Description");
         productDescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("productDescription"));
         productDescriptionColumn.setPrefWidth(452);
         table.getColumns().add(productDescriptionColumn);
@@ -105,7 +105,7 @@ public class RefundStage {
         cost.setMinWidth(100);
         totalCost.setPrefSize(Integer.MAX_VALUE,20);
 
-        Button refundItems = new Button("Refund Items");
+        Button refundItems = new Button("TransactionView Items");
         refundItems.setStyle("-fx-background-color: #f7cecc");
         refundItems.setPrefSize(Integer.MAX_VALUE,20);
         refundItems.setOnAction((ActionEvent ae)->error(ae));

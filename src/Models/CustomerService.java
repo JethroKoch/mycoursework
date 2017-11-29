@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class CustomerService {
-    public static void selectAll(List<Customer> targetList, DatabaseConnection database) {
+    public static void selectAll(List<CustomerView> targetList, DatabaseConnection database) {
 
         PreparedStatement statement = database.newStatement("SELECT CustomerID, FirstName, LastName, DOB, ContactNo, House, Street, City, County, Postcode FROM CUSTOMERS ORDER BY x");
 
@@ -18,7 +18,7 @@ public class CustomerService {
 
                 if (results != null) {
                     while (results.next()) {
-                        targetList.add(new Customer(
+                        targetList.add(new CustomerView(
                                 results.getInt("CustomerID"),
                                 results.getString("FirstName"), 
                                 results.getString("Lastname"),
@@ -36,9 +36,9 @@ public class CustomerService {
             System.out.println("Database select all error: " + resultsException.getMessage());
         }
     }
-    public static Customer selectById(int id, DatabaseConnection database) {
+    public static CustomerView selectById(int id, DatabaseConnection database) {
 
-        Customer result = null;
+        CustomerView result = null;
 
         PreparedStatement statement = database.newStatement("SELECT CustomerID, FirstName, LastName, DOB, ContactNo, House, Street, City, County, Postcode FROM CUSTOMERS WHERE CustomerID = ?");
 
@@ -49,7 +49,7 @@ public class CustomerService {
                 ResultSet results = database.excecuteQuery(statement);
 
                 if (results != null) {
-                    result = new Customer(results.getInt("CustomerID"),
+                    result = new CustomerView(results.getInt("CustomerID"),
                             results.getString("FirstName"),
                             results.getString("Lastname"),
                             results.getDate("DOB"),
@@ -67,9 +67,9 @@ public class CustomerService {
 
         return result;
     }
-    public static void save(Customer itemToSave, DatabaseConnection database) {
+    public static void save(CustomerView itemToSave, DatabaseConnection database) {
 
-        Customer existingItem = null;
+        CustomerView existingItem = null;
         if (itemToSave.getCustomerId() != 0) existingItem = selectById(itemToSave.getCustomerId(), database);
 
         try {

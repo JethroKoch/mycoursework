@@ -4,49 +4,64 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-public class Product {
+public class ProductView {
     private final SimpleIntegerProperty productID;
     private final SimpleStringProperty productDescription;
     private final SimpleIntegerProperty inStock;
-    private final SimpleIntegerProperty quantity;
     private final SimpleDoubleProperty price;
 
-    public Product(Integer productID, String productDescription, Integer inStock, Integer quantity, Double price) {
+    public ProductView(int productID, String productDescription, int inStock, double price) {
         this.productID = new SimpleIntegerProperty(productID);
         this.productDescription = new SimpleStringProperty(productDescription);
         this.inStock = new SimpleIntegerProperty(inStock);
-        this.quantity = new SimpleIntegerProperty(quantity);
         this.price = new SimpleDoubleProperty(price);
     }
 
-    public Integer getProductID() {
+    public int getProductID() {
         return productID.get();
     }
-    public void setProductID(Integer productID) {
+
+    public SimpleIntegerProperty productIDProperty() {
+        return productID;
+    }
+
+    public void setProductID(int productID) {
         this.productID.set(productID);
     }
+
     public String getProductDescription() {
         return productDescription.get();
     }
+
+    public SimpleStringProperty productDescriptionProperty() {
+        return productDescription;
+    }
+
     public void setProductDescription(String productDescription) {
         this.productDescription.set(productDescription);
     }
-    public Integer getInstock(){
+
+    public int getInStock() {
         return inStock.get();
     }
-    public void setInStock(Integer inStock){
+
+    public SimpleIntegerProperty inStockProperty() {
+        return inStock;
+    }
+
+    public void setInStock(int inStock) {
         this.inStock.set(inStock);
     }
-    public Integer getQuantity(){
-        return quantity.get();
-    }
-    public void setQuantity(Integer quantity){
-        this.quantity.set(quantity);
-    }
-    public Double getPrice() {
+
+    public double getPrice() {
         return price.get();
     }
-    public void setPrice(Double price){
+
+    public SimpleDoubleProperty priceProperty() {
+        return price;
+    }
+
+    public void setPrice(double price) {
         this.price.set(price);
     }
 }

@@ -29,7 +29,7 @@ public class HistoryStage {
 
         HBox root = new HBox();
         Scene scene = new Scene(root, 1024, 400);
-        stage.setTitle("Transaction History");
+        stage.setTitle("TransactionView History");
         stage.setScene(scene);
         stage.setOnCloseRequest((WindowEvent we) -> closeStage(stage));
         stage.show();

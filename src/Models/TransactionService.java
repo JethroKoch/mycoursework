@@ -3,11 +3,10 @@ package Models;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 
 public class TransactionService {
-    public static void selectAll(List<Transaction> targetList, DatabaseConnection database) {
+    public static void selectAll(List<TransactionView> targetList, DatabaseConnection database) {
 
         PreparedStatement statement = database.newStatement("SELECT TransactionID, CustomerID, TotalCost, AmountPaid, Change, Date FROM TRANSACTIONS ORDER BY x");
 
@@ -18,7 +17,7 @@ public class TransactionService {
 
                 if (results != null) {
                     while (results.next()) {
-                        targetList.add(new Transaction(
+                        targetList.add(new TransactionView(
                                 results.getInt("TransactionID"),
                                 results.getInt("CustomerID"),
                                 results.getDouble("TotalCost"),
@@ -33,7 +32,7 @@ public class TransactionService {
         }
     }
     public static void selectById(int id, DatabaseConnection database) {
-        Transaction result = null;
+        TransactionView result = null;
         PreparedStatement statement = database.newStatement("SELECT TransactionID, CustomerID, TotalCost, AmountPaid, Change, Date WHERE TransactionID = ?");
 
         try {
@@ -43,7 +42,7 @@ public class TransactionService {
                 ResultSet results = database.excecuteQuery(statement);
 
                 if (results != null) {
-                    result = new Transaction(
+                    result = new TransactionView(
                             results.getInt("TransactionID"),
                             results.getInt("CustomerID"),
                             results.getDouble("TotalCost"),
@@ -56,29 +55,28 @@ public class TransactionService {
             System.out.println("Database select all error: " + resultsException.getMessage());
         }
     }
-    public static void save(Transaction itemToSave, DatabaseConnection database) {
+    public static void save(TransactionView itemToSave, DatabaseConnection database) {
 
-        Transaction existingItem = null;
-        if (itemToSave.getTransactionId() != 0) selectById(itemToSave.getTransactionId(), database);
+        TransactionView existingItem = null;
+        if (itemToSave.getTransactionID() != 0) selectById(itemToSave.getTransactionID(), database);
 
         try {
             if (existingItem == null) {
-                PreparedStatement statement = database.newStatement("INSERT INTO Transaction (TransactionID, CustomerID, TotalCost, AmountPaid, Change, Date) VALUES (?, ?, ?, ?, ?, ?))");
-                statement.setInt(1, itemToSave.getTransactionId());
-                statement.setInt(2, itemToSave.getCustomerId());
+                PreparedStatement statement = database.newStatement("INSERT INTO TransactionView (TransactionID, CustomerID, TotalCost, AmountPaid, Change, Date) VALUES (?, ?, ?, ?, ?, ?))");
+                statement.setInt(1, itemToSave.getTransactionID());
+                statement.setInt(2, itemToSave.getCustomerID());
                 statement.setDouble(3,itemToSave.getTotalCost());
                 statement.setDouble(4,itemToSave.getAmountPaid());
-                statement.setDouble(5,itemToSave.getChange());
+                statement.setDouble(5,itemToSave.getChangeGiven());
                 statement.setDate(6, (java.sql.Date) itemToSave.getDate());
             }
             else {
                 PreparedStatement statement = database.newStatement("UPDATE TransactionS SET TransactionID = ?, CustomerID = ?, TotalCost = ?, AmountPaid =?, Change=?, Date=? WHERE TransactionID = ?");
-                statement.setInt(1, itemToSave.getTransactionId());
-                statement.setInt(1, itemToSave.getTransactionId());
-                statement.setInt(2, itemToSave.getCustomerId());
+                statement.setInt(1, itemToSave.getTransactionID());
+                statement.setInt(2, itemToSave.getTransactionID());
                 statement.setDouble(3,itemToSave.getTotalCost());
                 statement.setDouble(4,itemToSave.getAmountPaid());
-                statement.setDouble(5,itemToSave.getChange());
+                statement.setDouble(5,itemToSave.getChangeGiven());
                 statement.setDate(6, (java.sql.Date) itemToSave.getDate());
                 database.executeUpdate(statement);
             }

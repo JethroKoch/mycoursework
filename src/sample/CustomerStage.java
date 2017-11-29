@@ -25,7 +25,7 @@ public class CustomerStage {
 
     public void start(Stage stage) {
 
-        stage.setTitle("Customer Information");
+        stage.setTitle("CustomerView Information");
         stage.setOnCloseRequest((WindowEvent we) -> closeStage(stage));
         stage.show();
         searchPane(stage);
@@ -43,16 +43,16 @@ public class CustomerStage {
         HBox.setHgrow(topPane, Priority.ALWAYS);
         search.setTop(topPane);
 
-        Button searchCustomerButton = new Button("Search Customer");
+        Button searchCustomerButton = new Button("Search CustomerView");
         searchCustomerButton.setPrefSize(Integer.MAX_VALUE, 40);
         topPane.getChildren().add(searchCustomerButton);
 
-        Button editCustomerButton = new Button("Edit Customer");
+        Button editCustomerButton = new Button("Edit CustomerView");
         editCustomerButton.setPrefSize(Integer.MAX_VALUE, 40);
         editCustomerButton.setOnAction((ActionEvent ae)->openCustomeredit(ae,stage));
         topPane.getChildren().add(editCustomerButton);
 
-        Button newCustomerButton = new Button("New Customer");
+        Button newCustomerButton = new Button("New CustomerView");
         newCustomerButton.setPrefSize(Integer.MAX_VALUE, 40);
         newCustomerButton.setOnAction((ActionEvent ae)->openCustomerNew(ae,stage));
         topPane.getChildren().add(newCustomerButton);
@@ -97,7 +97,7 @@ public class CustomerStage {
         searchCustomerNowButton.setOnAction((ActionEvent ae) ->error(ae));
         leftPane.getChildren().add(searchCustomerNowButton);
 
-        Button selectButton = new Button("Select Customer");
+        Button selectButton = new Button("Select CustomerView");
         selectButton.setMinSize(100,20);
         selectButton.setOnAction((ActionEvent ae)->error(ae));
         leftPane.getChildren().add(selectButton);
@@ -150,15 +150,15 @@ public class CustomerStage {
         tabButtons.setPadding(new Insets(0,20,0,20));
         topPane.getChildren().add(tabButtons);
 
-        Button searchCustomerButton = new Button("Search Customer");
+        Button searchCustomerButton = new Button("Search CustomerView");
         searchCustomerButton.setPrefSize(Integer.MAX_VALUE, 40);
         searchCustomerButton.setOnAction((ActionEvent ae)-> openCustomerSearch(ae, stage));
 
-        Button editCustomerButton = new Button("Edit Customer");
+        Button editCustomerButton = new Button("Edit CustomerView");
         editCustomerButton.setPrefSize(Integer.MAX_VALUE, 40);
         editCustomerButton.setOnAction((ActionEvent ae)->openCustomeredit(ae,stage));
 
-        Button newCustomerButton = new Button("New Customer");
+        Button newCustomerButton = new Button("New CustomerView");
         newCustomerButton.setPrefSize(Integer.MAX_VALUE, 40);
         tabButtons.getChildren().addAll(searchCustomerButton, editCustomerButton, newCustomerButton);
 
@@ -276,15 +276,15 @@ public class CustomerStage {
         tabButtons.setPadding(new Insets(0,20,0,20));
         topPane.getChildren().add(tabButtons);
 
-        Button searchCustomerButton = new Button("Search Customer");
+        Button searchCustomerButton = new Button("Search CustomerView");
         searchCustomerButton.setPrefSize(Integer.MAX_VALUE, 40);
         searchCustomerButton.setOnAction((ActionEvent ae)-> openCustomerSearch(ae, stage));
 
-        Button editCustomerButton = new Button("Edit Customer");
+        Button editCustomerButton = new Button("Edit CustomerView");
         editCustomerButton.setPrefSize(Integer.MAX_VALUE, 40);
 
 
-        Button newCustomerButton = new Button("New Customer");
+        Button newCustomerButton = new Button("New CustomerView");
         newCustomerButton.setPrefSize(Integer.MAX_VALUE, 40);
         newCustomerButton.setOnAction((ActionEvent ae) ->openCustomerNew(ae, stage));
         tabButtons.getChildren().addAll(searchCustomerButton, editCustomerButton, newCustomerButton);
