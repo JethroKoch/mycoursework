@@ -49,7 +49,7 @@ public class HomeStage extends Application {
         adjustStockButton.setOnAction((ActionEvent ae) -> openStockAdjustmentStage(root));
         topPane.getChildren().add(adjustStockButton);
 
-        Button refundButton = new Button("TransactionView");
+        Button refundButton = new Button("Transaction");
         refundButton.getStyleClass().add("normalButton");
         refundButton.setPrefSize(Integer.MAX_VALUE, 20);
         refundButton.setOnAction((ActionEvent ae) -> openRefundStage(root));
@@ -67,11 +67,11 @@ public class HomeStage extends Application {
         centerPane.getChildren().add(searchPane);
 
         TextField searchBar = new TextField();
-        searchBar.setPromptText("Search ProductView ID");
+        searchBar.setPromptText("Search ProductID");
         searchBar.setPrefSize(Integer.MAX_VALUE, 20);
         searchPane.getChildren().add(searchBar);
 
-        Button searchButton = new Button("Add ProductView");
+        Button searchButton = new Button("Add Product");
         searchButton.setPrefHeight(20);
         searchButton.setMinWidth(100);
         searchButton.getStyleClass().add("normalButton");
@@ -85,7 +85,7 @@ public class HomeStage extends Application {
         productIDColumn.setCellValueFactory(new PropertyValueFactory<>("productID"));
         productIDColumn.setPrefWidth(180.8);
         table.getColumns().add(productIDColumn);
-        TableColumn productDescriptionColumn = new TableColumn<>("ProductView Description");
+        TableColumn productDescriptionColumn = new TableColumn<>("Product Description");
         productDescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("productDescription"));
         productDescriptionColumn.setPrefWidth(452);
         table.getColumns().add(productDescriptionColumn);
@@ -118,7 +118,7 @@ public class HomeStage extends Application {
         bottomPane.getChildren().add(customerPane);
         customerPane.setAlignment(Pos.BOTTOM_LEFT);
 
-        Label customerInformation = new Label("CustomerView Information");
+        Label customerInformation = new Label("Customer Information");
         customerInformation.setPrefWidth(Integer.MAX_VALUE);
         customerPane.add(customerInformation, 0, 0);
 
@@ -128,7 +128,7 @@ public class HomeStage extends Application {
         editCustomerInfo.setOnAction((ActionEvent ae) -> openCustomerStage(root));
         customerPane.add(editCustomerInfo, 1, 0);
 
-        Label customerID = new Label("CustomerView ID");
+        Label customerID = new Label("Customer ID");
         customerID.setPrefWidth(Integer.MAX_VALUE);
         customerPane.add(customerID, 0, 1);
 

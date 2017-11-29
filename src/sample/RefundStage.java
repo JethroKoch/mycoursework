@@ -68,26 +68,26 @@ public class RefundStage {
         ObservableList<TransactionView>basket= FXCollections.observableArrayList();
         table.setPrefSize(400, Integer.MAX_VALUE);
         table.setItems(basket);
-        TableColumn customerIDColumn = new TableColumn<>("CustomerID");
-        customerIDColumn.setCellValueFactory(new PropertyValueFactory<>("customerID"));
-        customerIDColumn.setPrefWidth(90.4);
-        table.getColumns().add(customerIDColumn);
-        TableColumn productIDColumn = new TableColumn<>("ProductID");
-        productIDColumn.setCellValueFactory(new PropertyValueFactory<>("productID"));
-        productIDColumn.setPrefWidth(180.8);
-        table.getColumns().add(productIDColumn);
-        TableColumn productDescriptionColumn = new TableColumn<>("ProductView Description");
-        productDescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("productDescription"));
-        productDescriptionColumn.setPrefWidth(452);
-        table.getColumns().add(productDescriptionColumn);
-        TableColumn inStockColumn = new TableColumn<>("InStock");
-        inStockColumn.setCellValueFactory(new PropertyValueFactory<>("inStock"));
-        inStockColumn.setPrefWidth(90.4);
-        table.getColumns().add(inStockColumn);
-        TableColumn priceColumn = new TableColumn<>("Price");
-        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-        priceColumn.setPrefWidth(90.4);
-        table.getColumns().add(priceColumn);
+        TableColumn transactionID = new TableColumn<>("TransactionID");
+        transactionID.setCellValueFactory(new PropertyValueFactory<>("TransactionID"));
+        transactionID.setPrefWidth(80);
+        table.getColumns().add(transactionID);
+        TableColumn totalCost = new TableColumn<>("Total Cost");
+        totalCost.setCellValueFactory(new PropertyValueFactory<>("TotalCost"));
+        totalCost.setPrefWidth(80);
+        table.getColumns().add(totalCost);
+        TableColumn amountPaid = new TableColumn<>("Amount Paid");
+        amountPaid.setCellValueFactory(new PropertyValueFactory<>("Amount Paid"));
+        amountPaid.setPrefWidth(80);
+        table.getColumns().add(amountPaid);
+        TableColumn changeGiven = new TableColumn<>("Change Given");
+        changeGiven.setCellValueFactory(new PropertyValueFactory<>("ChangeGiven"));
+        changeGiven.setPrefWidth(80);
+        table.getColumns().add(changeGiven);
+        TableColumn date = new TableColumn<>("Date");
+        date.setCellValueFactory(new PropertyValueFactory<>("date"));
+        date.setPrefWidth(80);
+        table.getColumns().add(date);
         centrePane.getChildren().add(table);
 
         HBox bottomPane = new HBox(40);
@@ -97,19 +97,19 @@ public class RefundStage {
         bottomPane.setAlignment(Pos.CENTER);
         root.getChildren().add(bottomPane);
 
-        Label totalCost = new Label("Total Cost");
-        totalCost.setPrefSize(Integer.MAX_VALUE, 20);
+        Label totalRefundCost = new Label("Total Cost");
+        totalRefundCost.setPrefSize(Integer.MAX_VALUE, 20);
 
         Label cost = new Label("£");
         cost.setStyle("-fx-background-color: #ffffff");
         cost.setMinWidth(100);
-        totalCost.setPrefSize(Integer.MAX_VALUE,20);
+        totalRefundCost.setPrefSize(Integer.MAX_VALUE,20);
 
         Button refundItems = new Button("TransactionView Items");
         refundItems.setStyle("-fx-background-color: #f7cecc");
         refundItems.setPrefSize(Integer.MAX_VALUE,20);
         refundItems.setOnAction((ActionEvent ae)->error(ae));
-        bottomPane.getChildren().addAll(totalCost, cost, refundItems);
+        bottomPane.getChildren().addAll(totalRefundCost, cost, refundItems);
     }
     public static void error(ActionEvent ae) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
