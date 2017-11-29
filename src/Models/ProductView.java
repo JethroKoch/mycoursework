@@ -64,4 +64,14 @@ public class ProductView {
     public void setPrice(double price) {
         this.price.set(price);
     }
+
+    @Override
+    public String toString() {
+        return "ProductView{" +
+                "productID=" + productID +
+                ", productDescription=" + productDescription +
+                ", inStock=" + inStock +
+                ", price=" + price +
+                '}';
+    }
 }

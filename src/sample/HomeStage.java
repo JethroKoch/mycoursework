@@ -2,6 +2,7 @@ package sample;
 
 import Models.DatabaseConnection;
 import Models.ProductView;
+import Models.TransactionView;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,6 +14,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+
+import java.io.Console;
+import java.util.ArrayList;
 
 public class HomeStage extends Application {
     public static Models.DatabaseConnection database;
@@ -49,7 +53,7 @@ public class HomeStage extends Application {
         adjustStockButton.setOnAction((ActionEvent ae) -> openStockAdjustmentStage(root));
         topPane.getChildren().add(adjustStockButton);
 
-        Button refundButton = new Button("Transaction");
+        Button refundButton = new Button("Refund");
         refundButton.getStyleClass().add("normalButton");
         refundButton.setPrefSize(Integer.MAX_VALUE, 20);
         refundButton.setOnAction((ActionEvent ae) -> openRefundStage(root));
@@ -191,11 +195,7 @@ public class HomeStage extends Application {
         Label change1 = new Label("");
         change1.setPrefWidth(Integer.MAX_VALUE);
         costPane.add(change1, 1, 2);
-
-
-
     }
-
     public static void error(ActionEvent ae) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Error");
@@ -218,4 +218,5 @@ public class HomeStage extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
 }

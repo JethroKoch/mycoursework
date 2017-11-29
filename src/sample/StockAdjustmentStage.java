@@ -44,16 +44,16 @@ public class StockAdjustmentStage {
         HBox.setHgrow(navigationPane, Priority.ALWAYS);
         root.getChildren().add(navigationPane);
 
-        Button searchProductButton = new Button("Search ProductView");
+        Button searchProductButton = new Button("Search Product");
         searchProductButton.setPrefSize(Integer.MAX_VALUE, 40);
         navigationPane.getChildren().add(searchProductButton);
 
-        Button editProductButton = new Button("Edit ProductView");
+        Button editProductButton = new Button("Edit Product");
         editProductButton.setPrefSize(Integer.MAX_VALUE, 40);
         editProductButton.setOnAction((ActionEvent ae)->openEditProduct(ae, stage));
         navigationPane.getChildren().add(editProductButton);
 
-        Button newProductButton = new Button("New ProductView");
+        Button newProductButton = new Button("New Product");
         newProductButton.setPrefSize(Integer.MAX_VALUE, 40);
         newProductButton.setOnAction((ActionEvent ae)->openNewProduct(ae,stage));
         navigationPane.getChildren().add(newProductButton);
@@ -99,16 +99,16 @@ public class StockAdjustmentStage {
         HBox.setHgrow(navigationPane, Priority.ALWAYS);
         root.getChildren().add(navigationPane);
 
-        Button searchProductButton = new Button("Search ProductView");
+        Button searchProductButton = new Button("Search Product");
         searchProductButton.setPrefSize(Integer.MAX_VALUE, 40);
         searchProductButton.setOnAction((ActionEvent ae)->openSearchProduct(ae,stage));
         navigationPane.getChildren().add(searchProductButton);
 
-        Button editProductButton = new Button("Edit ProductView");
+        Button editProductButton = new Button("Edit Product");
         editProductButton.setPrefSize(Integer.MAX_VALUE, 40);
         navigationPane.getChildren().add(editProductButton);
 
-        Button newProductButton = new Button("New ProductView");
+        Button newProductButton = new Button("New Product");
         newProductButton.setPrefSize(Integer.MAX_VALUE, 40);
         newProductButton.setOnAction((ActionEvent ae)->openNewProduct(ae,stage));
         navigationPane.getChildren().add(newProductButton);
@@ -120,7 +120,7 @@ public class StockAdjustmentStage {
         HBox.setHgrow(descriptions,Priority.ALWAYS);
         root.getChildren().add(descriptions);
 
-        Label productId = new Label("ProductView ID");
+        Label productId = new Label("Product ID");
         productId.setPrefSize(Integer.MAX_VALUE,30);
 
         Label productDescription = new Label("ProductView Description");
@@ -146,7 +146,7 @@ public class StockAdjustmentStage {
 
         TextField productDescriptionInput = new TextField();
         productDescriptionInput.setPrefSize(Integer.MAX_VALUE,30);
-        productDescriptionInput.setPromptText("ProductView Description...");
+        productDescriptionInput.setPromptText("Product Description...");
 
         TextField inStockInput = new TextField();
         inStockInput.setPrefSize(Integer.MAX_VALUE,30);
@@ -188,17 +188,17 @@ public class StockAdjustmentStage {
         HBox.setHgrow(navigationPane, Priority.ALWAYS);
         root.getChildren().add(navigationPane);
 
-        Button searchProductButton = new Button("Search ProductView");
+        Button searchProductButton = new Button("Search Product");
         searchProductButton.setPrefSize(Integer.MAX_VALUE, 40);
         searchProductButton.setOnAction((ActionEvent ae)->openSearchProduct(ae,stage));
         navigationPane.getChildren().add(searchProductButton);
 
-        Button editProductButton = new Button("Edit ProductView");
+        Button editProductButton = new Button("Edit Product");
         editProductButton.setPrefSize(Integer.MAX_VALUE, 40);
         editProductButton.setOnAction((ActionEvent ae)-> openEditProduct(ae,stage));
         navigationPane.getChildren().add(editProductButton);
 
-        Button newProductButton = new Button("New ProductView");
+        Button newProductButton = new Button("New Product");
         newProductButton.setPrefSize(Integer.MAX_VALUE, 40);
         navigationPane.getChildren().add(newProductButton);
 
@@ -209,10 +209,10 @@ public class StockAdjustmentStage {
         HBox.setHgrow(descriptions,Priority.ALWAYS);
         root.getChildren().add(descriptions);
 
-        Label productId = new Label("ProductView ID");
+        Label productId = new Label("Product ID");
         productId.setPrefSize(Integer.MAX_VALUE,30);
 
-        Label productDescription = new Label("ProductView Description");
+        Label productDescription = new Label("Product Description");
         productDescription.setPrefSize(Integer.MAX_VALUE,30);
 
         Label inStock = new Label("In Stock");
@@ -235,7 +235,7 @@ public class StockAdjustmentStage {
 
         TextField productDescriptionInput = new TextField();
         productDescriptionInput.setPrefSize(Integer.MAX_VALUE,30);
-        productDescriptionInput.setPromptText("ProductView Description...");
+        productDescriptionInput.setPromptText("Product Description...");
 
         TextField inStockInput = new TextField();
         inStockInput.setPrefSize(Integer.MAX_VALUE,30);

@@ -96,4 +96,16 @@ public class TransactionView {
     public void setDate(Date date) {
         this.date.set(date);
     }
+
+    @Override
+    public String toString() {
+        return "TransactionView{" +
+                "transactionID=" + transactionID +
+                ", customerID=" + customerID +
+                ", totalCost=" + totalCost +
+                ", amountPaid=" + amountPaid +
+                ", changeGiven=" + changeGiven +
+                ", date=" + date +
+                '}';
+    }
 }
