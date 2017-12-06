@@ -6,15 +6,15 @@ public class CustomerView {
     private int customerId;
     private String firstName;
     private String lastName;
-    private Date dateOfBirth;
+    private String dateOfBirth;
     private String contactNumber;
     private String house;
     private String street;
     private String city;
-    private String coounty;
+    private String county;
     private String postcode;
 
-    public CustomerView(int customerId, String firstName, String lastName, Date dateOfBirth, String contactNumber, String house, String street, String city, String county, String postcode) {
+    public CustomerView(int customerId, String firstName, String lastName, String dateOfBirth, String contactNumber, String house, String street, String city, String county, String postcode) {
         this.customerId = customerId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -23,7 +23,7 @@ public class CustomerView {
         this.house = house;
         this.street = street;
         this.city = city;
-        this.coounty = county;
+        this.county = county;
         this.postcode = postcode;
     }
 
@@ -51,11 +51,11 @@ public class CustomerView {
         this.lastName = lastName;
     }
 
-    public Date getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -92,11 +92,11 @@ public class CustomerView {
     }
 
     public String getCounty() {
-        return coounty;
+        return county;
     }
 
-    public void setCounty(String coounty) {
-        this.coounty = coounty;
+    public void setCounty(String county) {
+        this.county = county;
     }
 
     public String getPostcode() {
@@ -113,12 +113,12 @@ public class CustomerView {
                 "customerId=" + customerId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", dateOfBirth=" + dateOfBirth +
+                ", dateOfBirth='" + dateOfBirth + '\'' +
                 ", contactNumber='" + contactNumber + '\'' +
                 ", house='" + house + '\'' +
                 ", street='" + street + '\'' +
                 ", city='" + city + '\'' +
-                ", coounty='" + coounty + '\'' +
+                ", county='" + county + '\'' +
                 ", postcode='" + postcode + '\'' +
                 '}';
     }

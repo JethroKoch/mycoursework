@@ -9,7 +9,7 @@ import java.util.List;
 public class CustomerService {
     public static void selectAll(List<CustomerView> targetList, DatabaseConnection database) {
 
-        PreparedStatement statement = database.newStatement("SELECT CustomerID, FirstName, LastName, DOB, ContactNo, House, Street, City, County, Postcode FROM CUSTOMERS ORDER BY x");
+        PreparedStatement statement = database.newStatement("SELECT CustomerID, FirstName, LastName, DOB, ContactNo, House, Street, City, County, Postcode FROM CUSTOMERS ORDER BY CustomerID");
 
         try {
             if (statement != null) {
@@ -22,7 +22,7 @@ public class CustomerService {
                                 results.getInt("CustomerID"),
                                 results.getString("FirstName"), 
                                 results.getString("Lastname"),
-                                results.getDate("DOB"),
+                                results.getString("DOB"),
                                 results.getString("ContactNo"),
                                 results.getString("House"),
                                 results.getString("Street"),
@@ -52,7 +52,7 @@ public class CustomerService {
                     result = new CustomerView(results.getInt("CustomerID"),
                             results.getString("FirstName"),
                             results.getString("Lastname"),
-                            results.getDate("DOB"),
+                            results.getString("DOB"),
                             results.getString("ContactNo"),
                             results.getString("House"),
                             results.getString("Street"),
@@ -78,7 +78,7 @@ public class CustomerService {
                 statement.setInt(1, itemToSave.getCustomerId());
                 statement.setString(2, itemToSave.getFirstName());
                 statement.setString(3, itemToSave.getLastName());
-                statement.setDate(4, (Date) itemToSave.getDateOfBirth());
+                statement.setString(4, itemToSave.getDateOfBirth());
                 statement.setString(4, itemToSave.getContactNumber());
                 statement.setString(5, itemToSave.getHouse());
                 statement.setString(6, itemToSave.getStreet());
@@ -92,7 +92,7 @@ public class CustomerService {
                 statement.setInt(1, itemToSave.getCustomerId());
                 statement.setString(2, itemToSave.getFirstName());
                 statement.setString(3, itemToSave.getLastName());
-                statement.setDate(4, (Date) itemToSave.getDateOfBirth());
+                statement.setString(4, itemToSave.getDateOfBirth());
                 statement.setString(4, itemToSave.getContactNumber());
                 statement.setString(5, itemToSave.getHouse());
                 statement.setString(6, itemToSave.getStreet());

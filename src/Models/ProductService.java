@@ -8,7 +8,7 @@ import java.util.List;
 public class ProductService {
     public static void selectAll(List<ProductView> targetList, DatabaseConnection database) {
 
-        PreparedStatement statement = database.newStatement("SELECT ProductID, ProductDescription, InStock, Price FROM PRODUCTS ORDER BY x");
+        PreparedStatement statement = database.newStatement("SELECT ProductID, ProductDescription, InStock, Price FROM PRODUCTS ORDER BY ProductID");
 
         try {
             if (statement != null) {

@@ -1,5 +1,6 @@
-package sample;
+package Veiw;
 
+import Controller.main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,6 +15,7 @@ import javafx.stage.WindowEvent;
 public class CustomerStage {
     Scene searchCustomer, editCustomer, newCustomer;
     static Pane parent;
+    private static main controller;
 
     public CustomerStage(Pane theParent) {
         Stage stage = new Stage();
@@ -94,12 +96,12 @@ public class CustomerStage {
         Button searchCustomerNowButton = new Button("Search Now");
         searchCustomerNowButton.setStyle("-fx-background-color: #f7cecc");
         searchCustomerNowButton.setMinSize(100,20);
-        searchCustomerNowButton.setOnAction((ActionEvent ae) ->error(ae));
+        searchCustomerNowButton.setOnAction((ActionEvent ae) ->controller.error(ae));
         leftPane.getChildren().add(searchCustomerNowButton);
 
         Button selectButton = new Button("Select CustomerView");
         selectButton.setMinSize(100,20);
-        selectButton.setOnAction((ActionEvent ae)->error(ae));
+        selectButton.setOnAction((ActionEvent ae)->controller.error(ae));
         leftPane.getChildren().add(selectButton);
 
         HBox centrePane = new HBox(40);
@@ -242,7 +244,7 @@ public class CustomerStage {
         Button saveButton = new Button("Save");
         saveButton.setStyle("-fx-background-color: #f7cecc");
         saveButton.setMinSize(350,20);
-        saveButton.setOnAction((ActionEvent ae) ->error(ae));
+        saveButton.setOnAction((ActionEvent ae) ->controller.error(ae));
         rightPane.getChildren().addAll(contactNumber, saveButton);
 
         VBox centrePane = new VBox(0);
@@ -369,7 +371,7 @@ public class CustomerStage {
         Button saveButton = new Button("Save Edit");
         saveButton.setStyle("-fx-background-color: #f7cecc");
         saveButton.setMinSize(350,20);
-        saveButton.setOnAction((ActionEvent ae) ->error(ae));
+        saveButton.setOnAction((ActionEvent ae) ->controller.error(ae));
         rightPane.getChildren().addAll(contactNumber, saveButton);
 
         VBox centrePane = new VBox(0);
@@ -391,13 +393,6 @@ public class CustomerStage {
         editPane(stage);
     }
 
-    public static void error(ActionEvent ae) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText("This feature has not been implicated yet");
-        alert.showAndWait();
-    }
 
     public void closeStage(Stage stage) {
 

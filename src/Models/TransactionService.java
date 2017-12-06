@@ -8,7 +8,7 @@ import java.util.List;
 public class TransactionService {
     public static void selectAll(List<TransactionView> targetList, DatabaseConnection database) {
 
-        PreparedStatement statement = database.newStatement("SELECT TransactionID, CustomerID, TotalCost, AmountPaid, Change, Date FROM TRANSACTIONS ORDER BY x");
+        PreparedStatement statement = database.newStatement("SELECT TransactionID, CustomerID, TotalCost, AmountPaid, Change, Date FROM TRANSACTIONS ORDER BY TransactionID");
 
         try {
             if (statement != null) {
@@ -23,7 +23,7 @@ public class TransactionService {
                                 results.getDouble("TotalCost"),
                                 results.getDouble("AmountPaid"),
                                 results.getDouble("Change"),
-                                results.getDate("Date")));
+                                results.getString("Date")));
                     }
                 }
             }
@@ -48,7 +48,7 @@ public class TransactionService {
                             results.getDouble("TotalCost"),
                             results.getDouble("AmountPaid"),
                             results.getDouble("Change"),
-                            results.getDate("Date"));
+                            results.getString("Date"));
                 }
             }
         } catch (SQLException resultsException) {
@@ -68,7 +68,7 @@ public class TransactionService {
                 statement.setDouble(3,itemToSave.getTotalCost());
                 statement.setDouble(4,itemToSave.getAmountPaid());
                 statement.setDouble(5,itemToSave.getChangeGiven());
-                statement.setDate(6, (java.sql.Date) itemToSave.getDate());
+                statement.setString(6, itemToSave.getDate());
             }
             else {
                 PreparedStatement statement = database.newStatement("UPDATE TransactionS SET TransactionID = ?, CustomerID = ?, TotalCost = ?, AmountPaid =?, Change=?, Date=? WHERE TransactionID = ?");
@@ -77,7 +77,7 @@ public class TransactionService {
                 statement.setDouble(3,itemToSave.getTotalCost());
                 statement.setDouble(4,itemToSave.getAmountPaid());
                 statement.setDouble(5,itemToSave.getChangeGiven());
-                statement.setDate(6, (java.sql.Date) itemToSave.getDate());
+                statement.setString(6, itemToSave.getDate());
                 database.executeUpdate(statement);
             }
         } catch (SQLException resultsException) {

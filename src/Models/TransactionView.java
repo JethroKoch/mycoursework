@@ -3,6 +3,7 @@ package Models;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -14,15 +15,15 @@ public class TransactionView {
     private final SimpleDoubleProperty totalCost;
     private final SimpleDoubleProperty amountPaid;
     private final SimpleDoubleProperty changeGiven;
-    private final SimpleObjectProperty<Date> date;
+    private final SimpleStringProperty date;
 
-    public TransactionView(int transactionID, int customerID, double totalCost, double amountPaid, double changeGiven, Date date) {
+    public TransactionView(int transactionID, int customerID, double totalCost, double amountPaid, double changeGiven, String date) {
         this.transactionID = new SimpleIntegerProperty(transactionID);
         this.customerID = new SimpleIntegerProperty(customerID);
         this.totalCost = new SimpleDoubleProperty(totalCost);
         this.amountPaid = new SimpleDoubleProperty(amountPaid);
         this.changeGiven = new SimpleDoubleProperty(changeGiven);
-        this.date = new SimpleObjectProperty<>(date);
+        this.date = new SimpleStringProperty(date);
     }
 
     public int getTransactionID() {
@@ -85,15 +86,27 @@ public class TransactionView {
         this.changeGiven.set(changeGiven);
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date.get();
     }
 
-    public SimpleObjectProperty<Date> dateProperty() {
+    public SimpleStringProperty dateProperty() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date.set(date);
+    }
+
+    @Override
+    public String toString() {
+        return "TransactionView{" +
+                "transactionID=" + transactionID +
+                ", customerID=" + customerID +
+                ", totalCost=" + totalCost +
+                ", amountPaid=" + amountPaid +
+                ", changeGiven=" + changeGiven +
+                ", date=" + date +
+                '}';
     }
 }

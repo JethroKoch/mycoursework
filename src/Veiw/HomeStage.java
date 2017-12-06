@@ -1,5 +1,6 @@
-package sample;
+package Veiw;
 
+import Controller.main;
 import Models.DatabaseConnection;
 import Models.ProductView;
 import javafx.application.Application;
@@ -16,6 +17,7 @@ import javafx.stage.Stage;
 
 public class HomeStage extends Application {
     public static Models.DatabaseConnection database;
+    private static main controller;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -75,7 +77,7 @@ public class HomeStage extends Application {
         searchButton.setPrefHeight(20);
         searchButton.setMinWidth(100);
         searchButton.getStyleClass().add("normalButton");
-        searchButton.setOnAction((ActionEvent ae) -> error(ae));
+        searchButton.setOnAction((ActionEvent ae) -> controller.error(ae));
         searchPane.getChildren().add(searchButton);
 
         TableView table = new TableView<>();
@@ -155,7 +157,7 @@ public class HomeStage extends Application {
 
         Button processButton = new Button("PROCESS");
         processButton.setMinSize(300, 100);
-        processButton.setOnAction((ActionEvent ae) -> error(ae));
+        processButton.setOnAction((ActionEvent ae) -> controller.error(ae));
         bottomPane.getChildren().add(processButton);
         bottomPane.setAlignment(Pos.CENTER);
 
@@ -196,13 +198,6 @@ public class HomeStage extends Application {
 
     }
 
-    public static void error(ActionEvent ae) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText("This feature has not been implicated yet");
-        alert.showAndWait();
-    }
     public static void openCustomerStage(Pane parent) {
         CustomerStage newStage = new CustomerStage(parent);
     }
@@ -218,4 +213,5 @@ public class HomeStage extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
 }

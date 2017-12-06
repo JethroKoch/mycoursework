@@ -1,5 +1,6 @@
-package sample;
+package Veiw;
 
+import Controller.main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,7 +16,7 @@ import javafx.stage.WindowEvent;
 
 public class HistoryStage {
     static Pane parent;
-
+    private static main controller;
     public HistoryStage(Pane theParent) {
 
         Stage stage = new Stage();
@@ -64,7 +65,7 @@ public class HistoryStage {
         Button searchNow = new Button("Search Now");
         searchNow.setStyle("-fx-background-color: #f7cecc");
         searchNow.setMinSize(100,20);
-        searchNow.setOnAction((ActionEvent ae) ->error(ae));
+        searchNow.setOnAction((ActionEvent ae) ->controller.error(ae));
         leftPane.getChildren().add(searchNow);
 
         VBox rightPane = new VBox(30);
@@ -85,13 +86,6 @@ public class HistoryStage {
         parent.setDisable(false);
         stage.close();
 
-    }
-    public static void error(ActionEvent ae) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText("This feature has not been implicated yet");
-        alert.showAndWait();
     }
 
 }

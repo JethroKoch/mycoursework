@@ -1,5 +1,6 @@
-package sample;
+package Veiw;
 
+import Controller.main;
 import Models.TransactionView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,7 +20,7 @@ import javafx.stage.WindowEvent;
 
 public class RefundStage {
     static Pane parent;
-
+    private static main controller;
     public RefundStage(Pane theParent) {
 
         Stage stage = new Stage();
@@ -56,7 +57,7 @@ public class RefundStage {
         Button loadResults = new Button("Load Results");
         loadResults.setPrefSize(Integer.MAX_VALUE,30);
         loadResults.setStyle("-fx-background-color: #f7cecc");
-        loadResults.setOnAction((ActionEvent ae)->error(ae));
+        loadResults.setOnAction((ActionEvent ae)->controller.error(ae));
         topPane.getChildren().addAll(productID,customerID,loadResults);
 
         VBox centrePane = new VBox(20);
@@ -108,15 +109,8 @@ public class RefundStage {
         Button refundItems = new Button("TransactionView Items");
         refundItems.setStyle("-fx-background-color: #f7cecc");
         refundItems.setPrefSize(Integer.MAX_VALUE,20);
-        refundItems.setOnAction((ActionEvent ae)->error(ae));
+        refundItems.setOnAction((ActionEvent ae)->controller.error(ae));
         bottomPane.getChildren().addAll(totalRefundCost, cost, refundItems);
-    }
-    public static void error(ActionEvent ae) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText("This feature has not been implicated yet");
-        alert.showAndWait();
     }
 
     public void closeStage(Stage stage) {

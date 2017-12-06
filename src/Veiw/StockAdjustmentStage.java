@@ -1,5 +1,6 @@
-package sample;
+package Veiw;
 
+import Controller.main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,6 +15,7 @@ import javafx.stage.WindowEvent;
 public class StockAdjustmentStage {
     Scene searchProduct, editProduct, newProduct;
     static Pane parent;
+    private static main controller;
 
     public StockAdjustmentStage(Pane theParent) {
 
@@ -72,7 +74,7 @@ public class StockAdjustmentStage {
         Button searchNow = new Button("Search product");
         searchNow.setPrefSize(Integer.MAX_VALUE,20);
         searchNow.setStyle("-fx-background-color: #f7cecc");
-        searchNow.setOnAction((ActionEvent ae)-> error(ae));
+        searchNow.setOnAction((ActionEvent ae)-> controller.error(ae));
         searchBar.getChildren().addAll(itemDescription,searchNow);
 
         VBox listPane = new VBox(30);
@@ -167,12 +169,12 @@ public class StockAdjustmentStage {
         Button delete = new Button("Delete Item");
         delete.setStyle("-fx-background-color: #f7cecc");
         delete.setPrefSize(Integer.MAX_VALUE,30);
-        delete.setOnAction((ActionEvent ae)->error(ae));
+        delete.setOnAction((ActionEvent ae)->controller.error(ae));
 
         Button saveEdits = new Button("Update");
         saveEdits.setStyle("-fx-background-color: #f7cecc");
         saveEdits.setPrefSize(Integer.MAX_VALUE,30);
-        saveEdits.setOnAction((ActionEvent ae)->error(ae));
+        saveEdits.setOnAction((ActionEvent ae)->controller.error(ae));
         buttons.getChildren().addAll(delete,saveEdits);
     }
     private void newPane(Stage stage){
@@ -256,12 +258,12 @@ public class StockAdjustmentStage {
         Button delete = new Button("Delete Item");
         delete.setStyle("-fx-background-color: #f7cecc");
         delete.setPrefSize(Integer.MAX_VALUE,30);
-        delete.setOnAction((ActionEvent ae)->error(ae));
+        delete.setOnAction((ActionEvent ae)->controller.error(ae));
 
         Button save = new Button("Save New");
         save.setStyle("-fx-background-color: #f7cecc");
         save.setPrefSize(Integer.MAX_VALUE,30);
-        save.setOnAction((ActionEvent ae)->error(ae));
+        save.setOnAction((ActionEvent ae)->controller.error(ae));
         buttons.getChildren().addAll(delete,save);
 
     }
@@ -272,13 +274,7 @@ public class StockAdjustmentStage {
     private void openEditProduct(ActionEvent ae, Stage stage) {
         editPane(stage);
     }
-    public static void error(ActionEvent ae) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText("This feature has not been implicated yet");
-        alert.showAndWait();
-    }
+
     public void closeStage(Stage stage) {
 
         parent.setDisable(false);
