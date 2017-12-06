@@ -34,7 +34,7 @@ public class RefundStage {
 
         VBox root = new VBox();
         Scene scene = new Scene(root, 1024, 768);
-        stage.setTitle("TransactionView A TransactionView");
+        stage.setTitle("Refund A Transaction");
         stage.setScene(scene);
         stage.setOnCloseRequest((WindowEvent we) -> closeStage(stage));
         stage.show();
@@ -71,23 +71,23 @@ public class RefundStage {
         table.setItems(basket);
         TableColumn transactionID = new TableColumn<>("TransactionID");
         transactionID.setCellValueFactory(new PropertyValueFactory<>("TransactionID"));
-        transactionID.setPrefWidth(80);
+        transactionID.setPrefWidth(181);
         table.getColumns().add(transactionID);
         TableColumn totalCost = new TableColumn<>("Total Cost");
         totalCost.setCellValueFactory(new PropertyValueFactory<>("TotalCost"));
-        totalCost.setPrefWidth(80);
+        totalCost.setPrefWidth(181);
         table.getColumns().add(totalCost);
         TableColumn amountPaid = new TableColumn<>("Amount Paid");
         amountPaid.setCellValueFactory(new PropertyValueFactory<>("Amount Paid"));
-        amountPaid.setPrefWidth(80);
+        amountPaid.setPrefWidth(180);
         table.getColumns().add(amountPaid);
         TableColumn changeGiven = new TableColumn<>("Change Given");
         changeGiven.setCellValueFactory(new PropertyValueFactory<>("ChangeGiven"));
-        changeGiven.setPrefWidth(80);
+        changeGiven.setPrefWidth(181);
         table.getColumns().add(changeGiven);
         TableColumn date = new TableColumn<>("Date");
         date.setCellValueFactory(new PropertyValueFactory<>("date"));
-        date.setPrefWidth(80);
+        date.setPrefWidth(181);
         table.getColumns().add(date);
         centrePane.getChildren().add(table);
 
@@ -106,7 +106,7 @@ public class RefundStage {
         cost.setMinWidth(100);
         totalRefundCost.setPrefSize(Integer.MAX_VALUE,20);
 
-        Button refundItems = new Button("TransactionView Items");
+        Button refundItems = new Button("Transaction Items");
         refundItems.setStyle("-fx-background-color: #f7cecc");
         refundItems.setPrefSize(Integer.MAX_VALUE,20);
         refundItems.setOnAction((ActionEvent ae)->controller.error(ae));
