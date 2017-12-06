@@ -1,6 +1,5 @@
 package Models;
 
-import java.util.Date;
 
 public class CustomerView {
     private int customerId;

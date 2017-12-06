@@ -1,6 +1,7 @@
 package Veiw;
 
 import Controller.CustomerStageController;
+import Models.CustomerView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,6 +17,7 @@ public class CustomerStage {
     Scene searchCustomer, editCustomer, newCustomer;
     static Pane parent;
     private static CustomerStageController controller;
+    private static ListView<CustomerView>customersList  = new ListView<>();
 
     public CustomerStage(Pane theParent) {
         Stage stage = new Stage();
@@ -50,11 +52,6 @@ public class CustomerStage {
         searchCustomerButton.setPrefSize(Integer.MAX_VALUE, 40);
         topPane.getChildren().add(searchCustomerButton);
 
-        Button editCustomerButton = new Button("Edit Customer");
-        editCustomerButton.setPrefSize(Integer.MAX_VALUE, 40);
-        editCustomerButton.setOnAction((ActionEvent ae) -> customerEdit(ae, stage));
-        topPane.getChildren().add(editCustomerButton);
-
         Button newCustomerButton = new Button("New Customer");
         newCustomerButton.setPrefSize(Integer.MAX_VALUE, 40);
         newCustomerButton.setOnAction((ActionEvent ae) -> openCustomerNew(ae, stage));
@@ -67,27 +64,27 @@ public class CustomerStage {
         BorderPane.setAlignment(leftPane, Pos.CENTER_LEFT);
         search.setLeft(leftPane);
 
-        Label firstName = new Label("First Name");
-        firstName.setMinSize(100, 20);
-        leftPane.getChildren().add(firstName);
+        Label firstNameLabel = new Label("First Name");
+        firstNameLabel.setMinSize(100, 20);
+        leftPane.getChildren().add(firstNameLabel);
 
         TextField firstNameInput = new TextField("");
         firstNameInput.setPromptText("Enter First Name...");
         firstNameInput.setMinSize(100, 20);
         leftPane.getChildren().add(firstNameInput);
 
-        Label secondName = new Label("Second Name");
-        secondName.setMinSize(100, 20);
-        leftPane.getChildren().add(secondName);
+        Label secondNameLabel = new Label("Second Name");
+        secondNameLabel.setMinSize(100, 20);
+        leftPane.getChildren().add(secondNameLabel);
 
         TextField secondNameInput = new TextField("");
         secondNameInput.setPromptText("Enter Second Name...");
         secondNameInput.setMinSize(100, 20);
         leftPane.getChildren().add(secondNameInput);
 
-        Label postcode = new Label("Postcode");
-        postcode.setMinSize(100, 20);
-        leftPane.getChildren().add(postcode);
+        Label postcodeLabel = new Label("Postcode");
+        postcodeLabel.setMinSize(100, 20);
+        leftPane.getChildren().add(postcodeLabel);
 
         TextField postcodeInput = new TextField("");
         postcodeInput.setPromptText("Enter postcode...");
@@ -97,7 +94,10 @@ public class CustomerStage {
         Button searchCustomerNowButton = new Button("Search Now");
         searchCustomerNowButton.setStyle("-fx-background-color: #f7cecc");
         searchCustomerNowButton.setMinSize(100, 20);
-        searchCustomerNowButton.setOnAction((ActionEvent ae) -> controller.error(ae));
+        String firstName = firstNameInput.getText();
+        String secondName = secondNameInput.getText();
+        String postcode = postcodeInput.getText();
+        searchCustomerNowButton.setOnAction((ActionEvent ae) -> controller.search(ae));
         leftPane.getChildren().add(searchCustomerNowButton);
 
         Button selectButton = new Button("Select Customer");
@@ -105,32 +105,21 @@ public class CustomerStage {
         selectButton.setOnAction((ActionEvent ae) -> controller.error(ae));
         leftPane.getChildren().add(selectButton);
 
+        Button editCustomer = new Button("Edit Customer");
+        editCustomer.setMinSize(100,20);
+        editCustomer.setOnAction((ActionEvent ae)-> customerEdit(ae,stage));
+        leftPane.getChildren().add(editCustomer);
+
         HBox centrePane = new HBox(40);
         centrePane.setStyle("-fx-background-color: #c2c2c2");
         centrePane.setPadding(new Insets(60, 20, 60, 20));
         centrePane.setAlignment(Pos.CENTER);
         search.setAlignment(centrePane, Pos.CENTER);
-
         search.setCenter(centrePane);
-        ListView<String> results = new ListView<String>();
-        results.setPrefSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
-        ObservableList<String> customers = FXCollections.observableArrayList("No items Searched");
-        results.setItems(customers);
-        centrePane.getChildren().add(results);
-        /*playList.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
-                                       @Override
-                                       public void handle(MouseEvent click) {
+        customersList.setPrefSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
+        centrePane.getChildren().add(customersList);
 
-                                           if (click.getClickCount() == 2) {
-                                               //Use ListView's getSelected Item
-                                               currentItemSelected = playList.getSelectionModel()
-                                                       .getSelectedItem();
-                                               //use this to do whatever you want to. Open Link etc.
-                                           }
-                                       }
-                                   }
-        search.setCenter(results);*/
     }
 
     public void newPane(Stage stage) {
@@ -157,13 +146,10 @@ public class CustomerStage {
         searchCustomerButton.setPrefSize(Integer.MAX_VALUE, 40);
         searchCustomerButton.setOnAction((ActionEvent ae) -> openCustomerSearch(ae, stage));
 
-        Button editCustomerButton = new Button("Edit Customer");
-        editCustomerButton.setPrefSize(Integer.MAX_VALUE, 40);
-        editCustomerButton.setOnAction((ActionEvent ae) -> customerEdit(ae, stage));
 
         Button newCustomerButton = new Button("New Customer");
         newCustomerButton.setPrefSize(Integer.MAX_VALUE, 40);
-        tabButtons.getChildren().addAll(searchCustomerButton, editCustomerButton, newCustomerButton);
+        tabButtons.getChildren().addAll(searchCustomerButton, newCustomerButton);
 
         HBox labels = new HBox();
         labels.setStyle("-fx-background-color: #c2c2c2");
@@ -282,14 +268,11 @@ public class CustomerStage {
         searchCustomerButton.setPrefSize(Integer.MAX_VALUE, 40);
         searchCustomerButton.setOnAction((ActionEvent ae) -> openCustomerSearch(ae, stage));
 
-        Button editCustomerButton = new Button("Edit Customer");
-        editCustomerButton.setPrefSize(Integer.MAX_VALUE, 40);
-
 
         Button newCustomerButton = new Button("New Customer");
         newCustomerButton.setPrefSize(Integer.MAX_VALUE, 40);
         newCustomerButton.setOnAction((ActionEvent ae) -> openCustomerNew(ae, stage));
-        tabButtons.getChildren().addAll(searchCustomerButton, editCustomerButton, newCustomerButton);
+        tabButtons.getChildren().addAll(searchCustomerButton, newCustomerButton);
 
         HBox labels = new HBox();
         labels.setStyle("-fx-background-color: #c2c2c2");
