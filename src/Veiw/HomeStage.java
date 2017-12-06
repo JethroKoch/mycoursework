@@ -1,6 +1,6 @@
 package Veiw;
 
-import Controller.main;
+import Controller.MainController;
 import Models.DatabaseConnection;
 import Models.ProductView;
 import javafx.application.Application;
@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 
 public class HomeStage extends Application {
     public static Models.DatabaseConnection database;
-    private static main controller;
+    private static MainController controller;
 
     @Override
     public void start(Stage stage) throws Exception {

@@ -1,6 +1,6 @@
 package Veiw;
 
-import Controller.main;
+import Controller.MainController;
 import Models.TransactionView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,7 +20,7 @@ import javafx.stage.WindowEvent;
 
 public class RefundStage {
     static Pane parent;
-    private static main controller;
+    private static MainController controller;
     public RefundStage(Pane theParent) {
 
         Stage stage = new Stage();

@@ -1,6 +1,6 @@
 package Veiw;
 
-import Controller.main;
+import Controller.MainController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,7 +15,7 @@ import javafx.stage.WindowEvent;
 public class StockAdjustmentStage {
     Scene searchProduct, editProduct, newProduct;
     static Pane parent;
-    private static main controller;
+    private static MainController controller;
 
     public StockAdjustmentStage(Pane theParent) {
 
