@@ -1,6 +1,7 @@
 package Veiw;
 
-import Controller.MainController;
+import Controller.HistoryStageController;
+import Controller.HomeStageController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,7 +17,7 @@ import javafx.stage.WindowEvent;
 
 public class HistoryStage {
     static Pane parent;
-    private static MainController controller;
+    private static HistoryStageController controller;
     public HistoryStage(Pane theParent) {
 
         Stage stage = new Stage();

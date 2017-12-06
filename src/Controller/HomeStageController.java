@@ -3,7 +3,7 @@ package Controller;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 
-public class MainController {
+public class HomeStageController {
     public static void error(ActionEvent ae) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Error");
