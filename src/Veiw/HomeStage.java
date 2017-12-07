@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 public class HomeStage extends Application {
     public static Models.DatabaseConnection database;
     private static HomeStageController controller;
+    private static TableView<ProductView> productsTable = new TableView<>();
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -76,34 +77,38 @@ public class HomeStage extends Application {
         Button searchButton = new Button("Add Product");
         searchButton.setPrefHeight(20);
         searchButton.setMinWidth(100);
-        searchButton.getStyleClass().add("normalButton");
-        searchButton.setOnAction((ActionEvent ae) -> controller.error(ae));
+        int productID = Integer.parseInt(searchBar.getText());
+        searchButton.setOnAction((ActionEvent ae) -> controller.addProduct(ae,productID));
         searchPane.getChildren().add(searchButton);
 
-        TableView table = new TableView<>();
-        table.setPrefSize(400, 400);
-        table.setItems(purchaseTable);
+        productsTable.setPrefSize(400, 400);
+        productsTable.setItems(purchaseTable);
+
         TableColumn productIDColumn = new TableColumn<>("ProductID");
         productIDColumn.setCellValueFactory(new PropertyValueFactory<>("productID"));
         productIDColumn.setPrefWidth(180.8);
-        table.getColumns().add(productIDColumn);
+        productsTable.getColumns().add(productIDColumn);
+
         TableColumn productDescriptionColumn = new TableColumn<>("Product Description");
         productDescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("productDescription"));
         productDescriptionColumn.setPrefWidth(452);
-        table.getColumns().add(productDescriptionColumn);
+        productsTable.getColumns().add(productDescriptionColumn);
+
         TableColumn inStockColumn = new TableColumn<>("InStock");
         inStockColumn.setCellValueFactory(new PropertyValueFactory<>("inStock"));
         inStockColumn.setPrefWidth(90.4);
-        table.getColumns().add(inStockColumn);
+        productsTable.getColumns().add(inStockColumn);
+
         TableColumn quantityColumn = new TableColumn<>("Quantity");
         quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         quantityColumn.setPrefWidth(90.4);
-        table.getColumns().add(quantityColumn);
+        productsTable.getColumns().add(quantityColumn);
+
         TableColumn priceColumn = new TableColumn<>("Price");
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         priceColumn.setPrefWidth(90.4);
-        table.getColumns().add(priceColumn);
-        centerPane.getChildren().add(table);
+        productsTable.getColumns().add(priceColumn);
+        centerPane.getChildren().add(productsTable);
 
         HBox bottomPane = new HBox(20);
         bottomPane.setStyle("-fx-background-color: navy;");
