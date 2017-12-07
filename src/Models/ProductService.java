@@ -34,9 +34,10 @@ public class ProductService {
         PreparedStatement statement = database.newStatement("SELECT ProductID, ProductDescription, InStock, Price WHERE ProductID = ?");
 
         try {
-            statement.setInt(1,id);
+
             if (statement != null) {
 
+                statement.setInt(1,id);
                 ResultSet results = database.excecuteQuery(statement);
 
                 if (results != null) {

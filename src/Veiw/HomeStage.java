@@ -17,12 +17,15 @@ import javafx.stage.Stage;
 
 public class HomeStage extends Application {
     public static Models.DatabaseConnection database;
+    public static TableView<ProductView> productsTable = new TableView<>();
+
     private static HomeStageController controller;
-    private static TableView<ProductView> productsTable = new TableView<>();
 
     @Override
     public void start(Stage stage) throws Exception {
+
         database = new DatabaseConnection("Database.db");
+        controller = new HomeStageController();
 
         BorderPane root = new BorderPane();
         Scene scene = new Scene(root, 1024, 768);
@@ -69,7 +72,7 @@ public class HomeStage extends Application {
         searchPane.setStyle("-fx-background-color: navy");
         centerPane.getChildren().add(searchPane);
 
-        TextField searchBar = new TextField();
+        final TextField searchBar = new TextField();
         searchBar.setPromptText("Search ProductID");
         searchBar.setPrefSize(Integer.MAX_VALUE, 20);
         searchPane.getChildren().add(searchBar);
@@ -77,8 +80,8 @@ public class HomeStage extends Application {
         Button searchButton = new Button("Add Product");
         searchButton.setPrefHeight(20);
         searchButton.setMinWidth(100);
-        int productID = Integer.parseInt(searchBar.getText());
-        searchButton.setOnAction((ActionEvent ae) -> controller.addProduct(ae,productID));
+
+        searchButton.setOnAction((ae) -> controller.addProduct(searchBar));
         searchPane.getChildren().add(searchButton);
 
         productsTable.setPrefSize(400, 400);

@@ -3,30 +3,37 @@ package Controller;
 import Models.DatabaseConnection;
 import Models.ProductService;
 import Models.ProductView;
+import Veiw.HomeStage;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 
 import java.util.ArrayList;
 
 public class HomeStageController {
 
-    private TableView<ProductView> productsTable;
-
-    private DatabaseConnection database;
     private ArrayList<ProductView> currentProduct = new ArrayList<>();
 
-    public HomeStageController(TableView<ProductView>productsTable){
-        this.productsTable=productsTable;
-        database = new DatabaseConnection("Database.db");
-    }
+    public HomeStageController() {}
 
-    public void addProduct(ActionEvent ae,int productID){
+    public void addProduct(TextField searchBar){
+
+        System.out.println("Attempt to search for: " + searchBar.getText());
+
+        int productID = 0;
+        try {
+            Integer.parseInt(searchBar.getText());
+        }
+        catch (NumberFormatException nfe) {
+            System.out.println (nfe.getMessage());
+        }
+
         currentProduct.clear();
-        ProductService.selectById(productID,database);
+        ProductService.selectById(productID, HomeStage.database);
 
-        productsTable.setItems(FXCollections.observableArrayList(currentProduct));
+        HomeStage.productsTable.setItems(FXCollections.observableArrayList(currentProduct));
     }
 
     public static void error(ActionEvent ae) {
