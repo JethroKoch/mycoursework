@@ -18,7 +18,7 @@ public class ProductService {
                 if (results != null) {
                     while (results.next()) {
                         targetList.add(new ProductView(
-                                results.getInt("TransactionID"),
+                                results.getInt("ProductID"),
                                 results.getString("ProductDescription"),
                                 results.getInt("InStock"),
                                 results.getDouble("Price")));
@@ -29,9 +29,9 @@ public class ProductService {
             System.out.println("Database select all error: " + resultsException.getMessage());
         }
     }
-    public static void selectById(int id, DatabaseConnection database) {
+    public static ProductView selectById(int id, DatabaseConnection database) {
         ProductView result = null;
-        PreparedStatement statement = database.newStatement("SELECT ProductID, ProductDescription, InStock, Price WHERE ProductID = ?");
+        PreparedStatement statement = database.newStatement("SELECT ProductID, ProductDescription, InStock, Price FROM PRODUCTS WHERE ProductID = ?");
 
         try {
 
@@ -40,17 +40,18 @@ public class ProductService {
                 statement.setInt(1,id);
                 ResultSet results = database.excecuteQuery(statement);
 
-                if (results != null) {
+                if (results != null && !results.isAfterLast()) {
                     result = new ProductView(
-                            results.getInt("TransactionID"),
+                            results.getInt("ProductID"),
                             results.getString("ProductDescription"),
                             results.getInt("InStock"),
                             results.getDouble("Price"));
                 }
             }
         } catch (SQLException resultsException) {
-            System.out.println("Database select all error: " + resultsException.getMessage());
+            System.out.println("! Database select by id error: " + resultsException.getMessage());
         }
+        return result;
     }
     public static void save(ProductView itemToSave, DatabaseConnection database) {
 
@@ -68,7 +69,7 @@ public class ProductService {
 
             }
             else {
-                PreparedStatement statement = database.newStatement("UPDATE TransactionS SET ProductID = ?, ProductDescription = ?, InStock = ?, Price =? WHERE CustomerID = ?");
+                PreparedStatement statement = database.newStatement("UPDATE PRODUCTS SET ProductID = ?, ProductDescription = ?, InStock = ?, Price =? WHERE CustomerID = ?");
                 statement.setInt(1, itemToSave.getProductID());
                 statement.setString(2,itemToSave.getProductDescription());
                 statement.setInt(3,itemToSave.getInStock());

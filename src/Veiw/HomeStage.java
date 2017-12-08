@@ -94,7 +94,7 @@ public class HomeStage extends Application {
 
         TableColumn productDescriptionColumn = new TableColumn<>("Product Description");
         productDescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("productDescription"));
-        productDescriptionColumn.setPrefWidth(452);
+        productDescriptionColumn.setPrefWidth(452+90.4);
         productsTable.getColumns().add(productDescriptionColumn);
 
         TableColumn inStockColumn = new TableColumn<>("InStock");
@@ -102,10 +102,6 @@ public class HomeStage extends Application {
         inStockColumn.setPrefWidth(90.4);
         productsTable.getColumns().add(inStockColumn);
 
-        TableColumn quantityColumn = new TableColumn<>("Quantity");
-        quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
-        quantityColumn.setPrefWidth(90.4);
-        productsTable.getColumns().add(quantityColumn);
 
         TableColumn priceColumn = new TableColumn<>("Price");
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));

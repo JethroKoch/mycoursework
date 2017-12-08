@@ -2,8 +2,6 @@ package Veiw;
 
 import Controller.CustomerStageController;
 import Models.CustomerView;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -17,7 +15,7 @@ public class CustomerStage {
     Scene searchCustomer, editCustomer, newCustomer;
     static Pane parent;
     private static CustomerStageController controller;
-    private static ListView<CustomerView>customersList  = new ListView<>();
+    public static ListView<CustomerView>customersList  = new ListView<>();
 
     public CustomerStage(Pane theParent) {
         Stage stage = new Stage();
