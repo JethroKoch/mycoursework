@@ -2,6 +2,8 @@ package Controller;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 public class RefundStageController {
 
@@ -13,5 +15,11 @@ public class RefundStageController {
         alert.setHeaderText(null);
         alert.setContentText("This feature has not been implicated yet");
         alert.showAndWait();
+    }
+    public void closeStage(Pane parent, Stage stage) {
+
+        parent.setDisable(false);
+        stage.close();
+
     }
 }

@@ -32,7 +32,7 @@ public class HistoryStage {
         Scene scene = new Scene(root, 1024, 400);
         stage.setTitle("TransactionHistory");
         stage.setScene(scene);
-        stage.setOnCloseRequest((WindowEvent we) -> closeStage(stage));
+        stage.setOnCloseRequest((WindowEvent we) -> controller.closeStage(parent,stage));
         stage.show();
 
         VBox leftPane = new VBox(30);
@@ -77,13 +77,5 @@ public class HistoryStage {
 
 
     }
-
-    public void closeStage(Stage stage) {
-
-        parent.setDisable(false);
-        stage.close();
-
-    }
-
 }
 

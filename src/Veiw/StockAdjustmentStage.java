@@ -1,9 +1,7 @@
 package Veiw;
 
-import Controller.HomeStageController;
 import Controller.StockAdjustmentStageController;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import Models.ProductView;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -14,9 +12,9 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 public class StockAdjustmentStage {
-    Scene searchProduct, editProduct, newProduct;
     static Pane parent;
     private static StockAdjustmentStageController controller;
+    public static ListView<ProductView> stockList = new ListView<>();
 
     public StockAdjustmentStage(Pane theParent) {
 
@@ -29,15 +27,16 @@ public class StockAdjustmentStage {
 
     public void start(Stage stage) {
 
+        controller = new StockAdjustmentStageController();
         stage.setTitle("Adjust Stock");
-        stage.setOnCloseRequest((WindowEvent we) -> closeStage(stage));
+        stage.setOnCloseRequest((WindowEvent we) -> controller.closeStage(parent,stage));
         stage.show();
         searchPane(stage);
 
     }
-    private void searchPane(Stage stage){
+    public static void  searchPane(Stage stage){
         VBox root = new VBox(0);
-        searchProduct = new Scene(root,1024,768);
+        Scene searchProduct = new Scene(root,1024,768);
         stage.setScene(searchProduct);
 
         HBox navigationPane = new HBox(20);
@@ -53,12 +52,12 @@ public class StockAdjustmentStage {
 
         Button editProductButton = new Button("Edit Product");
         editProductButton.setPrefSize(Integer.MAX_VALUE, 40);
-        editProductButton.setOnAction((ActionEvent ae)->openEditProduct(ae, stage));
+        editProductButton.setOnAction((ActionEvent ae)->controller.openEditProduct(ae, stage));
         navigationPane.getChildren().add(editProductButton);
 
         Button newProductButton = new Button("New Product");
         newProductButton.setPrefSize(Integer.MAX_VALUE, 40);
-        newProductButton.setOnAction((ActionEvent ae)->openNewProduct(ae,stage));
+        newProductButton.setOnAction((ActionEvent ae)->controller.openNewProduct(ae,stage));
         navigationPane.getChildren().add(newProductButton);
 
         HBox searchBar = new HBox(20);
@@ -82,16 +81,24 @@ public class StockAdjustmentStage {
         listPane.setStyle("-fx-background-color: #c2c2c2");
         listPane.setPadding(new Insets(20,60,20,60));
         root.getChildren().add(listPane);
-        ListView<String> results = new ListView<String>();
-        results.setPrefSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
-        ObservableList<String> products = FXCollections.observableArrayList("No items Searched");
-        results.setItems(products);
-        listPane.getChildren().add(results);
+        stockList.setPrefSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
+        listPane.getChildren().add(stockList);
+
+        HBox bottomPane = new HBox(30);
+        bottomPane.setStyle("-fx-background-color: #c2c2c2");
+        bottomPane.setPadding(new Insets(20,20,20,20));
+        bottomPane.setAlignment(Pos.CENTER);
+        root.getChildren().add(bottomPane);
+
+        Button select = new Button("Select");
+        select.setPrefSize(100,20);
+        select.setOnAction((ActionEvent ae)->controller.error(ae));
+        bottomPane.getChildren().add(select);
 
     }
-    private void editPane(Stage stage){
+    public static void editPane(Stage stage){
         VBox root = new VBox(0);
-        editProduct = new Scene(root,1024,280);
+        Scene editProduct = new Scene(root,1024,280);
         stage.setScene(editProduct);
 
         HBox navigationPane = new HBox(20);
@@ -104,7 +111,7 @@ public class StockAdjustmentStage {
 
         Button searchProductButton = new Button("Search Product");
         searchProductButton.setPrefSize(Integer.MAX_VALUE, 40);
-        searchProductButton.setOnAction((ActionEvent ae)->openSearchProduct(ae,stage));
+        searchProductButton.setOnAction((ActionEvent ae)->controller.openSearchProduct(ae,stage));
         navigationPane.getChildren().add(searchProductButton);
 
         Button editProductButton = new Button("Edit Product");
@@ -113,7 +120,7 @@ public class StockAdjustmentStage {
 
         Button newProductButton = new Button("New Product");
         newProductButton.setPrefSize(Integer.MAX_VALUE, 40);
-        newProductButton.setOnAction((ActionEvent ae)->openNewProduct(ae,stage));
+        newProductButton.setOnAction((ActionEvent ae)->controller.openNewProduct(ae,stage));
         navigationPane.getChildren().add(newProductButton);
 
         HBox descriptions = new HBox(60);
@@ -178,9 +185,9 @@ public class StockAdjustmentStage {
         saveEdits.setOnAction((ActionEvent ae)->controller.error(ae));
         buttons.getChildren().addAll(delete,saveEdits);
     }
-    private void newPane(Stage stage){
+    public static void newPane(Stage stage){
         VBox root = new VBox(0);
-        editProduct = new Scene(root,1024,280);
+        Scene editProduct = new Scene(root,1024,280);
         stage.setScene(editProduct);
 
         HBox navigationPane = new HBox(20);
@@ -193,12 +200,12 @@ public class StockAdjustmentStage {
 
         Button searchProductButton = new Button("Search Product");
         searchProductButton.setPrefSize(Integer.MAX_VALUE, 40);
-        searchProductButton.setOnAction((ActionEvent ae)->openSearchProduct(ae,stage));
+        searchProductButton.setOnAction((ActionEvent ae)->controller.openSearchProduct(ae,stage));
         navigationPane.getChildren().add(searchProductButton);
 
         Button editProductButton = new Button("Edit Product");
         editProductButton.setPrefSize(Integer.MAX_VALUE, 40);
-        editProductButton.setOnAction((ActionEvent ae)-> openEditProduct(ae,stage));
+        editProductButton.setOnAction((ActionEvent ae)-> controller.openEditProduct(ae,stage));
         navigationPane.getChildren().add(editProductButton);
 
         Button newProductButton = new Button("New Product");
@@ -268,19 +275,4 @@ public class StockAdjustmentStage {
         buttons.getChildren().addAll(delete,save);
 
     }
-    private void openSearchProduct(ActionEvent ae, Stage stage){ searchPane(stage); }
-    private void openNewProduct(ActionEvent ae, Stage stage) {
-        newPane(stage);
-    }
-    private void openEditProduct(ActionEvent ae, Stage stage) {
-        editPane(stage);
-    }
-
-    public void closeStage(Stage stage) {
-
-        parent.setDisable(false);
-        stage.close();
-
-    }
-
 }

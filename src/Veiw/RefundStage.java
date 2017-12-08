@@ -1,10 +1,7 @@
 package Veiw;
 
-import Controller.HomeStageController;
 import Controller.RefundStageController;
 import Models.TransactionView;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -39,7 +36,7 @@ public class RefundStage {
         Scene scene = new Scene(root, 1024, 768);
         stage.setTitle("Refund A Transaction");
         stage.setScene(scene);
-        stage.setOnCloseRequest((WindowEvent we) -> closeStage(stage));
+        stage.setOnCloseRequest((WindowEvent we) -> controller.closeStage(parent,stage));
         stage.show();
 
         HBox topPane = new HBox(20);
@@ -107,13 +104,6 @@ public class RefundStage {
         refundItems.setPrefSize(Integer.MAX_VALUE,20);
         refundItems.setOnAction((ActionEvent ae)->controller.error(ae));
         bottomPane.getChildren().addAll(totalRefundCost, cost, refundItems);
-    }
-
-    public void closeStage(Stage stage) {
-
-        parent.setDisable(false);
-        stage.close();
-
     }
 
 }
