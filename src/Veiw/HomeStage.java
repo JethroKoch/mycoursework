@@ -46,19 +46,19 @@ public class HomeStage extends Application {
         Button historyButton = new Button("History");
         historyButton.getStyleClass().add("normalButton");
         historyButton.setPrefSize(Integer.MAX_VALUE, 20);
-        historyButton.setOnAction((ActionEvent ae) -> openHistoryStage(root));
+        historyButton.setOnAction((ActionEvent ae) -> controller.openHistoryStage(root));
         topPane.getChildren().add(historyButton);
 
         Button adjustStockButton = new Button("Adjust Stock");
         adjustStockButton.getStyleClass().add("normalButton");
         adjustStockButton.setPrefSize(Integer.MAX_VALUE, 20);
-        adjustStockButton.setOnAction((ActionEvent ae) -> openStockAdjustmentStage(root));
+        adjustStockButton.setOnAction((ActionEvent ae) -> controller.openStockAdjustmentStage(root));
         topPane.getChildren().add(adjustStockButton);
 
-        Button refundButton = new Button("Transaction");
+        Button refundButton = new Button("Refund");
         refundButton.getStyleClass().add("normalButton");
         refundButton.setPrefSize(Integer.MAX_VALUE, 20);
-        refundButton.setOnAction((ActionEvent ae) -> openRefundStage(root));
+        refundButton.setOnAction((ActionEvent ae) -> controller.openRefundStage(root));
         topPane.getChildren().add(refundButton);
 
         VBox centerPane = new VBox(20);
@@ -131,7 +131,7 @@ public class HomeStage extends Application {
         Button editCustomerInfo = new Button("Edit/New");
         editCustomerInfo.getStyleClass().add("normalButton");
         editCustomerInfo.setPrefSize(Integer.MAX_VALUE, 20);
-        editCustomerInfo.setOnAction((ActionEvent ae) -> openCustomerStage(root));
+        editCustomerInfo.setOnAction((ActionEvent ae) -> controller.openCustomerStage(root));
         customerPane.add(editCustomerInfo, 1, 0);
 
         Label customerID = new Label("Customer ID");
@@ -202,18 +202,6 @@ public class HomeStage extends Application {
 
     }
 
-    public static void openCustomerStage(Pane parent) {
-        CustomerStage newStage = new CustomerStage(parent);
-    }
-    public static void openHistoryStage(Pane parent) {
-        HistoryStage newStage = new HistoryStage(parent);
-    }
-    public static void openRefundStage(Pane parent) {
-        RefundStage newStage = new RefundStage(parent);
-    }
-    public static void openStockAdjustmentStage(Pane parent) {
-        StockAdjustmentStage newStage = new StockAdjustmentStage(parent);
-    }
     public static void main(String[] args) {
         launch(args);
     }

@@ -1,9 +1,7 @@
 package Veiw;
 
 import Controller.HistoryStageController;
-import Controller.HomeStageController;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import Models.TransactionView;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -18,6 +16,7 @@ import javafx.stage.WindowEvent;
 public class HistoryStage {
     static Pane parent;
     private static HistoryStageController controller;
+    public ListView<TransactionView> historyList = new ListView<>();
     public HistoryStage(Pane theParent) {
 
         Stage stage = new Stage();
@@ -28,7 +27,7 @@ public class HistoryStage {
     }
 
     public void start(Stage stage) {
-
+        controller = new HistoryStageController();
         HBox root = new HBox();
         Scene scene = new Scene(root, 1024, 400);
         stage.setTitle("TransactionHistory");
@@ -73,11 +72,8 @@ public class HistoryStage {
         rightPane.setStyle("-fx-background-color: #c2c2c2");
         leftPane.setPadding(new Insets(20));
         root.getChildren().add(rightPane);
-        ListView<String> results = new ListView<String>();
-        results.setPrefSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
-        ObservableList<String> transactions = FXCollections.observableArrayList("No items Searched");
-        results.setItems(transactions);
-        rightPane.getChildren().add(results);
+        historyList.setPrefSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
+        rightPane.getChildren().add(historyList);
 
 
     }

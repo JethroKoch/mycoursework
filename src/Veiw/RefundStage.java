@@ -21,6 +21,7 @@ import javafx.stage.WindowEvent;
 
 public class RefundStage {
     static Pane parent;
+    public TableView<TransactionView> RefundItems = new TableView<>();
     private static RefundStageController controller;
     public RefundStage(Pane theParent) {
 
@@ -33,6 +34,7 @@ public class RefundStage {
 
     public void start(Stage stage) {
 
+        controller = new RefundStageController();
         VBox root = new VBox();
         Scene scene = new Scene(root, 1024, 768);
         stage.setTitle("Refund A Transaction");
@@ -47,9 +49,9 @@ public class RefundStage {
         topPane.setAlignment(Pos.CENTER);
         root.getChildren().addAll(topPane);
 
-        TextField productID = new TextField();
-        productID.setPrefSize(Integer.MAX_VALUE,30);
-        productID.setPromptText("Enter ProductID...");
+        TextField transactionIdInput = new TextField();
+        transactionIdInput.setPrefSize(Integer.MAX_VALUE,30);
+        transactionIdInput.setPromptText("Enter TransactionID...");
 
         TextField customerID = new TextField();
         customerID.setPrefSize(Integer.MAX_VALUE,30);
@@ -59,38 +61,31 @@ public class RefundStage {
         loadResults.setPrefSize(Integer.MAX_VALUE,30);
         loadResults.setStyle("-fx-background-color: #f7cecc");
         loadResults.setOnAction((ActionEvent ae)->controller.error(ae));
-        topPane.getChildren().addAll(productID,customerID,loadResults);
+        topPane.getChildren().addAll(transactionIdInput,customerID,loadResults);
 
         VBox centrePane = new VBox(20);
         centrePane.setStyle("-fx-background-color: #c2c2c2;");
         centrePane.setPadding(new Insets(0, 60, 0, 60));
         root.getChildren().add(centrePane);
 
-        TableView table = new TableView<>();
-        ObservableList<TransactionView>basket= FXCollections.observableArrayList();
-        table.setPrefSize(400, Integer.MAX_VALUE);
-        table.setItems(basket);
+        RefundItems.setPrefSize(400, Integer.MAX_VALUE);
         TableColumn transactionID = new TableColumn<>("TransactionID");
         transactionID.setCellValueFactory(new PropertyValueFactory<>("TransactionID"));
-        transactionID.setPrefWidth(181);
-        table.getColumns().add(transactionID);
-        TableColumn totalCost = new TableColumn<>("Total Cost");
-        totalCost.setCellValueFactory(new PropertyValueFactory<>("TotalCost"));
-        totalCost.setPrefWidth(181);
-        table.getColumns().add(totalCost);
-        TableColumn amountPaid = new TableColumn<>("Amount Paid");
-        amountPaid.setCellValueFactory(new PropertyValueFactory<>("Amount Paid"));
-        amountPaid.setPrefWidth(180);
-        table.getColumns().add(amountPaid);
-        TableColumn changeGiven = new TableColumn<>("Change Given");
-        changeGiven.setCellValueFactory(new PropertyValueFactory<>("ChangeGiven"));
-        changeGiven.setPrefWidth(181);
-        table.getColumns().add(changeGiven);
-        TableColumn date = new TableColumn<>("Date");
-        date.setCellValueFactory(new PropertyValueFactory<>("date"));
-        date.setPrefWidth(181);
-        table.getColumns().add(date);
-        centrePane.getChildren().add(table);
+        transactionID.setPrefWidth(250);
+        RefundItems.getColumns().add(transactionID);
+        TableColumn productDescription = new TableColumn<>("ProductDescription");
+        productDescription.setCellValueFactory(new PropertyValueFactory<>("ProductDescription"));
+        productDescription.setPrefWidth(410);
+        RefundItems.getColumns().add(productDescription);
+        TableColumn inStock = new TableColumn<>("InStock");
+        inStock.setCellValueFactory(new PropertyValueFactory<>("InStock"));
+        inStock.setPrefWidth(121);
+        RefundItems.getColumns().add(inStock);
+        TableColumn price = new TableColumn<>("Price");
+        price.setCellValueFactory(new PropertyValueFactory<>("Price"));
+        price.setPrefWidth(121);
+        RefundItems.getColumns().add(price);
+        centrePane.getChildren().add(RefundItems);
 
         HBox bottomPane = new HBox(40);
         bottomPane.setStyle("-fx-background-color: #c2c2c2");
@@ -107,7 +102,7 @@ public class RefundStage {
         cost.setMinWidth(100);
         totalRefundCost.setPrefSize(Integer.MAX_VALUE,20);
 
-        Button refundItems = new Button("Transaction Items");
+        Button refundItems = new Button("Refund Item");
         refundItems.setStyle("-fx-background-color: #f7cecc");
         refundItems.setPrefSize(Integer.MAX_VALUE,20);
         refundItems.setOnAction((ActionEvent ae)->controller.error(ae));

@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 public class CustomerStage {
-    Scene searchCustomer, editCustomer, newCustomer;
     static Pane parent;
     private static CustomerStageController controller;
     public static ListView<CustomerView>customersList  = new ListView<>();
@@ -26,16 +25,16 @@ public class CustomerStage {
     }
 
     public void start(Stage stage) {
-
+        controller = new CustomerStageController();
         stage.setTitle("Customer Information");
-        stage.setOnCloseRequest((WindowEvent we) -> closeStage(stage));
+        stage.setOnCloseRequest((WindowEvent we) -> controller.closeStage(parent, stage));
         stage.show();
         searchPane(stage);
     }
 
-    public void searchPane(Stage stage) {
+    public static void searchPane(Stage stage) {
         BorderPane search = new BorderPane();
-        searchCustomer = new Scene(search, 1024, 768);
+        Scene searchCustomer = new  Scene(search, 1024, 768);
         stage.setScene(searchCustomer);
 
         HBox topPane = new HBox(20);
@@ -52,7 +51,7 @@ public class CustomerStage {
 
         Button newCustomerButton = new Button("New Customer");
         newCustomerButton.setPrefSize(Integer.MAX_VALUE, 40);
-        newCustomerButton.setOnAction((ActionEvent ae) -> openCustomerNew(ae, stage));
+        newCustomerButton.setOnAction((ActionEvent ae) -> controller.openCustomerNew(ae, stage));
         topPane.getChildren().add(newCustomerButton);
 
         VBox leftPane = new VBox(40);
@@ -105,7 +104,7 @@ public class CustomerStage {
 
         Button editCustomer = new Button("Edit Customer");
         editCustomer.setMinSize(100,20);
-        editCustomer.setOnAction((ActionEvent ae)-> customerEdit(ae,stage));
+        editCustomer.setOnAction((ActionEvent ae)-> controller.customerEdit(ae,stage));
         leftPane.getChildren().add(editCustomer);
 
         HBox centrePane = new HBox(40);
@@ -120,11 +119,11 @@ public class CustomerStage {
 
     }
 
-    public void newPane(Stage stage) {
-        BorderPane search = new BorderPane();
-        searchCustomer = new Scene(search, 1024, 768);
-        stage.setScene(searchCustomer);
-        stage.setOnCloseRequest((WindowEvent we) -> closeStage(stage));
+    public static void newPane(Stage stage) {
+        BorderPane new1 = new BorderPane();
+        Scene newCustomer = new Scene(new1, 1024, 768);
+        stage.setScene(newCustomer);
+        stage.setOnCloseRequest((WindowEvent we) -> controller.closeStage(parent,stage));
         stage.show();
 
         VBox topPane = new VBox(20);
@@ -133,7 +132,7 @@ public class CustomerStage {
         topPane.setAlignment(Pos.CENTER);
         BorderPane.setAlignment(topPane, Pos.TOP_CENTER);
         HBox.setHgrow(topPane, Priority.ALWAYS);
-        search.setTop(topPane);
+        new1.setTop(topPane);
 
         HBox tabButtons = new HBox(20);
         tabButtons.setStyle("-fx-background-color: #c2c2c2");
@@ -142,7 +141,7 @@ public class CustomerStage {
 
         Button searchCustomerButton = new Button("Search Customer");
         searchCustomerButton.setPrefSize(Integer.MAX_VALUE, 40);
-        searchCustomerButton.setOnAction((ActionEvent ae) -> openCustomerSearch(ae, stage));
+        searchCustomerButton.setOnAction((ActionEvent ae) -> controller.openCustomerSearch(ae, stage));
 
 
         Button newCustomerButton = new Button("New Customer");
@@ -188,7 +187,7 @@ public class CustomerStage {
         leftPane.setAlignment(Pos.CENTER_LEFT);
         BorderPane.setAlignment(leftPane, Pos.CENTER_LEFT);
         VBox.setVgrow(leftPane, Priority.ALWAYS);
-        search.setLeft(leftPane);
+        new1.setLeft(leftPane);
 
         Label address = new Label("Address");
         address.setMinWidth(500);
@@ -220,7 +219,7 @@ public class CustomerStage {
         rightPane.setAlignment(Pos.CENTER_RIGHT);
         BorderPane.setAlignment(rightPane, Pos.CENTER_RIGHT);
         VBox.setVgrow(rightPane, Priority.ALWAYS);
-        search.setRight(rightPane);
+        new1.setRight(rightPane);
 
         TextField contactNumber = new TextField();
         contactNumber.setMinWidth(350);
@@ -238,16 +237,16 @@ public class CustomerStage {
         centrePane.setAlignment(Pos.CENTER);
         BorderPane.setAlignment(centrePane, Pos.CENTER);
         VBox.setVgrow(centrePane, Priority.ALWAYS);
-        search.setCenter(centrePane);
+        new1.setCenter(centrePane);
 
 
     }
 
-    public void editPane(Stage stage) {
-        BorderPane search = new BorderPane();
-        searchCustomer = new Scene(search, 1024, 768);
-        stage.setScene(searchCustomer);
-        stage.setOnCloseRequest((WindowEvent we) -> closeStage(stage));
+    public static void editPane(Stage stage) {
+        BorderPane edit = new BorderPane();
+        Scene editCustomer = new Scene(edit, 1024, 768);
+        stage.setScene(editCustomer);
+        stage.setOnCloseRequest((WindowEvent we) -> controller.closeStage(parent,stage));
         stage.show();
         VBox topPane = new VBox(20);
         topPane.setStyle("-fx-background-color: #c2c2c2");
@@ -255,7 +254,7 @@ public class CustomerStage {
         topPane.setAlignment(Pos.CENTER);
         BorderPane.setAlignment(topPane, Pos.TOP_CENTER);
         HBox.setHgrow(topPane, Priority.ALWAYS);
-        search.setTop(topPane);
+        edit.setTop(topPane);
 
         HBox tabButtons = new HBox(20);
         tabButtons.setStyle("-fx-background-color: #c2c2c2");
@@ -264,12 +263,12 @@ public class CustomerStage {
 
         Button searchCustomerButton = new Button("Search Customer");
         searchCustomerButton.setPrefSize(Integer.MAX_VALUE, 40);
-        searchCustomerButton.setOnAction((ActionEvent ae) -> openCustomerSearch(ae, stage));
+        searchCustomerButton.setOnAction((ActionEvent ae) -> controller.openCustomerSearch(ae, stage));
 
 
         Button newCustomerButton = new Button("New Customer");
         newCustomerButton.setPrefSize(Integer.MAX_VALUE, 40);
-        newCustomerButton.setOnAction((ActionEvent ae) -> openCustomerNew(ae, stage));
+        newCustomerButton.setOnAction((ActionEvent ae) -> controller.openCustomerNew(ae, stage));
         tabButtons.getChildren().addAll(searchCustomerButton, newCustomerButton);
 
         HBox labels = new HBox();
@@ -311,7 +310,7 @@ public class CustomerStage {
         leftPane.setAlignment(Pos.CENTER_LEFT);
         BorderPane.setAlignment(leftPane, Pos.CENTER_LEFT);
         VBox.setVgrow(leftPane, Priority.ALWAYS);
-        search.setLeft(leftPane);
+        edit.setLeft(leftPane);
 
         Label address = new Label("Address");
         address.setMinWidth(500);
@@ -343,7 +342,7 @@ public class CustomerStage {
         rightPane.setAlignment(Pos.CENTER_RIGHT);
         BorderPane.setAlignment(rightPane, Pos.CENTER_RIGHT);
         VBox.setVgrow(rightPane, Priority.ALWAYS);
-        search.setRight(rightPane);
+        edit.setRight(rightPane);
 
         TextField contactNumber = new TextField();
         contactNumber.setMinWidth(350);
@@ -361,19 +360,6 @@ public class CustomerStage {
         centrePane.setAlignment(Pos.CENTER);
         BorderPane.setAlignment(centrePane, Pos.CENTER);
         VBox.setVgrow(centrePane, Priority.ALWAYS);
-        search.setCenter(centrePane);
-    }
-    public void openCustomerSearch(ActionEvent ae, Stage stage){
-        searchPane(stage);
-    }
-    public void openCustomerNew(ActionEvent ae, Stage stage) {newPane(stage); }
-    public void customerEdit(ActionEvent ae, Stage stage) {editPane(stage);
-    }
-
-    public void closeStage(Stage stage) {
-
-        parent.setDisable(false);
-        stage.close();
-
+        edit.setCenter(centrePane);
     }
 }
