@@ -177,7 +177,7 @@ public class HomeStage extends Application {
         totalCost.setPrefWidth(Integer.MAX_VALUE);
         costPane.add(totalCost, 0, 0);
 
-        Label totalCost1 = new Label("");
+        Label totalCost1 = new Label(HomeStageController.outputString);
         totalCost1.setPrefWidth(Integer.MAX_VALUE);
         costPane.add(totalCost1, 1, 0);
 
