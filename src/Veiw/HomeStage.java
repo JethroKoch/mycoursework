@@ -7,6 +7,8 @@ import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -14,6 +16,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+
+import javax.swing.*;
+import java.util.Observable;
 
 public class HomeStage extends Application {
     public static Models.DatabaseConnection database;
@@ -72,7 +77,7 @@ public class HomeStage extends Application {
         searchPane.setStyle("-fx-background-color: navy");
         centerPane.getChildren().add(searchPane);
 
-        final TextField searchBar = new TextField();
+        TextField searchBar = new TextField();
         searchBar.setPromptText("Search ProductID");
         searchBar.setPrefSize(Integer.MAX_VALUE, 20);
         searchPane.getChildren().add(searchBar);
@@ -80,9 +85,12 @@ public class HomeStage extends Application {
         Button searchButton = new Button("Add Product");
         searchButton.setPrefHeight(20);
         searchButton.setMinWidth(100);
-
-        searchButton.setOnAction((ae) -> controller.addProduct(searchBar));
         searchPane.getChildren().add(searchButton);
+
+        Button removeButton = new Button("Remove Product");
+        removeButton.setPrefHeight(20);
+        removeButton.setMinWidth(150);
+        searchPane.getChildren().add(removeButton);
 
         productsTable.setPrefSize(400, 400);
         productsTable.setItems(purchaseTable);
@@ -177,7 +185,7 @@ public class HomeStage extends Application {
         totalCost.setPrefWidth(Integer.MAX_VALUE);
         costPane.add(totalCost, 0, 0);
 
-        Label totalCost1 = new Label(HomeStageController.outputString);
+        Label totalCost1 = new Label();
         totalCost1.setPrefWidth(Integer.MAX_VALUE);
         costPane.add(totalCost1, 1, 0);
 
@@ -186,7 +194,7 @@ public class HomeStage extends Application {
         costPane.add(amountGiven, 0, 1);
 
         TextField amountGiven1 = new TextField();
-        amountGiven1.setPromptText("Enter amount");
+        amountGiven1.setText("0.0");
         amountGiven1.setPrefWidth(Integer.MAX_VALUE);
         costPane.add(amountGiven1, 1, 1);
 
@@ -194,11 +202,12 @@ public class HomeStage extends Application {
         change.setPrefWidth(Integer.MAX_VALUE);
         costPane.add(change, 0, 2);
 
-        Label change1 = new Label("");
+        Label change1 = new Label();
         change1.setPrefWidth(Integer.MAX_VALUE);
         costPane.add(change1, 1, 2);
 
-
+        searchButton.setOnAction((ae) -> controller.addProduct(searchBar,totalCost1,amountGiven1,change1));
+        removeButton.setOnAction((ActionEvent ae)->controller.removeItem(change1,totalCost1,amountGiven1));
 
     }
 
