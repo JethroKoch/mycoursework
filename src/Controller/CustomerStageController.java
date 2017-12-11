@@ -2,21 +2,21 @@ package Controller;
 
 import Models.CustomerService;
 import Models.CustomerView;
+import Models.CustomerViewSearch;
 import Veiw.CustomerStage;
 import Veiw.HomeStage;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 
 public class CustomerStageController {
-    private ArrayList<CustomerView> customerList=new ArrayList<>();
+    private ArrayList<CustomerViewSearch> currentCustomers =new ArrayList<>();
 
     public CustomerStageController(){}
 
@@ -26,11 +26,13 @@ public class CustomerStageController {
     public void openCustomerNew(ActionEvent ae, Stage stage) {CustomerStage.newPane(stage); }
     public void customerEdit(ActionEvent ae, Stage stage) {CustomerStage.editPane(stage); }
 
-    public void search(ActionEvent ae, String firstName,String secondName, String postCode){
-        customerList.clear();
-        customerList.add(CustomerService.selectForList(firstName,secondName,postCode, HomeStage.database));
-        CustomerStage.customersList.setItems(FXCollections.observableArrayList(customerList));
-
+    public void search(ActionEvent ae, TextField firstName, TextField secondName, TextField postCode){
+        String firstname = firstName.getText();
+        String secondname = secondName.getText();
+        String postcode = postCode.getText();
+        currentCustomers.clear();
+        currentCustomers.add(CustomerService.selectForList(firstname,secondname,postcode,HomeStage.database));
+        CustomerStage.customersList.setItems(FXCollections.observableArrayList(currentCustomers));
     }
     public void closeStage(Pane parent, Stage stage) {
 

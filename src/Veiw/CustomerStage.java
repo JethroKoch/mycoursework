@@ -2,6 +2,7 @@ package Veiw;
 
 import Controller.CustomerStageController;
 import Models.CustomerView;
+import Models.CustomerViewSearch;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -14,7 +15,7 @@ import javafx.stage.WindowEvent;
 public class CustomerStage {
     static Pane parent;
     private static CustomerStageController controller;
-    public static ListView<CustomerView>customersList  = new ListView<>();
+    public static ListView<CustomerViewSearch>customersList  = new ListView<>();
 
     public CustomerStage(Pane theParent) {
         Stage stage = new Stage();
@@ -91,10 +92,7 @@ public class CustomerStage {
         Button searchCustomerNowButton = new Button("Search Now");
         searchCustomerNowButton.setStyle("-fx-background-color: #f7cecc");
         searchCustomerNowButton.setMinSize(100, 20);
-        String firstName = firstNameInput.getText();
-        String secondName = secondNameInput.getText();
-        String postcode = postcodeInput.getText();
-        searchCustomerNowButton.setOnAction((ActionEvent ae) -> controller.search(ae,firstName,secondName,postcode));
+        searchCustomerNowButton.setOnAction((ActionEvent ae) -> controller.search(ae,firstNameInput,secondNameInput,postcodeInput));
         leftPane.getChildren().add(searchCustomerNowButton);
 
         Button selectButton = new Button("Select Customer");

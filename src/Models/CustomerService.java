@@ -68,33 +68,29 @@ public class CustomerService {
 
         return result;
     }
-    public static CustomerView selectForList(String firstName, String secondName,String postCode, DatabaseConnection database) {
+    public static CustomerViewSearch selectForList(String firstName, String lastName,String postCode, DatabaseConnection database) {
 
-        CustomerView result = null;
+        CustomerViewSearch result = null;
 
-        PreparedStatement statement = database.newStatement("SELECT CustomerID, FirstName, LastName, DOB FROM CUSTOMERS WHERE FirstName =? AND LastName=? AND PostCode=?");
+        PreparedStatement statement = database.newStatement("SELECT CustomerID, FirstName, LastName, DOB,ContactNo,House,Street,City,County,Postcode FROM CUSTOMERS WHERE FirstName =? AND LastName=? AND Postcode=?");
 
-        try {
-            if (statement != null) {
+        try{
+            if (statement != null){
 
                 statement.setString(1, firstName);
+                statement.setString(2, lastName);
+                statement.setString(3, postCode);
                 ResultSet results = database.excecuteQuery(statement);
 
-                if (results != null) {
-                    result = new CustomerView(results.getInt("CustomerID"),
+                if (results != null &&!results.isAfterLast()) {
+                    result = new CustomerViewSearch(results.getInt("CustomerID"),
                             results.getString("FirstName"),
                             results.getString("LastName"),
-                            results.getString("DOB"),
-                            results.getString("ContactNo"),
-                            results.getString("House"),
-                            results.getString("Street"),
-                            results.getString("City"),
-                            results.getString("County"),
-                            results.getString("Postcode"));
+                            results.getString("DOB"));
                 }
             }
-        } catch (SQLException resultsException) {
-            System.out.println("Database select by id error: " + resultsException.getMessage());
+        } catch (SQLException resultsException){
+            System.out.println("Database select for list error: " + resultsException.getMessage());
         }
 
         return result;
