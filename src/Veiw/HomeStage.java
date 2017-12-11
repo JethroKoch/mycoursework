@@ -24,7 +24,6 @@ import java.util.Observable;
 public class HomeStage extends Application {
     public static Models.DatabaseConnection database;
     public static TableView<ProductView> productsTable = new TableView<>();
-
     private static HomeStageController controller;
 
     @Override

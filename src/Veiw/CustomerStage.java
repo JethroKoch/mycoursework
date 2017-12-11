@@ -16,6 +16,7 @@ public class CustomerStage {
     static Pane parent;
     private static CustomerStageController controller;
     public static ListView<CustomerViewSearch>customersList  = new ListView<>();
+    public static ListView<CustomerView>customerForEdit = new ListView<>();
 
     public CustomerStage(Pane theParent) {
         Stage stage = new Stage();
@@ -359,5 +360,6 @@ public class CustomerStage {
         BorderPane.setAlignment(centrePane, Pos.CENTER);
         VBox.setVgrow(centrePane, Priority.ALWAYS);
         edit.setCenter(centrePane);
+        controller.updateInformation(firstNameInput,secondNameInput,datOfBirthInput,house,street,city,county,postcode,contactNumber);
     }
 }

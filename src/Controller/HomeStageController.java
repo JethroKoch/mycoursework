@@ -47,7 +47,6 @@ public class HomeStageController {
         }
 
         currentProduct.add(ProductService.selectById(productID, HomeStage.database));
-
         HomeStage.productsTable.setItems(FXCollections.observableArrayList(currentProduct));
 
 
