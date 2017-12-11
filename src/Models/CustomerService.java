@@ -21,7 +21,7 @@ public class CustomerService {
                         targetList.add(new CustomerView(
                                 results.getInt("CustomerID"),
                                 results.getString("FirstName"), 
-                                results.getString("Lastname"),
+                                results.getString("LastName"),
                                 results.getString("DOB"),
                                 results.getString("ContactNo"),
                                 results.getString("House"),
@@ -36,6 +36,7 @@ public class CustomerService {
             System.out.println("Database select all error: " + resultsException.getMessage());
         }
     }
+
     public static CustomerView selectById(int id, DatabaseConnection database) {
 
         CustomerView result = null;
@@ -51,7 +52,38 @@ public class CustomerService {
                 if (results != null) {
                     result = new CustomerView(results.getInt("CustomerID"),
                             results.getString("FirstName"),
-                            results.getString("Lastname"),
+                            results.getString("LastName"),
+                            results.getString("DOB"),
+                            results.getString("ContactNo"),
+                            results.getString("House"),
+                            results.getString("Street"),
+                            results.getString("City"),
+                            results.getString("County"),
+                            results.getString("Postcode"));
+                }
+            }
+        } catch (SQLException resultsException) {
+            System.out.println("Database select by id error: " + resultsException.getMessage());
+        }
+
+        return result;
+    }
+    public static CustomerView selectForList(String firstName, String secondName,String postCode, DatabaseConnection database) {
+
+        CustomerView result = null;
+
+        PreparedStatement statement = database.newStatement("SELECT CustomerID, FirstName, LastName, DOB FROM CUSTOMERS WHERE FirstName =? AND LastName=? AND PostCode=?");
+
+        try {
+            if (statement != null) {
+
+                statement.setString(1, firstName);
+                ResultSet results = database.excecuteQuery(statement);
+
+                if (results != null) {
+                    result = new CustomerView(results.getInt("CustomerID"),
+                            results.getString("FirstName"),
+                            results.getString("LastName"),
                             results.getString("DOB"),
                             results.getString("ContactNo"),
                             results.getString("House"),

@@ -4,14 +4,19 @@ import Models.CustomerService;
 import Models.CustomerView;
 import Veiw.CustomerStage;
 import Veiw.HomeStage;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
+
 public class CustomerStageController {
-    private ListView<CustomerView>customerList;
+    private ArrayList<CustomerView> customerList=new ArrayList<>();
 
     public CustomerStageController(){}
 
@@ -21,9 +26,10 @@ public class CustomerStageController {
     public void openCustomerNew(ActionEvent ae, Stage stage) {CustomerStage.newPane(stage); }
     public void customerEdit(ActionEvent ae, Stage stage) {CustomerStage.editPane(stage); }
 
-    public void search(ActionEvent ae){
-        customerList.getItems().clear();
-        CustomerService.selectAll(customerList.getItems(), HomeStage.database);
+    public void search(ActionEvent ae, String firstName,String secondName, String postCode){
+        customerList.clear();
+        customerList.add(CustomerService.selectForList(firstName,secondName,postCode, HomeStage.database));
+        CustomerStage.customersList.setItems(FXCollections.observableArrayList(customerList));
 
     }
     public void closeStage(Pane parent, Stage stage) {

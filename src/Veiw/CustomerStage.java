@@ -94,7 +94,7 @@ public class CustomerStage {
         String firstName = firstNameInput.getText();
         String secondName = secondNameInput.getText();
         String postcode = postcodeInput.getText();
-        searchCustomerNowButton.setOnAction((ActionEvent ae) -> controller.search(ae));
+        searchCustomerNowButton.setOnAction((ActionEvent ae) -> controller.search(ae,firstName,secondName,postcode));
         leftPane.getChildren().add(searchCustomerNowButton);
 
         Button selectButton = new Button("Select Customer");
