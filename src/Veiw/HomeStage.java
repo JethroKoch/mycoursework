@@ -14,6 +14,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
@@ -208,6 +209,7 @@ public class HomeStage extends Application {
 
         searchButton.setOnAction((ae) -> controller.addProduct(searchBar,totalCost1,amountGiven1,change1));
         removeButton.setOnAction((ActionEvent ae)->controller.removeItem(change1,totalCost1,amountGiven1));
+        amountGiven1.setOnKeyPressed(event -> { if (event.getCode() == KeyCode.ENTER){controller.updateCost(amountGiven1, change1);}});
 
     }
 

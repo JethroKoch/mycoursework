@@ -3,6 +3,7 @@ package Controller;
 import Models.ProductService;
 import Models.ProductView;
 import Veiw.*;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
@@ -35,7 +36,6 @@ public class HomeStageController {
     double amountGiven;
 
     public void addProduct(TextField searchBar, Label totalCost1, TextField amountGiven1, Label change1){
-
         System.out.println("Attempt to search for: " + searchBar.getText());
 
         int productID = 0;
@@ -58,34 +58,43 @@ public class HomeStageController {
                 totalCost1.setText(Double.toString(total));
             }
         }
-
-        amountGiven=Double.parseDouble(amountGiven1.getText());
-        checkChange(change1);
+        checkChange(change1, amountGiven1);
     }
 
     public void removeItem(Label change1,Label totalCost1,TextField amountGiven1){
         ProductView selectedItem = HomeStage.productsTable.getSelectionModel().getSelectedItem();
-        HomeStage.productsTable.getItems().remove(selectedItem);
         total = 0;
-        for(ProductView price:HomeStage.productsTable.getItems()){
-            if(price.getPrice()!=0) {
+        HomeStage.productsTable.getItems().remove(selectedItem);
+        currentProduct.remove(selectedItem);
+        for (ProductView price : HomeStage.productsTable.getItems()) {
+            if (price.getPrice() != 0) {
                 total += price.getPrice();
-                totalCost1.setText(Double.toString(total));
             }
         }
-        amountGiven=Double.parseDouble(amountGiven1.getText());
-        checkChange(change1);
-    }
-    public void checkChange(Label change1){
-        change = amountGiven-total;
-        if(change<0){
-            change1.setStyle("-fx-background-color: #f7070c");
-        }else{
-            change1.setStyle("-fx-background-color: forestgreen");
-        }
-        change1.setText(Double.toString(change));
+        totalCost1.setText(Double.toString(total));
+        checkChange(change1, amountGiven1);
     }
 
+    public void updateCost(TextField amountGiven1, Label change1){
+        amountGiven = Double.parseDouble(amountGiven1.getText());
+        checkChange(change1,amountGiven1);
+    }
+    public void checkChange(Label change1,TextField amountGiven1){
+
+        if(Double.parseDouble(amountGiven1.getText())==0){
+            amountGiven1.setText(Double.toString(amountGiven));
+            change = 0;
+            change1.setText(Double.toString(change));
+        }else {
+            change = amountGiven - total;
+            if (change < 0) {
+                change1.setStyle("-fx-background-color: #f7070c");
+            } else {
+                change1.setStyle("-fx-background-color: forestgreen");
+            }
+            change1.setText(Double.toString(change));
+        }
+    }
     public static void error(ActionEvent ae) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Error");
