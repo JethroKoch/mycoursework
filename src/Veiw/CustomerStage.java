@@ -16,7 +16,6 @@ public class CustomerStage {
     static Pane parent;
     private static CustomerStageController controller;
     public static ListView<CustomerViewSearch>customersList  = new ListView<>();
-    public static ListView<CustomerView>customerForEdit = new ListView<>();
 
     public CustomerStage(Pane theParent) {
         Stage stage = new Stage();
@@ -93,7 +92,7 @@ public class CustomerStage {
         Button searchCustomerNowButton = new Button("Search Now");
         searchCustomerNowButton.setStyle("-fx-background-color: #f7cecc");
         searchCustomerNowButton.setMinSize(100, 20);
-        searchCustomerNowButton.setOnAction((ActionEvent ae) -> controller.search(ae,firstNameInput,secondNameInput,postcodeInput));
+        searchCustomerNowButton.setOnAction((ActionEvent ae) -> controller.search(firstNameInput,secondNameInput,postcodeInput));
         leftPane.getChildren().add(searchCustomerNowButton);
 
         Button selectButton = new Button("Select Customer");
@@ -109,7 +108,7 @@ public class CustomerStage {
         Button deleteCustomer = new Button("Delete Customer");
         deleteCustomer.setMinSize(100,20);
         deleteCustomer.setStyle("-fx-background-color: red");
-        editCustomer.setOnAction((ActionEvent ae)->controller.deleteCustomer());
+        deleteCustomer.setOnAction((ActionEvent ae)->controller.deleteCustomer(firstNameInput,secondNameInput,postcodeInput));
         leftPane.getChildren().add(deleteCustomer);
 
         HBox centrePane = new HBox(40);

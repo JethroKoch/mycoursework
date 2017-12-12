@@ -136,7 +136,6 @@ public class CustomerService {
     public static void deleteById(int id, DatabaseConnection database) {
 
         PreparedStatement statement = database.newStatement("DELETE FROM CUSTOMERS WHERE CustomerID  = ?");
-
         try {
             if (statement != null) {
                 statement.setInt(1, id);

@@ -26,8 +26,8 @@ public class CustomerStageController {
         CustomerStage.searchPane(stage);
     }
     public void openCustomerNew(ActionEvent ae, Stage stage) {CustomerStage.newPane(stage); }
-    public void customerEdit(ActionEvent ae, Stage stage) {
 
+    public void customerEdit(ActionEvent ae, Stage stage) {
         CustomerViewSearch selectedItem = CustomerStage.customersList.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
             customerID = selectedItem.getCustomerId();
@@ -44,7 +44,7 @@ public class CustomerStageController {
     }
 
 
-    public void search(ActionEvent ae, TextField firstName, TextField secondName, TextField postCode){
+    public void search(TextField firstName, TextField secondName, TextField postCode){
         String firstname = firstName.getText();
         String secondname = secondName.getText();
         String postcode = postCode.getText();
@@ -107,19 +107,26 @@ public class CustomerStageController {
         controller.selectCustomer();
     }
 
-    public void deleteCustomer(){
+    public void deleteCustomer(TextField firstName, TextField lastName, TextField postcode){
+        CustomerViewSearch selectedItem = CustomerStage.customersList.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
+            customerID = selectedItem.getCustomerId();
+            CustomerService.deleteById(customerID,HomeStage.database);
+            currentCustomers.clear();
+            CustomerStage.customersList.getItems().clear();
+            firstName.clear();
+            lastName.clear();
+            postcode.clear();
 
-        CustomerViewSearch selectedCustomer = CustomerStage.customersList.getSelectionModel().getSelectedItem();
-        if(selectedCustomer!=null) {
-            customerID = selectedCustomer.getCustomerId();
-            CustomerService.deleteById(customerID, HomeStage.database);
-        }else{
+        }else {
             Alert noCustomerSelected = new Alert(Alert.AlertType.INFORMATION);
             noCustomerSelected.setTitle("Error");
             noCustomerSelected.setHeaderText(null);
-            noCustomerSelected.setContentText("No customer has been selected for deletion");
+            noCustomerSelected.setContentText("No customer has been selected to delete");
             noCustomerSelected.showAndWait();
         }
+
+
     }
 
     public void closeStage(Pane parent, Stage stage) {
