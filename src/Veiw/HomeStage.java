@@ -171,7 +171,6 @@ public class HomeStage extends Application {
 
         Button processButton = new Button("PROCESS");
         processButton.setMinSize(300, 100);
-        processButton.setOnAction((ActionEvent ae) -> controller.error(ae));
         bottomPane.getChildren().add(processButton);
         bottomPane.setAlignment(Pos.CENTER);
 
@@ -204,13 +203,14 @@ public class HomeStage extends Application {
         change.setPrefWidth(Integer.MAX_VALUE);
         costPane.add(change, 0, 2);
 
-        Label change1 = new Label();
+        Label change1 = new Label(null);
         change1.setPrefWidth(Integer.MAX_VALUE);
         costPane.add(change1, 1, 2);
 
         searchButton.setOnAction((ae) -> controller.addProduct(searchBar,totalCost1,amountGiven1,change1));
         removeButton.setOnAction((ActionEvent ae)->controller.removeItem(change1,totalCost1,amountGiven1));
         amountGiven1.setOnKeyPressed(event -> { if (event.getCode() == KeyCode.ENTER){controller.updateCost(amountGiven1, change1);}});
+        processButton.setOnAction((ActionEvent ae) -> controller.process(totalCost1,amountGiven1,change1,customerID1,name1,age1));
     }
 
     public static void main(String[] args) {

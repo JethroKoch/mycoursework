@@ -62,16 +62,16 @@ public class TransactionService {
 
         try {
             if (existingItem == null) {
-                PreparedStatement statement = database.newStatement("INSERT INTO TransactionView (TransactionID, CustomerID, TotalCost, AmountPaid, Change, Date) VALUES (?, ?, ?, ?, ?, ?))");
-                statement.setInt(1, itemToSave.getTransactionID());
-                statement.setInt(2, itemToSave.getCustomerID());
-                statement.setDouble(3,itemToSave.getTotalCost());
-                statement.setDouble(4,itemToSave.getAmountPaid());
-                statement.setDouble(5,itemToSave.getChangeGiven());
-                statement.setString(6, itemToSave.getDate());
+                PreparedStatement statement = database.newStatement("INSERT INTO TRANSACTIONS (CustomerID, TotalCost, AmountPaid, Change, Date) VALUES (?, ?, ?, ?, ?)");
+                statement.setInt(1, itemToSave.getCustomerID());
+                statement.setDouble(2,itemToSave.getTotalCost());
+                statement.setDouble(3,itemToSave.getAmountPaid());
+                statement.setDouble(4,itemToSave.getChangeGiven());
+                statement.setString(5, itemToSave.getDate());
+                database.executeUpdate(statement);
             }
             else {
-                PreparedStatement statement = database.newStatement("UPDATE TransactionS SET TransactionID = ?, CustomerID = ?, TotalCost = ?, AmountPaid =?, Change=?, Date=? WHERE TransactionID = ?");
+                PreparedStatement statement = database.newStatement("UPDATE TRANSACTIONS SET TransactionID = ?, CustomerID = ?, TotalCost = ?, AmountPaid =?, Change=?, Date=? WHERE TransactionID = ?");
                 statement.setInt(1, itemToSave.getTransactionID());
                 statement.setInt(2, itemToSave.getTransactionID());
                 statement.setDouble(3,itemToSave.getTotalCost());

@@ -1,21 +1,18 @@
 package Controller;
 
-import Models.CustomerService;
-import Models.CustomerView;
-import Models.ProductService;
-import Models.ProductView;
+import Models.*;
 import Veiw.*;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.Pane;
 
-import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class HomeStageController {
 
@@ -40,7 +37,6 @@ public class HomeStageController {
     double amountGiven;
 
     public void addProduct(TextField searchBar, Label totalCost1, TextField amountGiven1, Label change1){
-        System.out.println("Attempt to search for: " + searchBar.getText());
 
         int productID = 0;
         try {
@@ -107,6 +103,36 @@ public class HomeStageController {
             HomeStage.customerID1.setText(Integer.toString(transactionCustomer.getCustomerId()));
             HomeStage.name1.setText(transactionCustomer.getFirstName() + " " + transactionCustomer.getLastName());
 
+        }
+    }
+    public void process(Label totalCost,TextField amountPaid,Label change,Label customerId,Label name, Label age){
+        if(Double.parseDouble(change.getText())<0||Double.parseDouble(totalCost.getText())==0||Double.parseDouble(amountPaid.getText())==0){
+            Alert notEnoughFunds = new Alert(Alert.AlertType.INFORMATION);
+            notEnoughFunds.setTitle("Error");
+            notEnoughFunds.setHeaderText(null);
+            notEnoughFunds.setContentText("Not enough funds for transaction");
+            notEnoughFunds.showAndWait();
+        }else{
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Date date = new Date();
+            String today  = dateFormat.format(date);
+            TransactionView newTransaction = new TransactionView(0,customerID,Double.parseDouble(totalCost.getText()),Double.parseDouble(amountPaid.getText()),Double.parseDouble(change.getText()),today);
+            TransactionService.save(newTransaction,HomeStage.database);
+
+            for (ProductView id:HomeStage.productsTable.getItems()){
+                BasketView newBasket = new BasketView(HomeStage.database.lastNewId(),id.getProductID());
+                System.out.println(newBasket);
+                BasketService.save(newBasket,HomeStage.database);
+            }
+            currentProduct.clear();
+            HomeStage.productsTable.getItems().clear();
+            CustomerStage.customersList.getItems().clear();
+            customerId.setText(null);
+            name.setText(null);
+            age.setText(null);
+            totalCost.setText(null);
+            amountPaid.clear();
+            change.setText(null);
         }
     }
     public static void error(ActionEvent ae) {

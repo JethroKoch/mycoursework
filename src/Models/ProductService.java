@@ -60,7 +60,7 @@ public class ProductService {
 
         try {
             if (existingItem == null) {
-                PreparedStatement statement = database.newStatement("INSERT INTO ProductView (ProductID, ProductDescription, InStock, Price) VALUES (?, ?, ?, ?, ?, ?))");
+                PreparedStatement statement = database.newStatement("INSERT INTO ProductView (ProductID, ProductDescription, InStock, Price) VALUES (?, ?, ?, ?, ?, ?)");
                 statement.setInt(1, itemToSave.getProductID());
                 statement.setString(2,itemToSave.getProductDescription());
                 statement.setInt(3,itemToSave.getInStock());
