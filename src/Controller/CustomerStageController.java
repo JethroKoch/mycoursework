@@ -18,8 +18,8 @@ import java.util.ArrayList;
 public class CustomerStageController {
     private ArrayList<CustomerViewSearch> currentCustomers =new ArrayList<>();
     private ArrayList<CustomerView> itemForEditing = new ArrayList<>();
-
-    public CustomerStageController(){}
+    private static HomeStageController controller;
+    public CustomerStageController(){controller = new HomeStageController(); }
     public int customerID;
     public void openCustomerSearch(ActionEvent ae, Stage stage){
         CustomerStage.searchPane(stage);
@@ -67,6 +67,30 @@ public class CustomerStageController {
         county.setText(customer.getCounty());
         postcode.setText(customer.getPostcode());
         contactNo.setText("0"+customer.getContactNumber());
+    }
+    public void selectCustomer(Pane parent, Stage stage){
+        CustomerViewSearch selectedItem = CustomerStage.customersList.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
+            HomeStageController.customerID = selectedItem.getCustomerId();
+            CustomerStage.customersList.getItems().clear();
+            currentCustomers.clear();
+            closeStage(parent, stage);
+            controller.selectCustomer();
+
+        }else {
+            Alert noCustomerSelected = new Alert(Alert.AlertType.INFORMATION);
+            noCustomerSelected.setTitle("Error");
+            noCustomerSelected.setHeaderText(null);
+            noCustomerSelected.setContentText("No customer has been selected for transaction");
+            noCustomerSelected.showAndWait();
+        }
+
+    }public void saveEdit(Pane parent,Stage stage,TextField firstName, TextField secondName,TextField DOB, TextField contactNumber,TextField house,TextField street,
+                          TextField city,TextField county, TextField postcode){
+        CustomerView updatedCustomer = new CustomerView(customerID,firstName.getText(),secondName.getText(),DOB.getText(),contactNumber.getText(),house.getText(),
+                street.getText(),city.getText(),county.getText(),street.getText());
+        CustomerService.save(updatedCustomer,HomeStage.database);
+        closeStage(parent,stage);
     }
 
     public void closeStage(Pane parent, Stage stage) {

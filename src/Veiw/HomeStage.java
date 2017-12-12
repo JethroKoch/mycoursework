@@ -25,6 +25,9 @@ public class HomeStage extends Application {
     public static Models.DatabaseConnection database;
     public static TableView<ProductView> productsTable = new TableView<>();
     private static HomeStageController controller;
+    public static Label customerID1 = new Label("");
+    public  static Label name1 = new Label("");
+    public static Label age1 = new Label("");
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -146,7 +149,6 @@ public class HomeStage extends Application {
         customerID.setPrefWidth(Integer.MAX_VALUE);
         customerPane.add(customerID, 0, 1);
 
-        Label customerID1 = new Label("");
         customerID1.setPrefWidth(Integer.MAX_VALUE);
         customerPane.add(customerID1, 1, 1);
 
@@ -154,7 +156,7 @@ public class HomeStage extends Application {
         name.setPrefWidth(Integer.MAX_VALUE);
         customerPane.add(name, 0, 2);
 
-        Label name1 = new Label("");
+
         customerInformation.setPrefWidth(Integer.MAX_VALUE);
         customerPane.add(name1, 1, 2);
 
@@ -162,7 +164,7 @@ public class HomeStage extends Application {
         age.setPrefWidth(Integer.MAX_VALUE);
         customerPane.add(age, 0, 3);
 
-        Label age1 = new Label("");
+
         age1.setPrefWidth(Integer.MAX_VALUE);
         customerPane.add(age1, 1, 3);
 
@@ -209,7 +211,6 @@ public class HomeStage extends Application {
         searchButton.setOnAction((ae) -> controller.addProduct(searchBar,totalCost1,amountGiven1,change1));
         removeButton.setOnAction((ActionEvent ae)->controller.removeItem(change1,totalCost1,amountGiven1));
         amountGiven1.setOnKeyPressed(event -> { if (event.getCode() == KeyCode.ENTER){controller.updateCost(amountGiven1, change1);}});
-
     }
 
     public static void main(String[] args) {

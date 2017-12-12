@@ -23,11 +23,11 @@ public class CustomerStage {
         parent = theParent;
         parent.setDisable(true);
         start(stage);
+        controller = new CustomerStageController();
 
     }
 
     public void start(Stage stage) {
-        controller = new CustomerStageController();
         stage.setTitle("Customer Information");
         stage.setOnCloseRequest((WindowEvent we) -> controller.closeStage(parent, stage));
         stage.show();
@@ -98,7 +98,7 @@ public class CustomerStage {
 
         Button selectButton = new Button("Select Customer");
         selectButton.setMinSize(100, 20);
-        selectButton.setOnAction((ActionEvent ae) -> controller.error(ae));
+        selectButton.setOnAction((ActionEvent ae) -> controller.selectCustomer(parent,stage));
         leftPane.getChildren().add(selectButton);
 
         Button editCustomer = new Button("Edit Customer");
@@ -350,7 +350,7 @@ public class CustomerStage {
         Button saveButton = new Button("Save Edit");
         saveButton.setStyle("-fx-background-color: #f7cecc");
         saveButton.setMinSize(350, 20);
-        saveButton.setOnAction((ActionEvent ae) -> controller.error(ae));
+        saveButton.setOnAction((ActionEvent ae) -> controller.saveEdit(parent,stage,firstNameInput,secondNameInput,datOfBirthInput,house,street,city,county,postcode,contactNumber));
         rightPane.getChildren().addAll(contactNumber, saveButton);
 
         VBox centrePane = new VBox(0);
