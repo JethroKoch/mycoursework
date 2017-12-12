@@ -106,6 +106,12 @@ public class CustomerStage {
         editCustomer.setOnAction((ActionEvent ae)-> controller.customerEdit(ae,stage));
         leftPane.getChildren().add(editCustomer);
 
+        Button deleteCustomer = new Button("Delete Customer");
+        deleteCustomer.setMinSize(100,20);
+        deleteCustomer.setStyle("-fx-background-color: red");
+        editCustomer.setOnAction((ActionEvent ae)->controller.deleteCustomer());
+        leftPane.getChildren().add(deleteCustomer);
+
         HBox centrePane = new HBox(40);
         centrePane.setStyle("-fx-background-color: #c2c2c2");
         centrePane.setPadding(new Insets(60, 20, 60, 20));
@@ -227,7 +233,7 @@ public class CustomerStage {
         Button saveButton = new Button("Save");
         saveButton.setStyle("-fx-background-color: #f7cecc");
         saveButton.setMinSize(350, 20);
-        saveButton.setOnAction((ActionEvent ae) -> controller.error(ae));
+        saveButton.setOnAction((ActionEvent ae) -> controller.saveNew(parent,stage,firstNameInput,secondNameInput,datOfBirthInput,contactNumber,house,street,city,county,postcode));
         rightPane.getChildren().addAll(contactNumber, saveButton);
 
         VBox centrePane = new VBox(0);
@@ -350,7 +356,7 @@ public class CustomerStage {
         Button saveButton = new Button("Save Edit");
         saveButton.setStyle("-fx-background-color: #f7cecc");
         saveButton.setMinSize(350, 20);
-        saveButton.setOnAction((ActionEvent ae) -> controller.saveEdit(parent,stage,firstNameInput,secondNameInput,datOfBirthInput,house,street,city,county,postcode,contactNumber));
+        saveButton.setOnAction((ActionEvent ae) -> controller.saveEdit(parent,stage,firstNameInput,secondNameInput,datOfBirthInput,contactNumber,house,street,city,county,postcode));
         rightPane.getChildren().addAll(contactNumber, saveButton);
 
         VBox centrePane = new VBox(0);

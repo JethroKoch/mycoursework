@@ -99,14 +99,14 @@ public class CustomerService {
 
         CustomerView existingItem = null;
         if (itemToSave.getCustomerId() != 0) existingItem = selectById(itemToSave.getCustomerId(), database);
+        System.out.println(itemToSave.getCustomerId());
 
         try {
             if (existingItem == null) {
-                PreparedStatement statement = database.newStatement("INSERT INTO CUSTOMER (CustomerID, FirstName, LastName, DOB, ContactNo, House, Street, City, County, Postcode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?))");
-                statement.setInt(1, itemToSave.getCustomerId());
-                statement.setString(2, itemToSave.getFirstName());
-                statement.setString(3, itemToSave.getLastName());
-                statement.setString(4, itemToSave.getDateOfBirth());
+                PreparedStatement statement = database.newStatement("INSERT INTO CUSTOMERS (FirstName, LastName, DOB, ContactNo, House, Street, City, County, Postcode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                statement.setString(1, itemToSave.getFirstName());
+                statement.setString(2, itemToSave.getLastName());
+                statement.setString(3, itemToSave.getDateOfBirth());
                 statement.setString(4, itemToSave.getContactNumber());
                 statement.setString(5, itemToSave.getHouse());
                 statement.setString(6, itemToSave.getStreet());
@@ -116,17 +116,17 @@ public class CustomerService {
                 database.executeUpdate(statement);
             }
             else {
-                PreparedStatement statement = database.newStatement("UPDATE CUSTOMERS SET CustomerID = ?, FirstName = ?, LastName = ?, DOB=?, ContactNo=?, House=?, Street=?, City=?, County=?, Postcode=? WHERE CustomerID = ?");
-                statement.setInt(1, itemToSave.getCustomerId());
-                statement.setString(2, itemToSave.getFirstName());
-                statement.setString(3, itemToSave.getLastName());
-                statement.setString(4, itemToSave.getDateOfBirth());
+                PreparedStatement statement = database.newStatement("UPDATE CUSTOMERS SET FirstName = ?, LastName = ?, DOB=?, ContactNo=?, House=?, Street=?, City=?, County=?, Postcode=? WHERE CustomerID = ?");
+                statement.setString(1, itemToSave.getFirstName());
+                statement.setString(2, itemToSave.getLastName());
+                statement.setString(3, itemToSave.getDateOfBirth());
                 statement.setString(4, itemToSave.getContactNumber());
                 statement.setString(5, itemToSave.getHouse());
                 statement.setString(6, itemToSave.getStreet());
                 statement.setString(7,itemToSave.getCity());
                 statement.setString(8,itemToSave.getCounty());
                 statement.setString(9,itemToSave.getPostcode());
+                statement.setInt(10,itemToSave.getCustomerId());
                 database.executeUpdate(statement);
             }
         } catch (SQLException resultsException) {

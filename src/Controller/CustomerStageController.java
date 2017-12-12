@@ -3,6 +3,7 @@ package Controller;
 import Models.CustomerService;
 import Models.CustomerView;
 import Models.CustomerViewSearch;
+import Models.DatabaseConnection;
 import Veiw.CustomerStage;
 import Veiw.HomeStage;
 import javafx.collections.FXCollections;
@@ -26,6 +27,7 @@ public class CustomerStageController {
     }
     public void openCustomerNew(ActionEvent ae, Stage stage) {CustomerStage.newPane(stage); }
     public void customerEdit(ActionEvent ae, Stage stage) {
+
         CustomerViewSearch selectedItem = CustomerStage.customersList.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
             customerID = selectedItem.getCustomerId();
@@ -88,9 +90,36 @@ public class CustomerStageController {
     }public void saveEdit(Pane parent,Stage stage,TextField firstName, TextField secondName,TextField DOB, TextField contactNumber,TextField house,TextField street,
                           TextField city,TextField county, TextField postcode){
         CustomerView updatedCustomer = new CustomerView(customerID,firstName.getText(),secondName.getText(),DOB.getText(),contactNumber.getText(),house.getText(),
-                street.getText(),city.getText(),county.getText(),street.getText());
+                street.getText(),city.getText(),county.getText(),postcode.getText());
+        System.out.print(updatedCustomer);
         CustomerService.save(updatedCustomer,HomeStage.database);
+        HomeStageController.customerID = customerID;
         closeStage(parent,stage);
+        controller.selectCustomer();
+    }
+    public void saveNew(Pane parent,Stage stage,TextField firstName, TextField secondName,TextField DOB, TextField contactNumber,TextField house,TextField street,
+                        TextField city,TextField county, TextField postcode){
+        CustomerView newCustomer = new CustomerView(0,firstName.getText(),secondName.getText(),DOB.getText(),contactNumber.getText(),house.getText(),
+                street.getText(),city.getText(),county.getText(),postcode.getText());
+        CustomerService.save(newCustomer,HomeStage.database);
+        HomeStageController.customerID = HomeStage.database.lastNewId();
+        closeStage(parent,stage);
+        controller.selectCustomer();
+    }
+
+    public void deleteCustomer(){
+
+        CustomerViewSearch selectedCustomer = CustomerStage.customersList.getSelectionModel().getSelectedItem();
+        if(selectedCustomer!=null) {
+            customerID = selectedCustomer.getCustomerId();
+            CustomerService.deleteById(customerID, HomeStage.database);
+        }else{
+            Alert noCustomerSelected = new Alert(Alert.AlertType.INFORMATION);
+            noCustomerSelected.setTitle("Error");
+            noCustomerSelected.setHeaderText(null);
+            noCustomerSelected.setContentText("No customer has been selected for deletion");
+            noCustomerSelected.showAndWait();
+        }
     }
 
     public void closeStage(Pane parent, Stage stage) {
