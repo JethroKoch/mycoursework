@@ -69,7 +69,6 @@ public class CustomerStageController {
         contactNo.setText("0"+customer.getContactNumber());
     }
 
-
     public void closeStage(Pane parent, Stage stage) {
         parent.setDisable(false);
         stage.close();

@@ -1,5 +1,7 @@
 package Controller;
 
+import Models.CustomerService;
+import Models.CustomerView;
 import Models.ProductService;
 import Models.ProductView;
 import Veiw.*;
@@ -12,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.Pane;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 public class HomeStageController {
@@ -30,7 +33,8 @@ public class HomeStageController {
         RefundStage newStage = new RefundStage(parent);
     }
     public static void openStockAdjustmentStage(Pane parent) { StockAdjustmentStage newStage = new StockAdjustmentStage(parent);}
-
+    public int customerID;
+    private ArrayList<CustomerView>customerForTransaction = new ArrayList<>();
     double total;
     double change;
     double amountGiven;
@@ -94,6 +98,14 @@ public class HomeStageController {
             change1.setText(Double.toString(change));
         }
     }
+    /*public void selectCustomer(Label customerID1, Label customerName,Label customerAge){
+        customerForTransaction.clear();
+        customerForTransaction.add(CustomerService.selectById(customerID,HomeStage.database));
+        CustomerView transactionCustomer = customerForTransaction.get(0);
+        customerID1.setText(Integer.toString(transactionCustomer.getCustomerId()));
+        customerName.setText(transactionCustomer.getFirstName()+" "+transactionCustomer.getLastName());*/
+
+    //}
     public static void error(ActionEvent ae) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Error");
