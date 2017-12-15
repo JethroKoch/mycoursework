@@ -3,19 +3,21 @@ package Models;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductService {
-    public static void selectAll(List<ProductView> targetList, DatabaseConnection database) {
+    public static List<ProductView> selectByDescription(ArrayList<ProductView> targetList, String productDescription, DatabaseConnection database) {
 
-        PreparedStatement statement = database.newStatement("SELECT ProductID, ProductDescription, InStock, Price FROM PRODUCTS ORDER BY ProductID");
+        PreparedStatement statement = database.newStatement("SELECT ProductID, ProductDescription, InStock, Price FROM PRODUCTS WHERE ProductDescription =?");
 
         try {
             if (statement != null) {
 
+                statement.setString(1,productDescription);
                 ResultSet results = database.excecuteQuery(statement);
 
-                if (results != null) {
+                if (results != null&& !results.isAfterLast()) {
                     while (results.next()) {
                         targetList.add(new ProductView(
                                 results.getInt("ProductID"),
@@ -28,6 +30,7 @@ public class ProductService {
         } catch (SQLException resultsException) {
             System.out.println("Database select all error: " + resultsException.getMessage());
         }
+        return targetList;
     }
     public static ProductView selectById(int id, DatabaseConnection database) {
         ProductView result = null;

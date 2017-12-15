@@ -7,6 +7,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -14,7 +15,7 @@ import javafx.stage.WindowEvent;
 public class StockAdjustmentStage {
     static Pane parent;
     private static StockAdjustmentStageController controller;
-    public static ListView<ProductView> stockList = new ListView<>();
+    public static TableView<ProductView> stockTable = new TableView<>();
 
     public StockAdjustmentStage(Pane theParent) {
 
@@ -74,15 +75,33 @@ public class StockAdjustmentStage {
         Button searchNow = new Button("Search product");
         searchNow.setPrefSize(Integer.MAX_VALUE,20);
         searchNow.setStyle("-fx-background-color: #f7cecc");
-        searchNow.setOnAction((ActionEvent ae)-> controller.error(ae));
+        searchNow.setOnAction((ActionEvent ae)-> controller.loadResults(itemDescription));
         searchBar.getChildren().addAll(itemDescription,searchNow);
 
         VBox listPane = new VBox(30);
         listPane.setStyle("-fx-background-color: #c2c2c2");
         listPane.setPadding(new Insets(20,60,20,60));
         root.getChildren().add(listPane);
-        stockList.setPrefSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
-        listPane.getChildren().add(stockList);
+
+        TableColumn productIDColumn = new TableColumn<>("ProductID");
+        productIDColumn.setCellValueFactory(new PropertyValueFactory<>("productID"));
+        productIDColumn.setPrefWidth(180.8);
+
+        TableColumn productDescriptionColumn = new TableColumn<>("Product Description");
+        productDescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("productDescription"));
+        productDescriptionColumn.setPrefWidth(452+90.4);
+
+        TableColumn inStockColumn = new TableColumn<>("InStock");
+        inStockColumn.setCellValueFactory(new PropertyValueFactory<>("inStock"));
+        inStockColumn.setPrefWidth(90.4);;
+
+
+        TableColumn priceColumn = new TableColumn<>("Price");
+        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        priceColumn.setPrefWidth(90.4);
+        stockTable.getColumns().addAll(productIDColumn,productDescriptionColumn,inStockColumn,priceColumn);
+        stockTable.setPrefHeight(Integer.MAX_VALUE);
+        listPane.getChildren().add(stockTable);
 
         HBox bottomPane = new HBox(30);
         bottomPane.setStyle("-fx-background-color: #c2c2c2");
