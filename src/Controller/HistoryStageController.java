@@ -1,20 +1,25 @@
 package Controller;
 
-import javafx.event.ActionEvent;
-import javafx.scene.control.Alert;
+import Models.TransactionService;
+import Models.TransactionTableView;
+import Veiw.HistoryStage;
+import Veiw.HomeStage;
+import javafx.collections.FXCollections;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 public class HistoryStageController {
+    private ArrayList<TransactionTableView> currentTransaction = new ArrayList<>();
 
     public HistoryStageController(){}
-
-    public static void error(ActionEvent ae) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText("This feature has not been implicated yet");
-        alert.showAndWait();
+    public void loadResults(TextField customerID){
+        currentTransaction.clear();
+        int customerId = Integer.parseInt(customerID.getText());
+        currentTransaction.add(TransactionService.selectForList(customerId, HomeStage.database));
+        HistoryStage.historyTable.setItems(FXCollections.observableArrayList(currentTransaction));
     }
     public void closeStage(Pane parent, Stage stage) {
 

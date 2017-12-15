@@ -2,27 +2,22 @@ package Models;
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.Date;
-
-public class TransactionView {
+public class TransactionTableView {
     private final SimpleIntegerProperty transactionID;
     private final SimpleIntegerProperty customerID;
     private final SimpleDoubleProperty totalCost;
     private final SimpleDoubleProperty amountPaid;
-    private final SimpleDoubleProperty changeGiven;
+    private final SimpleDoubleProperty change;
     private final SimpleStringProperty date;
 
-    public TransactionView(int transactionID, int customerID, double totalCost, double amountPaid, double changeGiven, String date) {
+    public TransactionTableView(int transactionID, int customerID, double totalCost, double amountPaid, double changeGiven, String date) {
         this.transactionID = new SimpleIntegerProperty(transactionID);
         this.customerID = new SimpleIntegerProperty(customerID);
         this.totalCost = new SimpleDoubleProperty(totalCost);
         this.amountPaid = new SimpleDoubleProperty(amountPaid);
-        this.changeGiven = new SimpleDoubleProperty(changeGiven);
+        this.change = new SimpleDoubleProperty(changeGiven);
         this.date = new SimpleStringProperty(date);
     }
 
@@ -74,16 +69,16 @@ public class TransactionView {
         this.amountPaid.set(amountPaid);
     }
 
-    public double getChangeGiven() {
-        return changeGiven.get();
+    public double getChange() {
+        return change.get();
     }
 
-    public SimpleDoubleProperty changeGivenProperty() {
-        return changeGiven;
+    public SimpleDoubleProperty changeProperty() {
+        return change;
     }
 
-    public void setChangeGiven(double changeGiven) {
-        this.changeGiven.set(changeGiven);
+    public void setChange(double change) {
+        this.change.set(change);
     }
 
     public String getDate() {
@@ -100,13 +95,11 @@ public class TransactionView {
 
     @Override
     public String toString() {
-        return "TransactionView{" +
-                "transactionID=" + transactionID +
-                ", customerID=" + customerID +
-                ", totalCost=" + totalCost +
-                ", amountPaid=" + amountPaid +
-                ", changeGiven=" + changeGiven +
-                ", date=" + date +
-                '}';
+        return transactionID +
+                ", " + customerID +
+                ", " + totalCost +
+                ", " + amountPaid +
+                ", " + change +
+                ", " + date;
     }
 }

@@ -1,7 +1,7 @@
 package Veiw;
 
 import Controller.RefundStageController;
-import Models.TransactionView;
+import Models.TransactionTableView;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -18,7 +18,7 @@ import javafx.stage.WindowEvent;
 
 public class RefundStage {
     static Pane parent;
-    public TableView<TransactionView> RefundItems = new TableView<>();
+    public TableView<TransactionTableView> RefundItems = new TableView<>();
     private static RefundStageController controller;
     public RefundStage(Pane theParent) {
 

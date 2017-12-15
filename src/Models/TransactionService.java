@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class TransactionService {
-    public static void selectAll(List<TransactionView> targetList, DatabaseConnection database) {
+    public static void selectAll(List<TransactionTableView> targetList, DatabaseConnection database) {
 
         PreparedStatement statement = database.newStatement("SELECT TransactionID, CustomerID, TotalCost, AmountPaid, Change, Date FROM TRANSACTIONS ORDER BY TransactionID");
 
@@ -17,7 +17,7 @@ public class TransactionService {
 
                 if (results != null) {
                     while (results.next()) {
-                        targetList.add(new TransactionView(
+                        targetList.add(new TransactionTableView(
                                 results.getInt("TransactionID"),
                                 results.getInt("CustomerID"),
                                 results.getDouble("TotalCost"),
@@ -31,18 +31,17 @@ public class TransactionService {
             System.out.println("Database select all error: " + resultsException.getMessage());
         }
     }
-    public static void selectById(int id, DatabaseConnection database) {
-        TransactionView result = null;
+    public static TransactionTableView selectById(int transactionId, DatabaseConnection database) {
+        TransactionTableView result = null;
         PreparedStatement statement = database.newStatement("SELECT TransactionID, CustomerID, TotalCost, AmountPaid, Change, Date WHERE TransactionID = ?");
 
         try {
-            statement.setInt(1,id);
             if (statement != null) {
-
+                statement.setInt(1,transactionId);
                 ResultSet results = database.excecuteQuery(statement);
 
-                if (results != null) {
-                    result = new TransactionView(
+                if (results != null&&!results.isAfterLast()) {
+                    result = new TransactionTableView(
                             results.getInt("TransactionID"),
                             results.getInt("CustomerID"),
                             results.getDouble("TotalCost"),
@@ -54,10 +53,36 @@ public class TransactionService {
         } catch (SQLException resultsException) {
             System.out.println("Database select all error: " + resultsException.getMessage());
         }
+        return result;
     }
-    public static void save(TransactionView itemToSave, DatabaseConnection database) {
+    public static TransactionTableView selectForList(int customerID, DatabaseConnection database) {
+        TransactionTableView result = null;
+        PreparedStatement statement = database.newStatement("SELECT TransactionID, CustomerID, TotalCost, AmountPaid, Change, Date FROM TRANSACTIONS WHERE CustomerID = ?");
 
-        TransactionView existingItem = null;
+        try {
+
+            if (statement != null) {
+                statement.setInt(1,customerID);
+                ResultSet results = database.excecuteQuery(statement);
+
+                if (results != null&&!results.isAfterLast()) {
+                    result = new TransactionTableView(
+                            results.getInt("TransactionID"),
+                            results.getInt("CustomerID"),
+                            results.getDouble("TotalCost"),
+                            results.getDouble("AmountPaid"),
+                            results.getDouble("Change"),
+                            results.getString("Date"));
+                }
+            }
+        } catch (SQLException resultsException) {
+            System.out.println("Database selectForList error: " + resultsException.getMessage());
+        }
+        return result;
+    }
+    public static void save(TransactionTableView itemToSave, DatabaseConnection database) {
+
+        TransactionTableView existingItem = null;
         if (itemToSave.getTransactionID() != 0) selectById(itemToSave.getTransactionID(), database);
 
         try {
@@ -66,7 +91,7 @@ public class TransactionService {
                 statement.setInt(1, itemToSave.getCustomerID());
                 statement.setDouble(2,itemToSave.getTotalCost());
                 statement.setDouble(3,itemToSave.getAmountPaid());
-                statement.setDouble(4,itemToSave.getChangeGiven());
+                statement.setDouble(4,itemToSave.getChange());
                 statement.setString(5, itemToSave.getDate());
                 database.executeUpdate(statement);
             }
@@ -76,7 +101,7 @@ public class TransactionService {
                 statement.setInt(2, itemToSave.getTransactionID());
                 statement.setDouble(3,itemToSave.getTotalCost());
                 statement.setDouble(4,itemToSave.getAmountPaid());
-                statement.setDouble(5,itemToSave.getChangeGiven());
+                statement.setDouble(5,itemToSave.getChange());
                 statement.setString(6, itemToSave.getDate());
                 database.executeUpdate(statement);
             }

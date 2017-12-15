@@ -1,11 +1,12 @@
 package Veiw;
 
 import Controller.HistoryStageController;
-import Models.TransactionView;
+import Models.TransactionTableView;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -16,7 +17,7 @@ import javafx.stage.WindowEvent;
 public class HistoryStage {
     static Pane parent;
     private static HistoryStageController controller;
-    public ListView<TransactionView> historyList = new ListView<>();
+    public static  TableView<TransactionTableView> historyTable= new TableView<>();
     public HistoryStage(Pane theParent) {
 
         Stage stage = new Stage();
@@ -40,40 +41,51 @@ public class HistoryStage {
         leftPane.setPadding(new Insets(20));
         root.getChildren().add(leftPane);
 
-        Label transactionID = new Label("TransactionID");
-        transactionID.setPrefSize(Integer.MAX_VALUE, 20);
-
-        TextField transactionIDInput = new TextField();
-        transactionIDInput.setPromptText("TransactionID...");
-        transactionIDInput.setPrefSize(Integer.MAX_VALUE, 20);
-
         Label customerID = new Label("CustomerID");
         customerID.setPrefSize(Integer.MAX_VALUE, 20);
 
-        TextField customerIDInput = new TextField();
-        customerIDInput.setPromptText("CustomerID...");
-        customerIDInput.setPrefSize(Integer.MAX_VALUE, 20);
-
-        Label productID = new Label("ProductID");
-        productID.setPrefSize(Integer.MAX_VALUE, 20);
-
-        TextField productIDInput = new TextField();
-        productIDInput.setPromptText("ProductID...");
-        productIDInput.setPrefSize(Integer.MAX_VALUE, 20);
-        leftPane.getChildren().addAll(transactionID,transactionIDInput,customerID,customerIDInput,productID,productIDInput);
+        TextField customerIdInput = new TextField();
+        customerIdInput.setPromptText("CustomerID...");
+        customerIdInput.setPrefSize(Integer.MAX_VALUE, 20);
+        leftPane.getChildren().addAll(customerID,customerIdInput);
 
         Button searchNow = new Button("Search Now");
         searchNow.setStyle("-fx-background-color: #f7cecc");
         searchNow.setMinSize(100,20);
-        searchNow.setOnAction((ActionEvent ae) ->controller.error(ae));
+        searchNow.setOnAction((ActionEvent ae) ->controller.loadResults(customerIdInput));
         leftPane.getChildren().add(searchNow);
 
         VBox rightPane = new VBox(30);
         rightPane.setStyle("-fx-background-color: #c2c2c2");
         leftPane.setPadding(new Insets(20));
         root.getChildren().add(rightPane);
-        historyList.setPrefSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
-        rightPane.getChildren().add(historyList);
+
+        TableColumn transactionID = new TableColumn<>("TransactionID");
+        transactionID.setCellValueFactory(new PropertyValueFactory<>("TransactionID"));
+        transactionID.setPrefWidth(125);
+
+        TableColumn customerId = new TableColumn<>("CustomerID");
+        customerId.setCellValueFactory(new PropertyValueFactory<>("CustomerID"));
+        customerId.setPrefWidth(125);
+
+        TableColumn totalCost = new TableColumn<>("Total");
+        totalCost.setCellValueFactory(new PropertyValueFactory<>("TotalCost"));
+        totalCost.setPrefWidth(55.5);
+
+        TableColumn amountGiven = new TableColumn<>("Paid");
+        amountGiven.setCellValueFactory(new PropertyValueFactory<>("AmountPaid"));
+        amountGiven.setPrefWidth(55.5);
+
+        TableColumn change = new TableColumn<>("Change");
+        change.setCellValueFactory(new PropertyValueFactory<>("Change"));
+        change.setPrefWidth(55.5);
+
+        TableColumn date = new TableColumn<>("Date");
+        date.setCellValueFactory(new PropertyValueFactory<>("Date"));
+        date.setPrefWidth(Integer.MAX_VALUE);
+        historyTable.setPrefSize(Integer.MAX_VALUE, Integer.MAX_VALUE);
+        historyTable.getColumns().addAll(transactionID,customerId,totalCost,amountGiven,change,date);
+        rightPane.getChildren().add(historyTable);
 
 
     }

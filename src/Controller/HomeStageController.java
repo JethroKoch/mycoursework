@@ -116,7 +116,7 @@ public class HomeStageController {
             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             Date date = new Date();
             String today  = dateFormat.format(date);
-            TransactionView newTransaction = new TransactionView(0,customerID,Double.parseDouble(totalCost.getText()),Double.parseDouble(amountPaid.getText()),Double.parseDouble(change.getText()),today);
+            TransactionTableView newTransaction = new TransactionTableView(0,customerID,Double.parseDouble(totalCost.getText()),Double.parseDouble(amountPaid.getText()),Double.parseDouble(change.getText()),today);
             TransactionService.save(newTransaction,HomeStage.database);
 
             for (ProductView id:HomeStage.productsTable.getItems()){
