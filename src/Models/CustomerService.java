@@ -49,7 +49,7 @@ public class CustomerService {
                 statement.setInt(1, id);
                 ResultSet results = database.excecuteQuery(statement);
 
-                if (results != null) {
+                if (results != null&& !results.isAfterLast()) {
                     result = new CustomerView(results.getInt("CustomerID"),
                             results.getString("FirstName"),
                             results.getString("LastName"),
@@ -99,8 +99,6 @@ public class CustomerService {
 
         CustomerView existingItem = null;
         if (itemToSave.getCustomerId() != 0) existingItem = selectById(itemToSave.getCustomerId(), database);
-        System.out.println(itemToSave.getCustomerId());
-
         try {
             if (existingItem == null) {
                 PreparedStatement statement = database.newStatement("INSERT INTO CUSTOMERS (FirstName, LastName, DOB, ContactNo, House, Street, City, County, Postcode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");

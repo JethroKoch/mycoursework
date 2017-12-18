@@ -18,16 +18,15 @@ import java.util.ArrayList;
 
 public class CustomerStageController {
     private ArrayList<CustomerViewSearch> currentCustomers =new ArrayList<>();
-    private ArrayList<CustomerView> itemForEditing = new ArrayList<>();
     private static HomeStageController controller;
     public CustomerStageController(){controller = new HomeStageController(); }
     public int customerID;
-    public void openCustomerSearch(ActionEvent ae, Stage stage){
+    public void openCustomerSearch(Stage stage){
         CustomerStage.searchPane(stage);
     }
-    public void openCustomerNew(ActionEvent ae, Stage stage) {CustomerStage.newPane(stage); }
+    public void openCustomerNew(Stage stage) {CustomerStage.newPane(stage); }
 
-    public void customerEdit(ActionEvent ae, Stage stage) {
+    public void customerEdit(Stage stage) {
         CustomerViewSearch selectedItem = CustomerStage.customersList.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
             customerID = selectedItem.getCustomerId();
@@ -57,9 +56,7 @@ public class CustomerStageController {
     public void updateInformation(TextField firstName, TextField lastName, TextField DOB,
                              TextField house, TextField street,TextField city,TextField county,
                              TextField postcode, TextField contactNo){
-        itemForEditing.clear();
-        itemForEditing.add(CustomerService.selectById(customerID,HomeStage.database));
-        CustomerView customer = itemForEditing.get(0);
+        CustomerView customer = CustomerService.selectById(customerID,HomeStage.database);
         firstName.setText(customer.getFirstName());
         lastName.setText(customer.getLastName());
         DOB.setText(customer.getDateOfBirth());

@@ -52,7 +52,7 @@ public class CustomerStage {
 
         Button newCustomerButton = new Button("New Customer");
         newCustomerButton.setPrefSize(Integer.MAX_VALUE, 40);
-        newCustomerButton.setOnAction((ActionEvent ae) -> controller.openCustomerNew(ae, stage));
+        newCustomerButton.setOnAction((ActionEvent ae) -> controller.openCustomerNew(stage));
         topPane.getChildren().add(newCustomerButton);
 
         VBox leftPane = new VBox(40);
@@ -102,7 +102,7 @@ public class CustomerStage {
 
         Button editCustomer = new Button("Edit Customer");
         editCustomer.setMinSize(100,20);
-        editCustomer.setOnAction((ActionEvent ae)-> controller.customerEdit(ae,stage));
+        editCustomer.setOnAction((ActionEvent ae)-> controller.customerEdit(stage));
         leftPane.getChildren().add(editCustomer);
 
         Button deleteCustomer = new Button("Delete Customer");
@@ -145,7 +145,7 @@ public class CustomerStage {
 
         Button searchCustomerButton = new Button("Search Customer");
         searchCustomerButton.setPrefSize(Integer.MAX_VALUE, 40);
-        searchCustomerButton.setOnAction((ActionEvent ae) -> controller.openCustomerSearch(ae, stage));
+        searchCustomerButton.setOnAction((ActionEvent ae) -> controller.openCustomerSearch(stage));
 
 
         Button newCustomerButton = new Button("New Customer");
@@ -267,12 +267,12 @@ public class CustomerStage {
 
         Button searchCustomerButton = new Button("Search Customer");
         searchCustomerButton.setPrefSize(Integer.MAX_VALUE, 40);
-        searchCustomerButton.setOnAction((ActionEvent ae) -> controller.openCustomerSearch(ae, stage));
+        searchCustomerButton.setOnAction((ActionEvent ae) -> controller.openCustomerSearch(stage));
 
 
         Button newCustomerButton = new Button("New Customer");
         newCustomerButton.setPrefSize(Integer.MAX_VALUE, 40);
-        newCustomerButton.setOnAction((ActionEvent ae) -> controller.openCustomerNew(ae, stage));
+        newCustomerButton.setOnAction((ActionEvent ae) -> controller.openCustomerNew(stage));
         tabButtons.getChildren().addAll(searchCustomerButton, newCustomerButton);
 
         HBox labels = new HBox();

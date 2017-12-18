@@ -1,5 +1,8 @@
 package Models;
 
+import Veiw.HomeStage;
+
+import java.awt.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,7 +12,7 @@ import java.util.List;
 public class ProductService {
     public static List<ProductView> selectByDescription(ArrayList<ProductView> targetList, String productDescription, DatabaseConnection database) {
 
-        PreparedStatement statement = database.newStatement("SELECT ProductID, ProductDescription, InStock, Price FROM PRODUCTS WHERE ProductDescription =?");
+        PreparedStatement statement = database.newStatement("SELECT ProductID, ProductDescription, InStock, Price FROM PRODUCTS WHERE ProductDescription LIKE ?");
 
         try {
             if (statement != null) {
@@ -17,7 +20,7 @@ public class ProductService {
                 statement.setString(1,productDescription);
                 ResultSet results = database.excecuteQuery(statement);
 
-                if (results != null&& !results.isAfterLast()) {
+                if (results != null) {
                     while (results.next()) {
                         targetList.add(new ProductView(
                                 results.getInt("ProductID"),
@@ -52,40 +55,40 @@ public class ProductService {
                 }
             }
         } catch (SQLException resultsException) {
-            System.out.println("! Database select by id error: " + resultsException.getMessage());
+            System.out.println("Database select by id error: " + resultsException.getMessage());
         }
         return result;
     }
     public static void save(ProductView itemToSave, DatabaseConnection database) {
 
         ProductView existingItem = null;
-        if (itemToSave.getProductID() != 0) selectById(itemToSave.getProductID(), database);
+        if (itemToSave.getProductID() != 0) existingItem = selectById(itemToSave.getProductID(), database);
 
         try {
             if (existingItem == null) {
-                PreparedStatement statement = database.newStatement("INSERT INTO ProductView (ProductID, ProductDescription, InStock, Price) VALUES (?, ?, ?, ?, ?, ?)");
-                statement.setInt(1, itemToSave.getProductID());
-                statement.setString(2,itemToSave.getProductDescription());
-                statement.setInt(3,itemToSave.getInStock());
-                statement.setDouble(4,  itemToSave.getPrice());
-
-
-            }
-            else {
-                PreparedStatement statement = database.newStatement("UPDATE PRODUCTS SET ProductID = ?, ProductDescription = ?, InStock = ?, Price =? WHERE CustomerID = ?");
+                PreparedStatement statement = database.newStatement("INSERT INTO PRODUCTS (ProductID, ProductDescription, InStock, Price) VALUES (?, ?, ?, ?)");
                 statement.setInt(1, itemToSave.getProductID());
                 statement.setString(2,itemToSave.getProductDescription());
                 statement.setInt(3,itemToSave.getInStock());
                 statement.setDouble(4,  itemToSave.getPrice());
                 database.executeUpdate(statement);
+
+
             }
-        } catch (SQLException resultsException) {
-            System.out.println("Database saving error: " + resultsException.getMessage());
+            else {
+                PreparedStatement statement = database.newStatement("UPDATE PRODUCTS ProductDescription = ?, InStock = ?, Price =? WHERE ProductID = ?");;
+                statement.setString(2,itemToSave.getProductDescription());
+                statement.setInt(2,itemToSave.getInStock());
+                statement.setDouble(3,  itemToSave.getPrice());
+                statement.setInt(4,itemToSave.getProductID());
+                database.executeUpdate(statement);
+            }
+        } catch (SQLException resultsException) { System.out.println("Database saving error: " + resultsException.getMessage());
         }
     }
     public static void deleteById(int id, DatabaseConnection database) {
 
-        PreparedStatement statement = database.newStatement("DELETE FROM TRANSACTIONS WHERE TransactionID = ?");
+        PreparedStatement statement = database.newStatement("DELETE FROM PRODUCTS WHERE ProductID = ?");
 
         try {
             if (statement != null) {

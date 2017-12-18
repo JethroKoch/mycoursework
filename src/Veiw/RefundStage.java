@@ -57,7 +57,7 @@ public class RefundStage {
         Button loadResults = new Button("Load Results");
         loadResults.setPrefSize(Integer.MAX_VALUE,30);
         loadResults.setStyle("-fx-background-color: #f7cecc");
-        loadResults.setOnAction((ActionEvent ae)->controller.error(ae));
+        loadResults.setOnAction((ActionEvent ae)->controller.error());
         topPane.getChildren().addAll(transactionIdInput,customerID,loadResults);
 
         VBox centrePane = new VBox(20);
@@ -102,7 +102,7 @@ public class RefundStage {
         Button refundItems = new Button("Refund Item");
         refundItems.setStyle("-fx-background-color: #f7cecc");
         refundItems.setPrefSize(Integer.MAX_VALUE,20);
-        refundItems.setOnAction((ActionEvent ae)->controller.error(ae));
+        refundItems.setOnAction((ActionEvent ae)->controller.error());
         bottomPane.getChildren().addAll(totalRefundCost, cost, refundItems);
     }
 

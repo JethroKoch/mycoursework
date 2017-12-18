@@ -9,7 +9,7 @@ public class RefundStageController {
 
     public RefundStageController(){}
 
-    public static void error(ActionEvent ae) {
+    public static void error() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Error");
         alert.setHeaderText(null);
