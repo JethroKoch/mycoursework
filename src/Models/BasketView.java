@@ -24,9 +24,4 @@ public class BasketView {
     public void setProductId(int productId) {
         this.productId = productId;
     }
-
-    @Override
-    public String toString() {
-        return transactionId + ", " + productId;
-    }
 }

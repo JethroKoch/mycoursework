@@ -47,7 +47,7 @@ public class StockAdjustmentStageController {
         currentItem.clear();
         String product = "%"+productDescription.getText()+"%";
         ArrayList<ProductView> target = new ArrayList<>();
-        currentItem.addAll(ProductService.selectByDescription(target, product, HomeStage.database));
+        currentItem.addAll(ProductService.selectByDescriptionList(target, product, HomeStage.database));
         StockAdjustmentStage.stockTable.setItems(FXCollections.observableArrayList(currentItem));
     }
 

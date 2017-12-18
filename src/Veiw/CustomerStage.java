@@ -21,6 +21,7 @@ public class CustomerStage {
         Stage stage = new Stage();
         parent = theParent;
         parent.setDisable(true);
+        stage.setResizable(false);
         start(stage);
         controller = new CustomerStageController();
 

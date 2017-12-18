@@ -34,7 +34,7 @@ public class HomeStage extends Application {
 
         database = new DatabaseConnection("Database.db");
         controller = new HomeStageController();
-
+        stage.setResizable(false);
         BorderPane root = new BorderPane();
         Scene scene = new Scene(root, 1024, 768);
         scene.getStylesheets().add("Stylesheet.css");

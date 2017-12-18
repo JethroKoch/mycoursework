@@ -1,6 +1,7 @@
 package Veiw;
 
 import Controller.RefundStageController;
+import Models.RefundView;
 import Models.TransactionTableView;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
@@ -18,13 +19,14 @@ import javafx.stage.WindowEvent;
 
 public class RefundStage {
     static Pane parent;
-    public TableView<TransactionTableView> RefundItems = new TableView<>();
+    public static TableView<RefundView> RefundItems = new TableView<>();
     private static RefundStageController controller;
     public RefundStage(Pane theParent) {
 
         Stage stage = new Stage();
         parent = theParent;
         parent.setDisable(true);
+        stage.setResizable(false);
         start(stage);
 
     }
@@ -50,15 +52,10 @@ public class RefundStage {
         transactionIdInput.setPrefSize(Integer.MAX_VALUE,30);
         transactionIdInput.setPromptText("Enter TransactionID...");
 
-        TextField customerID = new TextField();
-        customerID.setPrefSize(Integer.MAX_VALUE,30);
-        customerID.setPromptText("Enter CustomerID...");
-
         Button loadResults = new Button("Load Results");
         loadResults.setPrefSize(Integer.MAX_VALUE,30);
         loadResults.setStyle("-fx-background-color: #f7cecc");
-        loadResults.setOnAction((ActionEvent ae)->controller.error());
-        topPane.getChildren().addAll(transactionIdInput,customerID,loadResults);
+        topPane.getChildren().addAll(transactionIdInput,loadResults);
 
         VBox centrePane = new VBox(20);
         centrePane.setStyle("-fx-background-color: #c2c2c2;");
@@ -67,21 +64,25 @@ public class RefundStage {
 
         RefundItems.setPrefSize(400, Integer.MAX_VALUE);
         TableColumn transactionID = new TableColumn<>("TransactionID");
-        transactionID.setCellValueFactory(new PropertyValueFactory<>("TransactionID"));
-        transactionID.setPrefWidth(250);
+        transactionID.setCellValueFactory(new PropertyValueFactory<>("TransactionId"));
+        transactionID.setPrefWidth(185);
         RefundItems.getColumns().add(transactionID);
-        TableColumn productDescription = new TableColumn<>("ProductDescription");
-        productDescription.setCellValueFactory(new PropertyValueFactory<>("ProductDescription"));
-        productDescription.setPrefWidth(410);
+        TableColumn productDescription = new TableColumn<>("CustomerID");
+        productDescription.setCellValueFactory(new PropertyValueFactory<>("CustomerId"));
+        productDescription.setPrefWidth(185);
         RefundItems.getColumns().add(productDescription);
-        TableColumn inStock = new TableColumn<>("InStock");
-        inStock.setCellValueFactory(new PropertyValueFactory<>("InStock"));
-        inStock.setPrefWidth(121);
+        TableColumn inStock = new TableColumn<>("ProductDescription");
+        inStock.setCellValueFactory(new PropertyValueFactory<>("ProductDescription"));
+        inStock.setPrefWidth(330);
         RefundItems.getColumns().add(inStock);
-        TableColumn price = new TableColumn<>("Price");
-        price.setCellValueFactory(new PropertyValueFactory<>("Price"));
-        price.setPrefWidth(121);
-        RefundItems.getColumns().add(price);
+        TableColumn totalCost = new TableColumn<>("TotalCost");
+        totalCost.setCellValueFactory(new PropertyValueFactory<>("TotalCost"));
+        totalCost.setPrefWidth(102);
+        RefundItems.getColumns().add(totalCost);
+        TableColumn date = new TableColumn<>("Date");
+        date.setCellValueFactory(new PropertyValueFactory<>("Date"));
+        date.setPrefWidth(102);
+        RefundItems.getColumns().add(date);
         centrePane.getChildren().add(RefundItems);
 
         HBox bottomPane = new HBox(40);
@@ -102,8 +103,10 @@ public class RefundStage {
         Button refundItems = new Button("Refund Item");
         refundItems.setStyle("-fx-background-color: #f7cecc");
         refundItems.setPrefSize(Integer.MAX_VALUE,20);
-        refundItems.setOnAction((ActionEvent ae)->controller.error());
+        refundItems.setOnAction((ActionEvent ae)->controller.refundItemL(cost));
         bottomPane.getChildren().addAll(totalRefundCost, cost, refundItems);
+
+        loadResults.setOnAction((ActionEvent ae)->controller.searchTransactions(transactionIdInput,cost));
     }
 
 }

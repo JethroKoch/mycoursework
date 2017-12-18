@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductService {
-    public static List<ProductView> selectByDescription(ArrayList<ProductView> targetList, String productDescription, DatabaseConnection database) {
+    public static List<ProductView> selectByDescriptionList(ArrayList<ProductView> targetList, String productDescription, DatabaseConnection database) {
 
         PreparedStatement statement = database.newStatement("SELECT ProductID, ProductDescription, InStock, Price FROM PRODUCTS WHERE ProductDescription LIKE ?");
 
@@ -34,6 +34,30 @@ public class ProductService {
             System.out.println("Database select all error: " + resultsException.getMessage());
         }
         return targetList;
+    }
+    public static ProductView SelectByDescription(String description, DatabaseConnection database) {
+        ProductView result = null;
+        PreparedStatement statement = database.newStatement("SELECT ProductID, ProductDescription, InStock, Price FROM PRODUCTS WHERE ProductDescription = ?");
+
+        try {
+
+            if (statement != null) {
+
+                statement.setString(1,description);
+                ResultSet results = database.excecuteQuery(statement);
+
+                if (results != null && !results.isAfterLast()) {
+                    result = new ProductView(
+                            results.getInt("ProductID"),
+                            results.getString("ProductDescription"),
+                            results.getInt("InStock"),
+                            results.getDouble("Price"));
+                }
+            }
+        } catch (SQLException resultsException) {
+            System.out.println("Database select by description error: " + resultsException.getMessage());
+        }
+        return result;
     }
     public static ProductView selectById(int id, DatabaseConnection database) {
         ProductView result = null;

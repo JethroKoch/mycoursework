@@ -23,6 +23,7 @@ public class HistoryStage {
         Stage stage = new Stage();
         parent = theParent;
         parent.setDisable(true);
+        stage.setResizable(false);
         start(stage);
 
     }

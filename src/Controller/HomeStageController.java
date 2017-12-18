@@ -3,7 +3,6 @@ package Controller;
 import Models.*;
 import Veiw.*;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -119,11 +118,15 @@ public class HomeStageController {
             TransactionTableView newTransaction = new TransactionTableView(0,customerID,Double.parseDouble(totalCost.getText()),Double.parseDouble(amountPaid.getText()),Double.parseDouble(change.getText()),today);
             TransactionService.save(newTransaction,HomeStage.database);
 
+            ArrayList<BasketView> temp = new ArrayList<>();
             for (ProductView id:HomeStage.productsTable.getItems()){
                 BasketView newBasket = new BasketView(HomeStage.database.lastNewId(),id.getProductID());
                 System.out.println(newBasket);
-                BasketService.save(newBasket,HomeStage.database);
+                temp.add(newBasket);
             }
+            for(BasketView item: temp)
+            BasketService.save(item,HomeStage.database);
+
             currentProduct.clear();
             HomeStage.productsTable.getItems().clear();
             CustomerStage.customersList.getItems().clear();
