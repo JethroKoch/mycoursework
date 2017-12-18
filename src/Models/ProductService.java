@@ -76,8 +76,8 @@ public class ProductService {
 
             }
             else {
-                PreparedStatement statement = database.newStatement("UPDATE PRODUCTS ProductDescription = ?, InStock = ?, Price =? WHERE ProductID = ?");;
-                statement.setString(2,itemToSave.getProductDescription());
+                PreparedStatement statement = database.newStatement("UPDATE PRODUCTS SET ProductDescription = ?, InStock = ?, Price =? WHERE ProductID = ?");;
+                statement.setString(1,itemToSave.getProductDescription());
                 statement.setInt(2,itemToSave.getInStock());
                 statement.setDouble(3,  itemToSave.getPrice());
                 statement.setInt(4,itemToSave.getProductID());
@@ -89,7 +89,6 @@ public class ProductService {
     public static void deleteById(int id, DatabaseConnection database) {
 
         PreparedStatement statement = database.newStatement("DELETE FROM PRODUCTS WHERE ProductID = ?");
-
         try {
             if (statement != null) {
                 statement.setInt(1, id);

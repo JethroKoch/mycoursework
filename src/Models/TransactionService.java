@@ -6,31 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class TransactionService {
-    public static void selectAll(List<TransactionTableView> targetList, DatabaseConnection database) {
 
-        PreparedStatement statement = database.newStatement("SELECT TransactionID, CustomerID, TotalCost, AmountPaid, Change, Date FROM TRANSACTIONS ORDER BY TransactionID");
-
-        try {
-            if (statement != null) {
-
-                ResultSet results = database.excecuteQuery(statement);
-
-                if (results != null) {
-                    while (results.next()) {
-                        targetList.add(new TransactionTableView(
-                                results.getInt("TransactionID"),
-                                results.getInt("CustomerID"),
-                                results.getDouble("TotalCost"),
-                                results.getDouble("AmountPaid"),
-                                results.getDouble("Change"),
-                                results.getString("Date")));
-                    }
-                }
-            }
-        } catch (SQLException resultsException) {
-            System.out.println("Database select all error: " + resultsException.getMessage());
-        }
-    }
     public static TransactionTableView selectById(int transactionId, DatabaseConnection database) {
         TransactionTableView result = null;
         PreparedStatement statement = database.newStatement("SELECT TransactionID, CustomerID, TotalCost, AmountPaid, Change, Date WHERE TransactionID = ?");
