@@ -10,8 +10,13 @@ import javafx.scene.layout.Pane;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.Date;
+
+import static sun.text.normalizer.UCharacter.getAge;
+
 
 public class HomeStageController {
 
@@ -101,6 +106,11 @@ public class HomeStageController {
             CustomerView transactionCustomer = customerForTransaction.get(0);
             HomeStage.customerID1.setText(Integer.toString(transactionCustomer.getCustomerId()));
             HomeStage.name1.setText(transactionCustomer.getFirstName() + " " + transactionCustomer.getLastName());
+            String[] dob =transactionCustomer.getDateOfBirth().split("/");
+            LocalDate birthDate = LocalDate.parse(dob[2]+"-"+dob[1]+"-"+dob[0]);
+            LocalDate curDate = LocalDate.now();
+            String age = Integer.toString(Period.between(birthDate,curDate).getYears());
+            HomeStage.age1.setText(age);
 
         }
     }
