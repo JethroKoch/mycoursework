@@ -32,11 +32,7 @@ public class CustomerStageController {
             currentCustomers.clear();
             CustomerStage.editPane(stage);
         }else {
-            Alert noCustomerSelected = new Alert(Alert.AlertType.INFORMATION);
-            noCustomerSelected.setTitle("Error");
-            noCustomerSelected.setHeaderText(null);
-            noCustomerSelected.setContentText("No customer has been selected for editing");
-            noCustomerSelected.showAndWait();
+            HomeStageController.genericError("No customer has been selected for editing");
         }
     }
 
@@ -75,11 +71,7 @@ public class CustomerStageController {
             controller.selectCustomer();
 
         }else {
-            Alert noCustomerSelected = new Alert(Alert.AlertType.INFORMATION);
-            noCustomerSelected.setTitle("Error");
-            noCustomerSelected.setHeaderText(null);
-            noCustomerSelected.setContentText("No customer has been selected for transaction");
-            noCustomerSelected.showAndWait();
+            HomeStageController.genericError("No customer has been selected for transaction");
         }
 
     }public void saveEdit(Pane parent,Stage stage,TextField firstName, TextField secondName,TextField DOB, TextField contactNumber,TextField house,TextField street,
@@ -114,11 +106,7 @@ public class CustomerStageController {
             postcode.clear();
 
         }else {
-            Alert noCustomerSelected = new Alert(Alert.AlertType.INFORMATION);
-            noCustomerSelected.setTitle("Error");
-            noCustomerSelected.setHeaderText(null);
-            noCustomerSelected.setContentText("No customer has been selected to delete");
-            noCustomerSelected.showAndWait();
+            HomeStageController.genericError("No customer has been selected to delete");
         }
 
 

@@ -210,7 +210,7 @@ public class HomeStage extends Application {
         searchButton.setOnAction((ae) -> controller.addProduct(searchBar,totalCost1,amountGiven1,change1));
         removeButton.setOnAction((ActionEvent ae)->controller.removeItem(change1,totalCost1,amountGiven1));
         amountGiven1.setOnKeyPressed(event -> { if (event.getCode() == KeyCode.ENTER){controller.updateCost(amountGiven1, change1);}});
-        processButton.setOnAction((ActionEvent ae) -> controller.process(totalCost1,amountGiven1,change1,customerID1,name1,age1));
+        processButton.setOnAction((ActionEvent ae) -> controller.process(totalCost1,amountGiven1,change1,customerID1,name1,age1,searchBar));
     }
 
     public static void main(String[] args) {

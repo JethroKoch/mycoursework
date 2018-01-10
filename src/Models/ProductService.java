@@ -31,7 +31,7 @@ public class ProductService {
                 }
             }
         } catch (SQLException resultsException) {
-            System.out.println("Database select all error: " + resultsException.getMessage());
+            System.out.println("Database select by description error: " + resultsException.getMessage());
         }
         return targetList;
     }

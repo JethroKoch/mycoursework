@@ -50,18 +50,22 @@ public class HomeStageController {
             System.out.println (nfe.getMessage());
         }
 
-        currentProduct.add(ProductService.selectById(productID, HomeStage.database));
-        HomeStage.productsTable.setItems(FXCollections.observableArrayList(currentProduct));
+        ProductView addedProduct = ProductService.selectById(productID, HomeStage.database);
+        if (addedProduct !=null) {
+            currentProduct.add(addedProduct);
+            HomeStage.productsTable.setItems(FXCollections.observableArrayList(currentProduct));
 
-
-        total = 0;
-        for(ProductView price:HomeStage.productsTable.getItems()){
-            if(price.getPrice()!=0) {
-                total += price.getPrice();
-                totalCost1.setText(Double.toString(total));
+            total = 0;
+            for (ProductView price : HomeStage.productsTable.getItems()) {
+                if (price.getPrice() != 0) {
+                    total += price.getPrice();
+                    totalCost1.setText(Double.toString(total));
+                }
             }
+            checkChange(change1, amountGiven1);
+        }else{
+            genericError("Not a valid product ID");
         }
-        checkChange(change1, amountGiven1);
     }
 
     public void removeItem(Label change1,Label totalCost1,TextField amountGiven1){
@@ -84,11 +88,6 @@ public class HomeStageController {
     }
     public void checkChange(Label change1,TextField amountGiven1){
 
-        if(Double.parseDouble(amountGiven1.getText())==0){
-            amountGiven1.setText(Double.toString(amountGiven));
-            change = 0;
-            change1.setText(Double.toString(change));
-        }else {
             change = amountGiven - total;
             if (change < 0) {
                 change1.setStyle("-fx-background-color: #f7070c");
@@ -96,7 +95,6 @@ public class HomeStageController {
                 change1.setStyle("-fx-background-color: forestgreen");
             }
             change1.setText(Double.toString(change));
-        }
     }
 
     public void selectCustomer(){
@@ -114,14 +112,12 @@ public class HomeStageController {
 
         }
     }
-    public void process(Label totalCost,TextField amountPaid,Label change,Label customerId,Label name, Label age){
-        if(Double.parseDouble(change.getText())<0||Double.parseDouble(totalCost.getText())==0||Double.parseDouble(amountPaid.getText())==0){
-            Alert notEnoughFunds = new Alert(Alert.AlertType.INFORMATION);
-            notEnoughFunds.setTitle("Error");
-            notEnoughFunds.setHeaderText(null);
-            notEnoughFunds.setContentText("Not enough funds for transaction");
-            notEnoughFunds.showAndWait();
-        }else{
+    public void process(Label totalCost,TextField amountPaid,Label change,Label customerId,Label name, Label age,TextField searchBar){
+        if(currentProduct.size()==0){
+            genericError("No items for transaction");
+        } else if(Double.parseDouble(change.getText())<0){
+            genericError("Not enough money for Transaction");
+        } else{
             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             Date date = new Date();
             String today  = dateFormat.format(date);
@@ -131,7 +127,6 @@ public class HomeStageController {
             ArrayList<BasketView> temp = new ArrayList<>();
             for (ProductView id:HomeStage.productsTable.getItems()){
                 BasketView newBasket = new BasketView(HomeStage.database.lastNewId(),id.getProductID());
-                System.out.println(newBasket);
                 temp.add(newBasket);
             }
             for(BasketView item: temp)
@@ -146,6 +141,14 @@ public class HomeStageController {
             totalCost.setText(null);
             amountPaid.clear();
             change.setText(null);
+            searchBar.setText(null);
         }
+    }
+    public static void genericError(String inputText) {
+        Alert error = new Alert(Alert.AlertType.INFORMATION);
+        error.setTitle("Error");
+        error.setHeaderText(null);
+        error.setContentText(inputText);
+        error.showAndWait();
     }
 }

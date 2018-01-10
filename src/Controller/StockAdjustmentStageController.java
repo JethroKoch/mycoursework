@@ -28,11 +28,7 @@ public class StockAdjustmentStageController {
             currentItem.clear();
             StockAdjustmentStage.editPane(stage);
         }else {
-            Alert noProductSelected = new Alert(Alert.AlertType.INFORMATION);
-            noProductSelected.setTitle("Error");
-            noProductSelected.setHeaderText(null);
-            noProductSelected.setContentText("No product has been selected for editing");
-            noProductSelected.showAndWait();
+            HomeStageController.genericError("No product has been selected for editing");
         }
     }
     public void getItemsForEdit(TextField productId, TextField productDescription, TextField inStock,TextField price){
@@ -62,11 +58,7 @@ public class StockAdjustmentStageController {
             ProductService.save(product, HomeStage.database);
             openSearchProduct(stage);
         }else {
-            Alert noProductID = new Alert(Alert.AlertType.INFORMATION);
-            noProductID.setTitle("Error");
-            noProductID.setHeaderText(null);
-            noProductID.setContentText("No valid productID");
-            noProductID.showAndWait();
+            HomeStageController.genericError("No valid productID");
         }
     }
     public void closeStage(Pane parent, Stage stage) {

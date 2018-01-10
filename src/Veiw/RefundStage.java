@@ -2,7 +2,6 @@ package Veiw;
 
 import Controller.RefundStageController;
 import Models.RefundView;
-import Models.TransactionTableView;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -103,7 +102,7 @@ public class RefundStage {
         Button refundItems = new Button("Refund Item");
         refundItems.setStyle("-fx-background-color: #f7cecc");
         refundItems.setPrefSize(Integer.MAX_VALUE,20);
-        refundItems.setOnAction((ActionEvent ae)->controller.refundItemL(cost));
+        refundItems.setOnAction((ActionEvent ae)->controller.refundItem(cost));
         bottomPane.getChildren().addAll(totalRefundCost, cost, refundItems);
 
         loadResults.setOnAction((ActionEvent ae)->controller.searchTransactions(transactionIdInput,cost));

@@ -4,7 +4,6 @@ import Models.*;
 import Veiw.HomeStage;
 import Veiw.RefundStage;
 import javafx.collections.FXCollections;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
@@ -22,7 +21,7 @@ public class RefundStageController {
             currentItem.clear();
             if(transactionId.getText()!=null) {
                 int id = Integer.parseInt(transactionId.getText());
-                currentItem.add(RefundService.SelectForRefund(id, HomeStage.database));
+                RefundService.SelectForRefund(currentItem,id, HomeStage.database);
                 if (currentItem != null) {
                     RefundStage.RefundItems.setItems(FXCollections.observableArrayList(currentItem));
                     double cost =0;
@@ -37,11 +36,12 @@ public class RefundStageController {
             }
     }
 
-    public void refundItemL(Label totalCost){
+    public void refundItem(Label totalCost){
         RefundView selectedItem = RefundStage.RefundItems.getSelectionModel().getSelectedItem();
         TransactionService.deleteById(selectedItem.getTransactionId(),HomeStage.database);
         ProductView currentProduct = ProductService.SelectByDescription(selectedItem.getProductDescription(),HomeStage.database);
         currentProduct.setInStock(currentProduct.getProductID()+1);
+        BasketService.deleteByID(selectedItem.getTransactionId(),HomeStage.database);
         ProductService.save(currentProduct,HomeStage.database);
         RefundStage.RefundItems.getItems().remove(selectedItem);
         double cost =0;
@@ -51,14 +51,6 @@ public class RefundStageController {
             }
         }
         totalCost.setText("£"+Double.toString(cost));
-    }
-
-    public static void error() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText("This feature has not been implicated yet");
-        alert.showAndWait();
     }
     public void closeStage(Pane parent, Stage stage) {
 
