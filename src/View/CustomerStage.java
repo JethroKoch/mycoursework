@@ -1,7 +1,6 @@
-package Veiw;
+package View;
 
 import Controller.CustomerStageController;
-import Models.CustomerView;
 import Models.CustomerViewSearch;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;

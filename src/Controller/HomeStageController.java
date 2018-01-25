@@ -1,7 +1,7 @@
 package Controller;
 
 import Models.*;
-import Veiw.*;
+import View.*;
 import javafx.collections.FXCollections;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
@@ -14,8 +14,6 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.Date;
-
-import static sun.text.normalizer.UCharacter.getAge;
 
 
 public class HomeStageController {

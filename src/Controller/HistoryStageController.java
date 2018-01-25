@@ -2,8 +2,8 @@ package Controller;
 
 import Models.TransactionService;
 import Models.TransactionTableView;
-import Veiw.HistoryStage;
-import Veiw.HomeStage;
+import View.HistoryStage;
+import View.HomeStage;
 import javafx.collections.FXCollections;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;

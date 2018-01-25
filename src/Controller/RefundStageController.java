@@ -1,8 +1,8 @@
 package Controller;
 
 import Models.*;
-import Veiw.HomeStage;
-import Veiw.RefundStage;
+import View.HomeStage;
+import View.RefundStage;
 import javafx.collections.FXCollections;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -40,7 +40,7 @@ public class RefundStageController {
         RefundView selectedItem = RefundStage.RefundItems.getSelectionModel().getSelectedItem();
         TransactionService.deleteById(selectedItem.getTransactionId(),HomeStage.database);
         ProductView currentProduct = ProductService.SelectByDescription(selectedItem.getProductDescription(),HomeStage.database);
-        currentProduct.setInStock(currentProduct.getProductID()+1);
+        currentProduct.setInStock(currentProduct.getInStock()+1);
         BasketService.deleteByID(selectedItem.getTransactionId(),HomeStage.database);
         ProductService.save(currentProduct,HomeStage.database);
         RefundStage.RefundItems.getItems().remove(selectedItem);

@@ -1,4 +1,4 @@
-package Veiw;
+package View;
 
 import Controller.RefundStageController;
 import Models.RefundView;

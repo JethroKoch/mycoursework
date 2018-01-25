@@ -2,10 +2,9 @@ package Controller;
 
 import Models.ProductService;
 import Models.ProductView;
-import Veiw.HomeStage;
-import Veiw.StockAdjustmentStage;
+import View.HomeStage;
+import View.StockAdjustmentStage;
 import javafx.collections.FXCollections;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;

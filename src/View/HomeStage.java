@@ -1,4 +1,4 @@
-package Veiw;
+package View;
 
 import Controller.HomeStageController;
 import Models.DatabaseConnection;
@@ -7,8 +7,6 @@ import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -17,9 +15,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-
-import javax.swing.*;
-import java.util.Observable;
 
 public class HomeStage extends Application {
     public static Models.DatabaseConnection database;
