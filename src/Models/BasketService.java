@@ -4,7 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class BasketService {
-    public static void save(BasketView itemToSave, DatabaseConnection database){
+    public static void save(BasketModel itemToSave, DatabaseConnection database){
         //Initialized function save
         PreparedStatement statement = database.newStatement("INSERT INTO BASKET(TransactionID, ProductID) VALUES(?,?) ");
         //created SQL Statement to run on the database, it will save a new item to database table Basket
@@ -19,7 +19,7 @@ public class BasketService {
         }
     }
     public static void deleteByID(int id, DatabaseConnection database){
-        RefundView result = null;
+        RefundModel result = null;
         PreparedStatement statement = database.newStatement("Delete From BASKET WHERE TransactionID = ?");
         //Statement created to delete an item from a database.
         try {

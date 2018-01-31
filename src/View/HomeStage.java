@@ -2,7 +2,7 @@ package View;
 
 import Controller.HomeStageController;
 import Models.DatabaseConnection;
-import Models.ProductView;
+import Models.ProductModel;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 
 public class HomeStage extends Application {
     public static Models.DatabaseConnection database;
-    public static TableView<ProductView> productsTable = new TableView<>();
+    public static TableView<ProductModel> productsTable = new TableView<>();
     private static HomeStageController controller;
     public static Label customerID1 = new Label("");
     public  static Label name1 = new Label("");
@@ -36,7 +36,7 @@ public class HomeStage extends Application {
         stage.setTitle("mainScene Window");
         stage.setScene(scene);
         stage.show();
-        ObservableList<ProductView> purchaseTable = FXCollections.observableArrayList();
+        ObservableList<ProductModel> purchaseTable = FXCollections.observableArrayList();
 
         HBox topPane = new HBox(60);
         topPane.setStyle("-fx-background-color: navy;");

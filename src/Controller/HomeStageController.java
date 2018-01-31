@@ -18,7 +18,7 @@ import java.util.Date;
 
 public class HomeStageController {
 
-    private ArrayList<ProductView> currentProduct = new ArrayList<>();
+    private ArrayList<ProductModel> currentProduct = new ArrayList<>();
 
     public HomeStageController() {}
 
@@ -33,7 +33,7 @@ public class HomeStageController {
     }
     public static void openStockAdjustmentStage(Pane parent) { StockAdjustmentStage newStage = new StockAdjustmentStage(parent);}
     public static int customerID;
-    private ArrayList<CustomerView>customerForTransaction = new ArrayList<>();
+    private ArrayList<CustomerModel>customerForTransaction = new ArrayList<>();
     double total;
     double change;
     double amountGiven;
@@ -48,13 +48,13 @@ public class HomeStageController {
             System.out.println (nfe.getMessage());
         }
 
-        ProductView addedProduct = ProductService.selectById(productID, HomeStage.database);
+        ProductModel addedProduct = ProductService.selectById(productID, HomeStage.database);
         if (addedProduct !=null) {
             currentProduct.add(addedProduct);
             HomeStage.productsTable.setItems(FXCollections.observableArrayList(currentProduct));
 
             total = 0;
-            for (ProductView price : HomeStage.productsTable.getItems()) {
+            for (ProductModel price : HomeStage.productsTable.getItems()) {
                 if (price.getPrice() != 0) {
                     total += price.getPrice();
                     totalCost1.setText(Double.toString(total));
@@ -67,11 +67,11 @@ public class HomeStageController {
     }
 
     public void removeItem(Label change1,Label totalCost1,TextField amountGiven1){
-        ProductView selectedItem = HomeStage.productsTable.getSelectionModel().getSelectedItem();
+        ProductModel selectedItem = HomeStage.productsTable.getSelectionModel().getSelectedItem();
         total = 0;
         HomeStage.productsTable.getItems().remove(selectedItem);
         currentProduct.remove(selectedItem);
-        for (ProductView price : HomeStage.productsTable.getItems()) {
+        for (ProductModel price : HomeStage.productsTable.getItems()) {
             if (price.getPrice() != 0) {
                 total += price.getPrice();
             }
@@ -99,7 +99,7 @@ public class HomeStageController {
         if(customerID!=0) {
             customerForTransaction.clear();
             customerForTransaction.add(CustomerService.selectById(customerID, HomeStage.database));
-            CustomerView transactionCustomer = customerForTransaction.get(0);
+            CustomerModel transactionCustomer = customerForTransaction.get(0);
             HomeStage.customerID1.setText(Integer.toString(transactionCustomer.getCustomerId()));
             HomeStage.name1.setText(transactionCustomer.getFirstName() + " " + transactionCustomer.getLastName());
             String[] dob =transactionCustomer.getDateOfBirth().split("/");
@@ -119,15 +119,15 @@ public class HomeStageController {
             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             Date date = new Date();
             String today  = dateFormat.format(date);
-            TransactionTableView newTransaction = new TransactionTableView(0,customerID,Double.parseDouble(totalCost.getText()),Double.parseDouble(amountPaid.getText()),Double.parseDouble(change.getText()),today);
+            TransactionModel newTransaction = new TransactionModel(0,customerID,Double.parseDouble(totalCost.getText()),Double.parseDouble(amountPaid.getText()),Double.parseDouble(change.getText()),today);
             TransactionService.save(newTransaction,HomeStage.database);
 
-            ArrayList<BasketView> temp = new ArrayList<>();
-            for (ProductView id:HomeStage.productsTable.getItems()){
-                BasketView newBasket = new BasketView(HomeStage.database.lastNewId(),id.getProductID());
+            ArrayList<BasketModel> temp = new ArrayList<>();
+            for (ProductModel id:HomeStage.productsTable.getItems()){
+                BasketModel newBasket = new BasketModel(HomeStage.database.lastNewId(),id.getProductID());
                 temp.add(newBasket);
             }
-            for(BasketView item: temp)
+            for(BasketModel item: temp)
             BasketService.save(item,HomeStage.database);
 
             currentProduct.clear();

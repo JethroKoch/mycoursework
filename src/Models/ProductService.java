@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductService {
-    public static List<ProductView> selectByDescriptionList(ArrayList<ProductView> targetList, String productDescription, DatabaseConnection database) {
+    public static List<ProductModel> selectByDescriptionList(ArrayList<ProductModel> targetList, String productDescription, DatabaseConnection database) {
 
         PreparedStatement statement = database.newStatement("SELECT ProductID, ProductDescription, InStock, Price FROM PRODUCTS WHERE ProductDescription LIKE ?");
 
@@ -19,7 +19,7 @@ public class ProductService {
 
                 if (results != null) {
                     while (results.next()) {
-                        targetList.add(new ProductView(
+                        targetList.add(new ProductModel(
                                 results.getInt("ProductID"),
                                 results.getString("ProductDescription"),
                                 results.getInt("InStock"),
@@ -32,8 +32,8 @@ public class ProductService {
         }
         return targetList;
     }
-    public static ProductView SelectByDescription(String description, DatabaseConnection database) {
-        ProductView result = null;
+    public static ProductModel SelectByDescription(String description, DatabaseConnection database) {
+        ProductModel result = null;
         PreparedStatement statement = database.newStatement("SELECT ProductID, ProductDescription, InStock, Price FROM PRODUCTS WHERE ProductDescription = ?");
 
         try {
@@ -44,7 +44,7 @@ public class ProductService {
                 ResultSet results = database.excecuteQuery(statement);
 
                 if (results != null && !results.isAfterLast()) {
-                    result = new ProductView(
+                    result = new ProductModel(
                             results.getInt("ProductID"),
                             results.getString("ProductDescription"),
                             results.getInt("InStock"),
@@ -56,33 +56,36 @@ public class ProductService {
         }
         return result;
     }
-    public static ProductView selectById(int id, DatabaseConnection database) {
-        ProductView result = null;
+    public static ProductModel selectById(int id, DatabaseConnection database) {
+        ProductModel result = null;
+        //the result will store the result of the query
         PreparedStatement statement = database.newStatement("SELECT ProductID, ProductDescription, InStock, Price FROM PRODUCTS WHERE ProductID = ?");
-
+        //statement created to select an item from the product table
         try {
 
             if (statement != null) {
-
                 statement.setInt(1,id);
                 ResultSet results = database.excecuteQuery(statement);
-
+                //created a variable to temporarily store the result and executes the query
                 if (results != null && !results.isAfterLast()) {
-                    result = new ProductView(
+                    result = new ProductModel(
                             results.getInt("ProductID"),
                             results.getString("ProductDescription"),
                             results.getInt("InStock"),
                             results.getDouble("Price"));
                 }
+                //if there is a result it is stored in the result variable
             }
         } catch (SQLException resultsException) {
             System.out.println("Database select by id error: " + resultsException.getMessage());
         }
+        //any errors are caught and displayed to console
         return result;
+        //the result is returned to whatever called the function
     }
-    public static void save(ProductView itemToSave, DatabaseConnection database) {
+    public static void save(ProductModel itemToSave, DatabaseConnection database) {
 
-        ProductView existingItem = null;
+        ProductModel existingItem = null;
         if (itemToSave.getProductID() != 0) existingItem = selectById(itemToSave.getProductID(), database);
 
         try {

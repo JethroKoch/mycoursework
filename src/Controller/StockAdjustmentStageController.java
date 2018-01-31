@@ -1,7 +1,7 @@
 package Controller;
 
+import Models.ProductModel;
 import Models.ProductService;
-import Models.ProductView;
 import View.HomeStage;
 import View.StockAdjustmentStage;
 import javafx.collections.FXCollections;
@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 public class StockAdjustmentStageController {
-    private static ArrayList<ProductView> currentItem = new ArrayList<>();
+    private static ArrayList<ProductModel> currentItem = new ArrayList<>();
     private int productID;
     public StockAdjustmentStageController(){}
     public void openSearchProduct(Stage stage){ StockAdjustmentStage.searchPane(stage); }
@@ -20,7 +20,7 @@ public class StockAdjustmentStageController {
         StockAdjustmentStage.newPane(stage);
     }
     public void openEditProduct(Stage stage){
-        ProductView selectedItem = StockAdjustmentStage.stockTable.getSelectionModel().getSelectedItem();
+        ProductModel selectedItem = StockAdjustmentStage.stockTable.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
             productID = selectedItem.getProductID();
             StockAdjustmentStage.stockTable.getItems().clear();
@@ -31,7 +31,7 @@ public class StockAdjustmentStageController {
         }
     }
     public void getItemsForEdit(TextField productId, TextField productDescription, TextField inStock,TextField price){
-        ProductView product= ProductService.selectById(productID,HomeStage.database);
+        ProductModel product= ProductService.selectById(productID,HomeStage.database);
         productId.setText(Integer.toString(product.getProductID()));
         productDescription.setText(product.getProductDescription());
         inStock.setText(Integer.toString(product.getInStock()));
@@ -41,7 +41,7 @@ public class StockAdjustmentStageController {
     public void loadResults(TextField productDescription){
         currentItem.clear();
         String product = "%"+productDescription.getText()+"%";
-        ArrayList<ProductView> target = new ArrayList<>();
+        ArrayList<ProductModel> target = new ArrayList<>();
         currentItem.addAll(ProductService.selectByDescriptionList(target, product, HomeStage.database));
         StockAdjustmentStage.stockTable.setItems(FXCollections.observableArrayList(currentItem));
     }
@@ -52,7 +52,7 @@ public class StockAdjustmentStageController {
         openSearchProduct(stage);
     }
     public void saveProduct(TextField productId,TextField productDescription, TextField inStock, TextField price,Stage stage){
-        ProductView product = new ProductView(Integer.parseInt(productId.getText()),productDescription.getText(),Integer.parseInt(inStock.getText()),Double.parseDouble(price.getText()));
+        ProductModel product = new ProductModel(Integer.parseInt(productId.getText()),productDescription.getText(),Integer.parseInt(inStock.getText()),Double.parseDouble(price.getText()));
         if (product.getProductID()!=0) {
             ProductService.save(product, HomeStage.database);
             openSearchProduct(stage);

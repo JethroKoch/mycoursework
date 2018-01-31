@@ -5,14 +5,14 @@ public class CustomerViewSearch {
     private String firstName;
     private String lastName;
     private String dateOfBirth;
-
+    //attributes created for a customer view search object
     public CustomerViewSearch(int customerId, String firstName, String lastName, String dateOfBirth) {
         this.customerId = customerId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
     }
-
+        //constructor creates object when needed
     public int getCustomerId() {
         return customerId;
     }
@@ -44,9 +44,11 @@ public class CustomerViewSearch {
     public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
+    //getters and setters are used to allow the object to be accessed and edited
 
     @Override
     public String toString() {
         return customerId + ", "+ firstName +", " + lastName +", " + dateOfBirth;
     }
+    //to string method will display the attributes when the object is printed or displayed.
 }

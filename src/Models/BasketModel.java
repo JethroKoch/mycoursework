@@ -1,11 +1,11 @@
 package Models;
 
-public class BasketView {
+public class BasketModel {
     private int transactionId;
     //Created integer Object Transaction ID
     private int productId;
     //Created Integer object Product ID
-    public BasketView(int transactionId, int productId) {
+    public BasketModel(int transactionId, int productId) {
         this.transactionId = transactionId;
         this.productId = productId;
     }//Constructor created to initialize the objects

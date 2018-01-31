@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 public class RefundStageController {
-    private ArrayList<RefundView> currentItem = new ArrayList<>();
+    private ArrayList<RefundModel> currentItem = new ArrayList<>();
 
     public RefundStageController(){}
 
@@ -25,7 +25,7 @@ public class RefundStageController {
                 if (currentItem != null) {
                     RefundStage.RefundItems.setItems(FXCollections.observableArrayList(currentItem));
                     double cost =0;
-                    for(RefundView current:currentItem) {
+                    for(RefundModel current:currentItem) {
                         cost += current.getTotalCost();
                     }
                     totalCost.setText("£"+Double.toString(cost));
@@ -37,15 +37,15 @@ public class RefundStageController {
     }
 
     public void refundItem(Label totalCost){
-        RefundView selectedItem = RefundStage.RefundItems.getSelectionModel().getSelectedItem();
+        RefundModel selectedItem = RefundStage.RefundItems.getSelectionModel().getSelectedItem();
         TransactionService.deleteById(selectedItem.getTransactionId(),HomeStage.database);
-        ProductView currentProduct = ProductService.SelectByDescription(selectedItem.getProductDescription(),HomeStage.database);
+        ProductModel currentProduct = ProductService.SelectByDescription(selectedItem.getProductDescription(),HomeStage.database);
         currentProduct.setInStock(currentProduct.getInStock()+1);
         BasketService.deleteByID(selectedItem.getTransactionId(),HomeStage.database);
         ProductService.save(currentProduct,HomeStage.database);
         RefundStage.RefundItems.getItems().remove(selectedItem);
         double cost =0;
-        for(RefundView current:RefundStage.RefundItems.getItems()) {
+        for(RefundModel current:RefundStage.RefundItems.getItems()) {
             if(current.getTotalCost()!=0){
                 cost += current.getTotalCost();
             }

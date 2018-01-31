@@ -4,13 +4,13 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-public class ProductView {
+public class ProductModel {
     private final SimpleIntegerProperty productID;
     private final SimpleStringProperty productDescription;
     private final SimpleIntegerProperty inStock;
     private final SimpleDoubleProperty price;
 
-    public ProductView(int productID, String productDescription, int inStock, double price) {
+    public ProductModel(int productID, String productDescription, int inStock, double price) {
         this.productID = new SimpleIntegerProperty(productID);
         this.productDescription = new SimpleStringProperty(productDescription);
         this.inStock = new SimpleIntegerProperty(inStock);
@@ -67,7 +67,7 @@ public class ProductView {
 
     @Override
     public String toString() {
-        return "ProductView{" +
+        return "ProductModel{" +
                 "productID=" + productID +
                 ", productDescription=" + productDescription +
                 ", inStock=" + inStock +

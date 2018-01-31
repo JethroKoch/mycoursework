@@ -1,7 +1,7 @@
 package Controller;
 
 import Models.TransactionService;
-import Models.TransactionTableView;
+import Models.TransactionModel;
 import View.HistoryStage;
 import View.HomeStage;
 import javafx.collections.FXCollections;
@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 public class HistoryStageController {
-    private ArrayList<TransactionTableView> currentTransaction = new ArrayList<>();
+    private ArrayList<TransactionModel> currentTransaction = new ArrayList<>();
 
     public HistoryStageController(){}
     public void loadResults(TextField customerID){

@@ -4,14 +4,14 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-public class RefundView {
+public class RefundModel {
     private final SimpleIntegerProperty transactionId;
     private final SimpleIntegerProperty customerId;
     private final SimpleStringProperty productDescription;
     private final SimpleDoubleProperty totalCost;
     private final SimpleStringProperty date;
 
-    public RefundView(int transactionId, int customerId, String productDescription, double totalCost, String date) {
+    public RefundModel(int transactionId, int customerId, String productDescription, double totalCost, String date) {
         this.transactionId = new SimpleIntegerProperty (transactionId);
         this.customerId = new SimpleIntegerProperty(customerId);
         this.productDescription = new SimpleStringProperty(productDescription);

@@ -6,8 +6,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class RefundService {
-    public static RefundView SelectForRefund(ArrayList<RefundView> targetList,int id, DatabaseConnection database) {
-        RefundView result = null;
+    public static RefundModel SelectForRefund(ArrayList<RefundModel> targetList, int id, DatabaseConnection database) {
+        RefundModel result = null;
         PreparedStatement statement = database.newStatement("Select TRANSACTIONS.TransactionID, TRANSACTIONS.CustomerID, " +
                 "PRODUCTS.ProductDescription,TRANSACTIONS.TotalCost,TRANSACTIONS.Date From TRANSACTIONS " +
                 "INNER JOIN BASKET ON TRANSACTIONS.TransactionID = BASKET.TransactionID " +
@@ -23,7 +23,7 @@ public class RefundService {
                     //runs if there is an item in the database matching that transaction ID
                     while (results.next()) {
                         //while loop gets all results not just the first one
-                        targetList.add(new RefundView(results.getInt("TransactionID"),
+                        targetList.add(new RefundModel(results.getInt("TransactionID"),
                                 results.getInt("CustomerID"),
                                 results.getString("ProductDescription"),
                                 results.getDouble("TotalCost"),

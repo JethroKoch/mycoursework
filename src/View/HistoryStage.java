@@ -2,7 +2,7 @@ package View;
 //In package/Folder view
 
 import Controller.HistoryStageController;
-import Models.TransactionTableView;
+import Models.TransactionModel;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -19,7 +19,7 @@ public class HistoryStage {
     static Pane parent;
     private static HistoryStageController controller;
     //Links to the controller
-    public static  TableView<TransactionTableView> historyTable= new TableView<>();
+    public static  TableView<TransactionModel> historyTable= new TableView<>();
     //Table view needed for stage
     public HistoryStage(Pane theParent) {
 

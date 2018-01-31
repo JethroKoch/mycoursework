@@ -1,7 +1,7 @@
 package Controller;
 
+import Models.CustomerModel;
 import Models.CustomerService;
-import Models.CustomerView;
 import Models.CustomerViewSearch;
 import View.CustomerStage;
 import View.HomeStage;
@@ -49,7 +49,7 @@ public class CustomerStageController {
     public void updateInformation(TextField firstName, TextField lastName, TextField DOB,
                              TextField house, TextField street,TextField city,TextField county,
                              TextField postcode, TextField contactNo){
-        CustomerView customer = CustomerService.selectById(customerID,HomeStage.database);
+        CustomerModel customer = CustomerService.selectById(customerID,HomeStage.database);
         firstName.setText(customer.getFirstName());
         lastName.setText(customer.getLastName());
         DOB.setText(customer.getDateOfBirth());
@@ -75,7 +75,7 @@ public class CustomerStageController {
 
     }public void saveEdit(Pane parent,Stage stage,TextField firstName, TextField secondName,TextField DOB, TextField contactNumber,TextField house,TextField street,
                           TextField city,TextField county, TextField postcode){
-        CustomerView updatedCustomer = new CustomerView(customerID,firstName.getText(),secondName.getText(),DOB.getText(),contactNumber.getText(),house.getText(),
+        CustomerModel updatedCustomer = new CustomerModel(customerID,firstName.getText(),secondName.getText(),DOB.getText(),contactNumber.getText(),house.getText(),
                 street.getText(),city.getText(),county.getText(),postcode.getText());
         System.out.print(updatedCustomer);
         CustomerService.save(updatedCustomer,HomeStage.database);
@@ -85,7 +85,7 @@ public class CustomerStageController {
     }
     public void saveNew(Pane parent,Stage stage,TextField firstName, TextField secondName,TextField DOB, TextField contactNumber,TextField house,TextField street,
                         TextField city,TextField county, TextField postcode){
-        CustomerView newCustomer = new CustomerView(0,firstName.getText(),secondName.getText(),DOB.getText(),contactNumber.getText(),house.getText(),
+        CustomerModel newCustomer = new CustomerModel(0,firstName.getText(),secondName.getText(),DOB.getText(),contactNumber.getText(),house.getText(),
                 street.getText(),city.getText(),county.getText(),postcode.getText());
         CustomerService.save(newCustomer,HomeStage.database);
         HomeStageController.customerID = HomeStage.database.lastNewId();

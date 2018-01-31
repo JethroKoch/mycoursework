@@ -1,7 +1,7 @@
 package View;
 
 import Controller.StockAdjustmentStageController;
-import Models.ProductView;
+import Models.ProductModel;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -15,7 +15,7 @@ import javafx.stage.WindowEvent;
 public class StockAdjustmentStage {
     static Pane parent;
     private static StockAdjustmentStageController controller;
-    public static TableView<ProductView> stockTable = new TableView<>();
+    public static TableView<ProductModel> stockTable = new TableView<>();
 
     public StockAdjustmentStage(Pane theParent) {
 

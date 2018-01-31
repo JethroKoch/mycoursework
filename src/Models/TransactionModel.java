@@ -4,7 +4,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-public class TransactionTableView {
+public class TransactionModel {
     private final SimpleIntegerProperty transactionID;
     private final SimpleIntegerProperty customerID;
     private final SimpleDoubleProperty totalCost;
@@ -12,7 +12,7 @@ public class TransactionTableView {
     private final SimpleDoubleProperty change;
     private final SimpleStringProperty date;
 
-    public TransactionTableView(int transactionID, int customerID, double totalCost, double amountPaid, double changeGiven, String date) {
+    public TransactionModel(int transactionID, int customerID, double totalCost, double amountPaid, double changeGiven, String date) {
         this.transactionID = new SimpleIntegerProperty(transactionID);
         this.customerID = new SimpleIntegerProperty(customerID);
         this.totalCost = new SimpleDoubleProperty(totalCost);

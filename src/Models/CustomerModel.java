@@ -1,7 +1,7 @@
 package Models;
 
 
-public class CustomerView {
+public class CustomerModel {
     private int customerId;
     private String firstName;
     private String lastName;
@@ -13,7 +13,7 @@ public class CustomerView {
     private String county;
     private String postcode;
 
-    public CustomerView(int customerId, String firstName, String lastName, String dateOfBirth, String contactNumber, String house, String street, String city, String county, String postcode) {
+    public CustomerModel(int customerId, String firstName, String lastName, String dateOfBirth, String contactNumber, String house, String street, String city, String county, String postcode) {
         this.customerId = customerId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -108,7 +108,7 @@ public class CustomerView {
 
     @Override
     public String toString() {
-        return "CustomerView{" +
+        return "CustomerModel{" +
                 "customerId=" + customerId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +

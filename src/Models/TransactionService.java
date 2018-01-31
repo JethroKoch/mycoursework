@@ -3,12 +3,11 @@ package Models;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 public class TransactionService {
 
-    public static TransactionTableView selectById(int transactionId, DatabaseConnection database) {
-        TransactionTableView result = null;
+    public static TransactionModel selectById(int transactionId, DatabaseConnection database) {
+        TransactionModel result = null;
         PreparedStatement statement = database.newStatement("SELECT TransactionID, CustomerID, TotalCost, AmountPaid, Change, Date WHERE TransactionID = ?");
 
         try {
@@ -17,7 +16,7 @@ public class TransactionService {
                 ResultSet results = database.excecuteQuery(statement);
 
                 if (results != null&&!results.isAfterLast()) {
-                    result = new TransactionTableView(
+                    result = new TransactionModel(
                             results.getInt("TransactionID"),
                             results.getInt("CustomerID"),
                             results.getDouble("TotalCost"),
@@ -31,8 +30,8 @@ public class TransactionService {
         }
         return result;
     }
-    public static TransactionTableView selectForList(int customerID, DatabaseConnection database) {
-        TransactionTableView result = null;
+    public static TransactionModel selectForList(int customerID, DatabaseConnection database) {
+        TransactionModel result = null;
         PreparedStatement statement = database.newStatement("SELECT TransactionID, CustomerID, TotalCost, AmountPaid, Change, Date FROM TRANSACTIONS WHERE CustomerID = ?");
 
         try {
@@ -42,7 +41,7 @@ public class TransactionService {
                 ResultSet results = database.excecuteQuery(statement);
 
                 if (results != null&&!results.isAfterLast()) {
-                    result = new TransactionTableView(
+                    result = new TransactionModel(
                             results.getInt("TransactionID"),
                             results.getInt("CustomerID"),
                             results.getDouble("TotalCost"),
@@ -56,9 +55,9 @@ public class TransactionService {
         }
         return result;
     }
-    public static void save(TransactionTableView itemToSave, DatabaseConnection database) {
+    public static void save(TransactionModel itemToSave, DatabaseConnection database) {
 
-        TransactionTableView existingItem = null;
+        TransactionModel existingItem = null;
         if (itemToSave.getTransactionID() != 0) selectById(itemToSave.getTransactionID(), database);
 
         try {

@@ -1,45 +1,13 @@
 package Models;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 public class CustomerService {
-    public static void selectAll(List<CustomerView> targetList, DatabaseConnection database) {
+    public static CustomerModel selectById(int id, DatabaseConnection database) {
 
-        PreparedStatement statement = database.newStatement("SELECT CustomerID, FirstName, LastName, DOB, ContactNo, House, Street, City, County, Postcode FROM CUSTOMERS ORDER BY CustomerID");
-
-        try {
-            if (statement != null) {
-
-                ResultSet results = database.excecuteQuery(statement);
-
-                if (results != null) {
-                    while (results.next()) {
-                        targetList.add(new CustomerView(
-                                results.getInt("CustomerID"),
-                                results.getString("FirstName"), 
-                                results.getString("LastName"),
-                                results.getString("DOB"),
-                                results.getString("ContactNo"),
-                                results.getString("House"),
-                                results.getString("Street"),
-                                results.getString("City"),
-                                results.getString("County"),
-                                results.getString("Postcode")));
-                    }
-                }
-            }
-        } catch (SQLException resultsException) {
-            System.out.println("Database select all error: " + resultsException.getMessage());
-        }
-    }
-
-    public static CustomerView selectById(int id, DatabaseConnection database) {
-
-        CustomerView result = null;
+        CustomerModel result = null;
 
         PreparedStatement statement = database.newStatement("SELECT CustomerID, FirstName, LastName, DOB, ContactNo, House, Street, City, County, Postcode FROM CUSTOMERS WHERE CustomerID = ?");
 
@@ -50,7 +18,7 @@ public class CustomerService {
                 ResultSet results = database.excecuteQuery(statement);
 
                 if (results != null&& !results.isAfterLast()) {
-                    result = new CustomerView(results.getInt("CustomerID"),
+                    result = new CustomerModel(results.getInt("CustomerID"),
                             results.getString("FirstName"),
                             results.getString("LastName"),
                             results.getString("DOB"),
@@ -95,9 +63,9 @@ public class CustomerService {
 
         return result;
     }
-    public static void save(CustomerView itemToSave, DatabaseConnection database) {
+    public static void save(CustomerModel itemToSave, DatabaseConnection database) {
 
-        CustomerView existingItem = null;
+        CustomerModel existingItem = null;
         if (itemToSave.getCustomerId() != 0) existingItem = selectById(itemToSave.getCustomerId(), database);
         try {
             if (existingItem == null) {
