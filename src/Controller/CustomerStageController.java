@@ -85,12 +85,20 @@ public class CustomerStageController {
     }
     public void saveNew(Pane parent,Stage stage,TextField firstName, TextField secondName,TextField DOB, TextField contactNumber,TextField house,TextField street,
                         TextField city,TextField county, TextField postcode){
-        CustomerModel newCustomer = new CustomerModel(0,firstName.getText(),secondName.getText(),DOB.getText(),contactNumber.getText(),house.getText(),
-                street.getText(),city.getText(),county.getText(),postcode.getText());
-        CustomerService.save(newCustomer,HomeStage.database);
-        HomeStageController.customerID = HomeStage.database.lastNewId();
-        closeStage(parent,stage);
-        controller.selectCustomer();
+        if(firstName.getText()==null||secondName.getText()==null||DOB.getText()==null||contactNumber.getText()==null||house.getText()==null||
+                street.getText()==null||city.getText()==null||county.getText()==null||postcode.getText()==null){
+            HomeStageController.genericError("Not all fields are filled");
+        }else if(contactNumber.getText().length()!=10){
+            HomeStageController.genericError("Not a valid contact number");
+        }else{
+            CustomerModel newCustomer = new CustomerModel(0, firstName.getText(), secondName.getText(), DOB.getText(), contactNumber.getText(), house.getText(),
+                    street.getText(), city.getText(), county.getText(), postcode.getText());
+            System.out.println(newCustomer);
+            CustomerService.save(newCustomer, HomeStage.database);
+            HomeStageController.customerID = HomeStage.database.lastNewId();
+            closeStage(parent, stage);
+            controller.selectCustomer();
+        }
     }
 
     public void deleteCustomer(TextField firstName, TextField lastName, TextField postcode){
