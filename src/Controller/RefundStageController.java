@@ -19,38 +19,46 @@ public class RefundStageController {
     public void searchTransactions(TextField transactionId,Label totalCost){
             RefundStage.RefundItems.getItems().clear();
             currentItem.clear();
-            if(transactionId.getText()!=null) {
+            if(transactionId.getText().isEmpty()) {
+                HomeStageController.genericError("No criteria for search");
+                //Checks whether the search criteria is empty and if it as an alert says so
+            }else{
                 int id = Integer.parseInt(transactionId.getText());
                 RefundService.SelectForRefund(currentItem,id, HomeStage.database);
-                if (currentItem != null) {
+                //searches the database for transaction matching the search criteria
+                if (currentItem.size()!=0) {
                     RefundStage.RefundItems.setItems(FXCollections.observableArrayList(currentItem));
                     double cost =0;
                     for(RefundModel current:currentItem) {
                         cost += current.getTotalCost();
                     }
                     totalCost.setText("£"+Double.toString(cost));
+                    //if the results are not empty they are added to the table in refund stage
                 } else {
-                    currentItem.clear();
-                    RefundStage.RefundItems.getItems().clear();
-                }
+                    HomeStageController.genericError("Not a valid TransactionID");
+                }//If the results are empty an alert comes up saying so.
             }
     }
 
     public void refundItem(Label totalCost){
         RefundModel selectedItem = RefundStage.RefundItems.getSelectionModel().getSelectedItem();
-        TransactionService.deleteById(selectedItem.getTransactionId(),HomeStage.database);
-        ProductModel currentProduct = ProductService.SelectByDescription(selectedItem.getProductDescription(),HomeStage.database);
-        currentProduct.setInStock(currentProduct.getInStock()+1);
-        BasketService.deleteByID(selectedItem.getTransactionId(),HomeStage.database);
-        ProductService.save(currentProduct,HomeStage.database);
-        RefundStage.RefundItems.getItems().remove(selectedItem);
-        double cost =0;
-        for(RefundModel current:RefundStage.RefundItems.getItems()) {
-            if(current.getTotalCost()!=0){
-                cost += current.getTotalCost();
+        if(selectedItem==null) {
+            HomeStageController.genericError("No item selected for refund");
+        }else{
+            TransactionService.deleteById(selectedItem.getTransactionId(), HomeStage.database);
+            ProductModel currentProduct = ProductService.SelectByDescription(selectedItem.getProductDescription(), HomeStage.database);
+            currentProduct.setInStock(currentProduct.getInStock() + 1);
+            BasketService.deleteByID(selectedItem.getTransactionId(), HomeStage.database);
+            ProductService.save(currentProduct, HomeStage.database);
+            RefundStage.RefundItems.getItems().remove(selectedItem);
+            double cost = 0;
+            for (RefundModel current : RefundStage.RefundItems.getItems()) {
+                if (current.getTotalCost() != 0) {
+                    cost += current.getTotalCost();
+                }
             }
+            totalCost.setText("£" + Double.toString(cost));
         }
-        totalCost.setText("£"+Double.toString(cost));
     }
     public void closeStage(Pane parent, Stage stage) {
 

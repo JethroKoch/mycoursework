@@ -45,7 +45,6 @@ public class HomeStageController {
             productID = Integer.parseInt(searchBar.getText());
         }
         catch (NumberFormatException nfe) {
-            System.out.println (nfe.getMessage());
         }
 
         ProductModel addedProduct = ProductService.selectById(productID, HomeStage.database);

@@ -75,20 +75,32 @@ public class CustomerStageController {
 
     }public void saveEdit(Pane parent,Stage stage,TextField firstName, TextField secondName,TextField DOB, TextField contactNumber,TextField house,TextField street,
                           TextField city,TextField county, TextField postcode){
-        CustomerModel updatedCustomer = new CustomerModel(customerID,firstName.getText(),secondName.getText(),DOB.getText(),contactNumber.getText(),house.getText(),
-                street.getText(),city.getText(),county.getText(),postcode.getText());
-        System.out.print(updatedCustomer);
-        CustomerService.save(updatedCustomer,HomeStage.database);
-        HomeStageController.customerID = customerID;
-        closeStage(parent,stage);
-        controller.selectCustomer();
+        if(firstName.getText().isEmpty()||secondName.getText().isEmpty()||DOB.getText().isEmpty()||contactNumber.getText().isEmpty() ||house.getText().
+                isEmpty()|| street.getText().isEmpty()||city.getText().isEmpty()||county.getText().isEmpty()||postcode.getText().isEmpty()){
+            //checks if any of the fields are empty
+            HomeStageController.genericError("Not all fields are filled");
+            //if they are then an error message pops up saying "Not all fields are filled"
+        }else if(contactNumber.getText().length()!=11){
+            HomeStageController.genericError("Not a valid contact number");
+            /*checks whether the phone number is 10 digit. if not it displays an error
+            message saying "Not a valid contact number"
+             */
+        }else {
+            CustomerModel updatedCustomer = new CustomerModel(customerID, firstName.getText(), secondName.getText(), DOB.getText(), contactNumber.getText(), house.getText(),
+                    street.getText(), city.getText(), county.getText(), postcode.getText());
+            System.out.print(updatedCustomer);
+            CustomerService.save(updatedCustomer, HomeStage.database);
+            HomeStageController.customerID = customerID;
+            closeStage(parent, stage);
+            controller.selectCustomer();
+        }
     }
     public void saveNew(Pane parent,Stage stage,TextField firstName, TextField secondName,TextField DOB, TextField contactNumber,TextField house,TextField street,
                         TextField city,TextField county, TextField postcode){
-        if(firstName.getText()==null||secondName.getText()==null||DOB.getText()==null||contactNumber.getText()==null||house.getText()==null||
-                street.getText()==null||city.getText()==null||county.getText()==null||postcode.getText()==null){
+        if(firstName.getText().isEmpty()||secondName.getText().isEmpty()||DOB.getText().isEmpty()||contactNumber.getText().isEmpty() ||house.getText().
+                isEmpty()|| street.getText().isEmpty()||city.getText().isEmpty()||county.getText().isEmpty()||postcode.getText().isEmpty()){
             HomeStageController.genericError("Not all fields are filled");
-        }else if(contactNumber.getText().length()!=10){
+        }else if(contactNumber.getText().length()!=11){
             HomeStageController.genericError("Not a valid contact number");
         }else{
             CustomerModel newCustomer = new CustomerModel(0, firstName.getText(), secondName.getText(), DOB.getText(), contactNumber.getText(), house.getText(),

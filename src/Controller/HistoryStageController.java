@@ -16,10 +16,14 @@ public class HistoryStageController {
 
     public HistoryStageController(){}
     public void loadResults(TextField customerID){
-        currentTransaction.clear();
-        int customerId = Integer.parseInt(customerID.getText());
-        currentTransaction.add(TransactionService.selectForList(customerId, HomeStage.database));
-        HistoryStage.historyTable.setItems(FXCollections.observableArrayList(currentTransaction));
+        if(customerID.getText().isEmpty()) {
+            HomeStageController.genericError("No customer Id");
+        }else{
+            currentTransaction.clear();
+            int customerId = Integer.parseInt(customerID.getText());
+            currentTransaction.add(TransactionService.selectForList(customerId, HomeStage.database));
+            HistoryStage.historyTable.setItems(FXCollections.observableArrayList(currentTransaction));
+        }
     }
     public void closeStage(Pane parent, Stage stage) {
 
