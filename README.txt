@@ -1,0 +1,2 @@
+Download TillSystem_Download folder
+Run TillSystems.jar

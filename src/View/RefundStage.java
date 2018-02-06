@@ -91,7 +91,7 @@ public class RefundStage {
         bottomPane.setAlignment(Pos.CENTER);
         root.getChildren().add(bottomPane);
 
-        Label totalRefundCost = new Label("Total Cost");
+        Label totalRefundCost = new Label("Price");
         totalRefundCost.setPrefSize(Integer.MAX_VALUE, 20);
 
         Label cost = new Label("£");

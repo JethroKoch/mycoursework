@@ -58,7 +58,7 @@ public class CustomerStageController {
         city.setText(customer.getCity());
         county.setText(customer.getCounty());
         postcode.setText(customer.getPostcode());
-        contactNo.setText("0"+customer.getContactNumber());
+        contactNo.setText(customer.getContactNumber());
     }
     public void selectCustomer(Pane parent, Stage stage){
         CustomerViewSearch selectedItem = CustomerStage.customersList.getSelectionModel().getSelectedItem();
